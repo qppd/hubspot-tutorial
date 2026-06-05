@@ -6,9 +6,9 @@ A comprehensive, end-to-end tutorial covering the entire HubSpot platform. From 
 
 Each chapter is self-contained with:
 - **What It Does** — high-level description
-- **Key Features** — detailed breakdown of every feature
+- **Key Features** — detailed breakdown of every feature including Breeze AI capabilities
 - **Step-by-Step** — actionable procedures (with UI and API paths where relevant)
-- **Limits That Matter** — hard caps per plan tier
+- **Limits That Matter** — hard caps per plan tier (Free, Starter, Pro, Enterprise)
 - **Use Cases** — when to use each feature
 - **Common Gotchas** — pitfalls and how to avoid them
 
@@ -16,17 +16,17 @@ Each chapter is self-contained with:
 
 | # | Chapter | Description |
 |---|---------|-------------|
-| 00 | [Platform Overview](00_overview.md) | Architecture, Hubs comparison, licensing models, getting started |
-| 01 | [CRM Foundation](01_crm.md) | Contacts, Companies, Deals, Tickets, Properties, Pipelines, Lists |
-| 02 | [Marketing Hub](02_marketing_hub.md) | Email, Forms, Landing Pages, SEO/Blog, Social, Ads, Campaigns, Automation, Lead Scoring |
-| 03 | [Sales Hub](03_sales_hub.md) | Sequences, Meetings, Calling, Quotes, Playbooks, Forecasting, Conversation Intelligence |
-| 04 | [Service Hub](04_service_hub.md) | Ticketing, Knowledge Base, Chatbots, Feedback, CSAT/NPS, SLA, Customer Success |
-| 05 | [CMS / Content Hub](05_cms_content_hub.md) | Website Builder, HubL Templating, Custom Modules, Blogging, AI Content, Local Dev |
-| 06 | [Operations Hub](06_operations_hub.md) | Data Sync, Data Quality, Programmable Automation, Datasets, Calculated Properties |
-| 07 | [Commerce Hub](07_commerce_hub.md) | Payments, Invoicing, Subscriptions, CPQ, Accounting Integrations |
+| 00 | [Platform Overview](00_overview.md) | Architecture, Hubs comparison, Breeze AI platform, licensing models, getting started |
+| 01 | [CRM Foundation](01_crm.md) | Contacts, Companies, Deals, Tickets, Properties, Pipelines, Lists, Breeze Intelligence enrichment |
+| 02 | [Marketing Hub](02_marketing_hub.md) | Email, Forms, Landing Pages, SEO/Blog, Social, Ads, Campaigns, Automation, Lead Scoring, AI Content |
+| 03 | [Sales Hub](03_sales_hub.md) | Sequences, Meetings, Calling, Quotes, Playbooks, Forecasting, Conversation Intelligence, CPQ |
+| 04 | [Service Hub](04_service_hub.md) | Ticketing, Knowledge Base, Chatbots, Feedback, CSAT/NPS, SLA, Customer Success, AI Summarization |
+| 05 | [CMS / Content Hub](05_cms_content_hub.md) | Website Builder, HubL Templating, Custom Modules, Blogging, HubDB, AI Content, Local Dev |
+| 06 | [Operations Hub](06_operations_hub.md) | Data Sync, Data Quality, Breeze Intelligence Enrichment, Programmable Automation, Datasets |
+| 07 | [Commerce Hub](07_commerce_hub.md) | Payments, Invoicing, Subscriptions, CPQ, Dunning, Accounting Integrations |
 | 08 | [Custom Objects & API](08_custom_objects_api.md) | Custom Objects, REST API, GraphQL, Webhooks, OAuth 2.0, SDKs, Public Apps |
-| 09 | [Integrations & Automation](09_integrations_automation.md) | Native Integrations, iPaaS, Workflow Patterns, Sequences, Webhook Recipes |
-| 10 | [Pricing, Limits & Best Practices](10_pricing_limits_best_practices.md) | Pricing tiers per Hub, hard limits (all tiers), 20 best practices, common mistakes |
+| 09 | [Integrations & Automation](09_integrations_automation.md) | Native Integrations, iPaaS, Breeze AI Agents, Workflow Patterns, Sequences, Webhook Recipes |
+| 10 | [Pricing, Limits & Best Practices](10_pricing_limits_best_practices.md) | Pricing tiers per Hub, hard limits (all tiers), 22 best practices, common mistakes |
 
 ## How to use this tutorial
 
@@ -40,9 +40,12 @@ Each chapter is self-contained with:
 
 ## Quick Reference
 
-- [All Chapters](.) — browse all `.md` files
-- Research sources in `hubspot_*.html` (scraped product pages) and `hubspot_llms.txt`
-- API reference: `hubspot_api_overview.html` (scraped developer docs)
+- **Breeze AI** is HubSpot's 2024–2025 AI platform — mentioned throughout every chapter
+- Breeze Copilot is the conversational AI assistant throughout the HubSpot UI
+- Breeze Intelligence provides firmographic, technographic, and intent data enrichment
+- Chapter 05 covers HubDB (database tables in CMS) — key for structured content
+- Chapter 06 covers Data Sync and custom-coded actions for building integrations
+- Chapter 08 covers the complete developer API reference (REST, GraphQL, Webhooks, OAuth)
 
 ## Repository
 

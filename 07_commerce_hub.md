@@ -1,89 +1,93 @@
 # 7. Commerce Hub
 
 ## What It Does
-HubSpot Commerce Hub brings billing, payments, subscriptions, and CPQ (Configure, Price, Quote) into the HubSpot platform. It connects CRM data (deals, contacts, products) directly to payment processing, recurring billing, and invoicing — so sales and finance teams work from the same data.
+HubSpot Commerce Hub brings billing, payments, subscriptions, and CPQ (Configure, Price, Quote) directly into the HubSpot platform. It connects CRM data (deals, contacts, products) to payment processing, recurring billing, and invoicing — so sales and finance teams work from the same data instead of switching between Stripe, QuickBooks, and HubSpot.
 
 ## Key Features
 
 ### Payments
-- **Payment processing**: accept credit/debit cards, ACH/direct debit (US only), PayPal (limited regions)
-- **Payment gateways**: Stripe (built-in), with ability to connect custom Stripe accounts
+- **Payment processing**: accept credit/debit cards (Visa, MC, Amex, Discover), ACH/direct debit (US only), PayPal (limited regions), and digital wallets (Apple Pay, Google Pay)
+- **Payment gateways**: Stripe (built-in) with the option to connect your own Stripe account
 - **Payments from quotes**: attach payment links to sales quotes — customer clicks, pays, deal closes automatically
-- **Payment links**: standalone payment links (share via email, SMS, social)
-- **Checkout links**: payment pages with product details and quantity selectors
-- **Invoice payments**: send invoices with "pay now" button
-- **Payment branding**: customize payment page with your logo, colors, domain
+- **Payment links**: standalone payment links (share via email, SMS, social media)
+- **Checkout links**: full payment pages with product details, quantity selectors, and shipping info
+- **Invoice payments**: send invoices with embedded "Pay now" button
+- **Payment page branding**: customize with your logo, brand colors, and custom domain
 - **Auto-close deals**: when payment succeeds, deal stage auto-advances to Closed Won
-- **Payment receipts**: auto-send branded receipts
-- **Refunds**: process partial or full refunds from HubSpot
-- **Chargebacks**: track and manage dispute process
-- **Payouts**: view settlement history, next payout date
-- **Payment reporting**: revenue by product, by rep, by channel
+- **Payment receipts**: auto-send branded receipts with line items and payment details
+- **Refunds**: process partial or full refunds directly in HubSpot
+- **Chargebacks**: track and manage dispute process with notifications
+- **Payouts**: view settlement history, next payout date, and transaction breakdown
+- **Payment reporting**: revenue by product, rep, channel, and payment method
 
 ### Invoicing
 - **Invoice creation**: create professional invoices from deals, subscriptions, or standalone
-- **Invoice templates**: customize layout, logo, colors
-- **Auto-numbering**: sequential invoice numbers (configurable prefix)
-- **Invoice status**: Draft, Sent, Paid, Overdue, Canceled
+- **Invoice templates**: customize layout, logo, colors, and content blocks
+- **Auto-numbering**: sequential invoice numbers with configurable prefix and starting number
+- **Invoice status**: Draft, Sent, Paid, Overdue, Canceled, Void
 - **Invoice scheduling**: send automatically on recurring schedule
-- **Invoice reminders**: auto-send reminders for overdue invoices
-- **Payment terms**: Net 7, Net 15, Net 30, Net 60, Due on receipt, Custom
-- **Line items**: add products, services, discounts, taxes
+- **Invoice reminders**: auto-send reminders for overdue invoices (customizable timing and frequency)
+- **Payment terms**: Net 7, Net 15, Net 30, Net 60, Due on Receipt, Custom
+- **Line items**: add products, services, discounts, taxes, shipping
 - **Tax management**: configure tax rates per product or per customer region
-- **Currency**: multi-currency invoicing (Enterprise)
+- **Multi-currency invoicing**: send invoices in customer's currency (Enterprise)
 - **Bulk invoices**: create invoices for multiple customers at once
-- **Invoice archive**: searchable, filterable invoice history
+- **Invoice archive**: searchable, filterable invoice history with full audit trail
 
 ### Subscriptions & Recurring Billing
-- **Subscription creation**: create from deals, quotes, or directly
-- **Billing frequency**: monthly, quarterly, semi-annually, annually, custom
-- **Pricing models**: flat rate, per-seat, usage-based, tiered, volume
+- **Subscription creation**: create from deals, quotes, or directly from contact/company records
+- **Billing frequency**: monthly, quarterly, semi-annually, annually, or custom intervals
+- **Pricing models**: flat rate, per-seat, usage-based, tiered, volume-based
 - **Trial periods**: free trial with auto-conversion to paid
-- **Proration**: calculate partial charges for mid-cycle changes
-- **Subscription upgrades/downgrades**: change plan mid-cycle
-- **Cancellation**: automated cancellation workflows
-- **Dunning management**: auto-retry failed payments with escalation (reminders, then suspension, then cancellation)
-- **Subscription lifecycle**: Active, Past Due, Canceled, Expired
-- **Revenue recognition**: track MRR, ARR, churn, LTV
-- **Usage tracking**: track and bill based on consumption (API-based)
+- **Proration**: calculate partial charges for mid-cycle upgrades or downgrades
+- **Subscription upgrades/downgrades**: change plan mid-cycle with prorated charges
+- **Cancellation**: automated cancellation workflows with confirmation and feedback collection
+- **Dunning management**: auto-retry failed payments with escalation sequence
+  - Day 0: auto-retry (3 attempts)
+  - Day 3: reminder email
+  - Day 7: suspension notice
+  - Day 14: cancellation
+- **Subscription lifecycle**: Active, Past Due, Canceled, Expired, Pending
+- **Revenue recognition**: track MRR, ARR, churn rate, LTV, average revenue per account
+- **Usage tracking**: track and bill based on consumption (API-based metering)
 
 ### CPQ (Configure, Price, Quote)
-- **Product configuration**: bundles, options, variants
-- **Pricing rules**: volume discounts, tiered pricing, promotional pricing
-- **Quote templates**: professional PDF templates
-- **Approval workflows**: quotes over threshold need manager sign-off
-- **Discount management**: per-line or overall discounts
+- **Product configuration**: bundles, options, variants with conditional logic
+- **Pricing rules**: volume discounts, tiered pricing, promotional pricing, contract-length discounts
+- **Quote templates**: professional PDF templates with custom branding
+- **Approval workflows**: quotes over a threshold need manager sign-off (configurable per amount or discount %)
+- **Discount management**: per-line or overall discounts with approval gates
 - **Multi-currency quotes**: quote in customer's currency (Enterprise)
-- **Quote analytics**: quote-to-close rate, average discount %, quote velocity
-- **Locked pricing**: prevent sales reps from giving discounts beyond approved threshold
+- **Quote analytics**: quote-to-close rate, average discount %, quote velocity, time-to-sign
+- **Locked pricing**: prevent sales reps from giving discounts beyond approved thresholds
 - **Renewal quotes**: auto-generate renewal quotes from existing subscriptions
-- **Contract management**: associate contract terms with quotes (Enterprise)
+- **Contract management**: associate contract terms, start/end dates, and auto-renewal with quotes (Enterprise)
 
 ### Accounting Integration
 - **QuickBooks Online**: sync invoices, payments, customers (bidirectional)
 - **Xero**: sync invoices, payments, contacts
-- **Stripe**: payment processing and reconciliation
-- **Revenue recognition**: record revenue in accounting periods
+- **Stripe**: payment processing and automatic reconciliation
+- **Revenue recognition**: record revenue in proper accounting periods
 - **Chart of accounts mapping**: map products/categories to GL accounts
-- **Sales tax**: collect, track, and report sales tax (Avalara integration available)
+- **Sales tax**: collect, track, and report sales tax (Avalara integration available as add-on)
 
-### Payment Links & Checkout
-- **Payment link**: shareable URL for one-time payment
-- **Checkout page**: product + quantity + price → payment details → confirmation
-- **Embedded checkout**: embed in website, landing pages, or emails
-- **Checkout customization**: logo, brand colors, custom domain
-- **Email receipts**: auto-send on successful payment
-- **Abandoned payment recovery**: follow up on incomplete payments (via workflows)
-- **Multiple payment methods**: card, ACH, digital wallets (region-dependent)
+### Payment Links & Checkout Pages
+- **Payment link**: shareable URL for one-time payment (no customer login required)
+- **Checkout page**: full product + quantity + price → payment details → confirmation flow
+- **Embedded checkout**: embed in website, landing pages, or emails via iframe
+- **Checkout customization**: logo, brand colors, custom domain, thank-you page
+- **Email receipts**: auto-send branded receipt on successful payment
+- **Abandoned payment recovery**: follow up on incomplete payments (via workflows triggered on payment failure event)
+- **Multiple payment methods**: card, ACH, Apple Pay, Google Pay (region-dependent)
 
 ### Reporting & Analytics
-- **Revenue dashboard**: total revenue, MRR, ARR, churn rate, LTV, average deal size
-- **Subscription analytics**: active subscriptions, churn rate, upgrade/downgrade rate
-- **Invoice analytics**: invoices sent, paid, overdue, average days to payment
-- **Payment analytics**: volume, methods, failure rate, refund rate
-- **Quote analytics**: sent, viewed, signed, expired, won/lost
-- **Tax reporting**: sales tax collected by region
-- **Custom reports**: build on commerce data using custom report builder
+- **Revenue dashboard**: total revenue, MRR, ARR, churn rate, LTV, average deal size, net revenue retention
+- **Subscription analytics**: active subscriptions, churn rate, upgrade/downgrade rate, expansion revenue
+- **Invoice analytics**: invoices sent, paid, overdue %, average days to payment
+- **Payment analytics**: volume by method, success/failure rate, refund rate, chargeback rate
+- **Quote analytics**: sent, viewed, signed, expired, won/lost with conversion funnel
+- **Tax reporting**: sales tax collected by region and time period
+- **Custom reports**: build reports on commerce data using Custom Report Builder
 
 ## Step-by-Step: Connecting a Stripe Account
 
@@ -91,7 +95,7 @@ HubSpot Commerce Hub brings billing, payments, subscriptions, and CPQ (Configure
 2. Select Stripe
 3. Connect existing Stripe account or create new
 4. Configure auto-close: "Auto-close deals when payment succeeds"
-5. Set default payment methods: Credit card, ACH, PayPal
+5. Set default payment methods: Credit card, ACH, PayPal, Apple Pay
 6. Configure payment page branding (logo, colors, domain)
 7. Save
 
@@ -129,37 +133,39 @@ HubSpot Commerce Hub brings billing, payments, subscriptions, and CPQ (Configure
 
 ## Limits That Matter
 
-- Payment processing: only available in supported countries (US, UK, Canada, Australia, select EU)
-- Transaction fee: 1.99% + $0.49 (Starter), 1.49% + $0.49 (Pro/Enterprise) — or use your own Stripe
-- Payment methods: Credit/debit cards required; ACH (US only); PayPal (limited regions)
-- Recurring billing: included in Commerce Hub (not in base HubSpot)
-- Invoice number prefix: customizable
-- Invoice due date: set per invoice or default from payment terms
-- Subscription proration: supported for upgrades/downgrades
-- Multi-currency: Enterprise only
-- Accounting integrations: QuickBooks, Xero (Pro+)
-- Dunning retries: up to 5 retries before subscription suspension
-- Tax calculation: Avalara integration (separate subscription)
+- **Availability**: payment processing only in supported countries (US, UK, Canada, Australia, EU, select others)
+- **Transaction fee (HubSpot processing)**: 1.99% + $0.49 (Starter), 1.49% + $0.49 (Pro/Enterprise) — or use your own Stripe with no HubSpot transaction fee
+- **Payment methods**: Credit/debit cards always; ACH (US only); PayPal (limited regions); Apple Pay/Google Pay (where supported)
+- **Recurring billing**: included in Commerce Hub; not available in base HubSpot
+- **Invoice numbering**: fully customizable prefix
+- **Invoice due date**: set per invoice or default from payment terms
+- **Proration**: supported for mid-cycle upgrades and downgrades
+- **Multi-currency**: Enterprise only
+- **Accounting integrations**: QuickBooks, Xero (Pro+)
+- **Dunning retries**: up to 3 auto-retry attempts, then 2 reminder stages before cancellation
+- **Tax calculation**: manual or Avalara integration (separate subscription/subscription fee)
+- **Payment link expiration**: configurable (default 30 days)
 
 ## Use Cases
 
-- SaaS businesses: manage subscriptions, billing, dunning from CRM
-- Service businesses: send payment links in quotes and invoices
-- E-commerce: one-time payments, checkout links
-- Sales teams: close deals with integrated payment (customer pays immediately)
-- Finance teams: reconcile payments, manage invoices, track MRR
-- Subscription businesses: handle upgrades/downgrades/cancellations
-- CPQ: configure complex products with pricing rules, approvals, and discounts
+- **SaaS businesses**: manage subscriptions, billing, and dunning from the CRM
+- **Service businesses**: send payment links in quotes and invoices for one-time services
+- **E-commerce**: one-time payments with checkout links and product pages
+- **Sales teams**: close deals with embedded payment (customer pays immediately from quote)
+- **Finance teams**: reconcile payments, manage invoices, track MRR/ARR from one platform
+- **Subscription businesses**: handle upgrades, downgrades, cancellations, and failed payments
+- **CPQ**: configure complex product bundles with pricing rules, approval workflows, and discount gates
 
 ## Common Gotchas
 
-- Payment processing requires verification of your business (KYC) before payouts
+- Payment processing requires business verification (KYC) before payouts start
 - Stripe account currency must match HubSpot account default currency
-- Refunds are processed immediately — no "pending" state for credit cards
-- Subscription auto-creation from deals only works if the product has a recurring price
-- Dunning emails are separate from HubSpot marketing emails (transactional, not counted in marketing sends)
-- Abandoned payment recovery requires workflows configured on payment failure event
-- Tax is not automatically calculated unless using Avalara integration
-- Commerce Hub is not available in all countries (check HubSpot's supported countries list)
-- Payment links expire after set duration (default: 7 days) — configure in settings
-- Quotes with payment links show payment option only if Commerce Hub is active
+- Refunds are processed immediately — no "pending" state for credit card refunds
+- Subscription auto-creation from deals only works if the product has a recurring price set
+- Dunning emails are transactional (not counted in marketing email sends)
+- Abandoned payment recovery requires you to set up workflows triggered on payment failure event
+- Tax is not automatically calculated unless using Avalara integration (separate cost)
+- Commerce Hub is not available in all countries — check HubSpot's supported list
+- Payment links expire after a configurable duration (default: 30 days)
+- Quotes with payment links show payment options only if Commerce Hub is active on the account
+- ACH payments take 3-5 business days to settle; card payments settle in 1-2 days

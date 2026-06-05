@@ -9,6 +9,7 @@ HubSpot Sales Hub gives sales teams the tools to manage pipelines, automate outr
 - **Email tracking**: open notifications, click tracking, link tracking (Free)
 - **Email templates**: save and reuse email templates with personalization tokens
 - **Snippets**: short reusable text blocks for common replies
+- **AI Snippet Recommendations**: Breeze AI suggests relevant snippets based on email context and conversation history (Pro+)
 - **Sequences**: automated series of follow-up emails and tasks
 - **Send later**: schedule emails to send at optimal times
 - **Canned replies**: pre-written responses for common scenarios
@@ -46,6 +47,8 @@ HubSpot Sales Hub gives sales teams the tools to manage pipelines, automate outr
 
 ### Conversation Intelligence (Enterprise)
 - **Call transcription**: full transcription of sales calls
+- **Breeze AI Call Summaries**: auto-generated call summaries with key points, action items, and next steps (Enterprise)
+- **AI Coaching Suggestions**: Breeze AI identifies improvement areas and suggests coaching moments based on call patterns (Enterprise)
 - **Keyword spotting**: flag when specific topics are mentioned (price, competitor, etc.)
 - **Talk-to-listen ratio**: track who talks more
 - **Objection tracking**: identify common objections
@@ -58,23 +61,25 @@ HubSpot Sales Hub gives sales teams the tools to manage pipelines, automate outr
 - **Deal stages**: custom pipelines with probability percentages
 - **Deal board**: Kanban view of pipeline
 - **Deal amount & ROI tracking**: forecast revenue
+- **Breeze AI Deal Insights**: AI-powered deal health scores, next-best-action recommendations, and risk flags based on historical patterns (Enterprise)
 - **Line items**: associate products/services with deals
 - **Discounts**: flat and percentage discounts
 - **Recurring revenue**: track subscription deals
 - **Auto-assignment**: round-robin or rules-based deal assignment
 - **Deal split**: split revenue among multiple reps (Enterprise)
 - **Forecasting**: team forecast, rep forecast, weighted pipeline, commit forecast
+- **Breeze AI Forecasting Predictions**: ML-based predictive forecasts that auto-adjust based on deal velocity, rep activity, and historical close rates (Enterprise)
 - **Forecast categories**: commit, best case, pipeline, closed won/lost
 
 ### Lead Management
 - **Lead scoring**: behavioral + demographic scoring (Sales Hub Enterprise)
+- **Predictive lead scoring via Breeze Intelligence**: ML-based lead quality scores enriched with intent data, firmographic signals, and purchase intent from Breeze Intelligence (Enterprise)
 - **Lead rotation**: distribute leads round-robin
 - **Lead status tracking**: New, Attempted to Contact, Connected, Qualified, Unqualified
 - **Lead feed**: real-time notifications of new leads, email opens, page visits
 - **Prospecting workspace**: focused view for lead outreach
 - **Company insights**: technographics, recent funding, hiring news
-- **LinkedIn Sales Navigator integration**: sync contacts and lists
-- **Predictive lead scoring**: ML-based lead quality scores (Enterprise)
+- **LinkedIn Sales Navigator integration**: sync contacts and lists with deeper activity sync including InMail messages, profile views, and save-to-CRM actions (Pro+)
 
 ### Quotes (Pro+)
 - **Quote builder**: create professional quotes from deal line items
@@ -100,7 +105,7 @@ HubSpot Sales Hub gives sales teams the tools to manage pipelines, automate outr
 - **Deal conversion**: stage-to-stage conversion rates
 - **Activity tracking**: calls, emails, meetings per rep
 - **Forecasting**: custom forecast periods, team hierarchies
-- **Multi-currency reporting**: convert deal amounts to base currency
+- **Multi-currency reporting**: convert and report deal amounts, revenue, and pipeline values in any base currency with real-time exchange rate support and per-currency breakdowns (Pro+)
 - **Custom report builder**: drag-and-drop report creation
 - **Dashboard sharing**: share with team, exec, or stakeholders
 - **Attribution reporting**: which marketing sources produce closed-won deals

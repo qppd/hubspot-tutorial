@@ -5,7 +5,17 @@ HubSpot Marketing Hub provides tools for inbound marketing: attracting visitors,
 
 ## Key Features
 
+### Breeze AI Content Assistant
+- **AI writing**: generate blog posts, emails, landing page copy, and social content with natural language prompts
+- **AI image generation**: create custom images for blogs, landing pages, emails, and social posts using built-in AI image generator
+- **AI translation**: translate content into multiple languages with one click (Pro+)
+- **AI subject line generation**: automatically generate and test subject line variations for email campaigns
+- **Content tone adjustment**: rewrite content for brand voice (formal, casual, professional, playful)
+- **AI content repurposing**: reformat existing content for different channels (blog → social, email → landing page)
+- **Brand voice settings**: define and enforce brand voice guidelines across all AI-generated content
+
 ### Email Marketing
+- **Breeze AI email campaign generation**: generate full email campaigns — subject lines, body copy, CTAs, and images — with natural language prompts
 - **Drag-and-drop email editor** with pre-built templates
 - **Personalization tokens**: first name, company, deal info, custom properties
 - **Smart content**: show different content based on list membership, lifecycle stage, device type, language, or contact properties
@@ -18,8 +28,6 @@ HubSpot Marketing Hub provides tools for inbound marketing: attracting visitors,
 - **Email analytics**: opens, clicks, bounces, unsubscribes, spam reports, click maps, device breakdown
 - **Send time optimization**: send when each recipient is most likely to open (Pro+)
 - **Email templates**: save as templates, clone, share across teams
-
-### Landing Pages
 - **Drag-and-drop builder**: modules, sections, global content
 - **Domain management**: connect custom domains (up to 15 on Pro, unlimited on Enterprise)
 - **SEO settings**: meta description, page title, URL slug, canonical URL

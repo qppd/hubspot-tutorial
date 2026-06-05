@@ -17,11 +17,12 @@ HubSpot's developer platform extends the CRM beyond standard objects (Contacts, 
 - **Import/export**: bulk import/export custom object records
 - **Automation**: custom objects in workflows (triggers and actions)
 - **Data sync**: sync custom objects between HubSpot and connected apps (Enterprise)
+- **Breeze AI for developers**: generate API request snippets, HubL templates, and custom-coded action code via natural language prompts in the developer docs (2025)
 - **Limits**: 10 custom objects (Pro), 200 (Enterprise) / Record limits: 100k (Starter), 1M (Pro), 10M+ (Enterprise)
 
 ### HubSpot REST API
 - **Base URL**: `https://api.hubapi.com`
-- **Authentication**: API Key (legacy) or OAuth 2.0 (recommended) or Private App Access Token
+- **Authentication**: API Key (legacy, being deprecated) or OAuth 2.0 (recommended for public apps) or Private App Access Token (recommended for internal integrations)
 - **API Categories**:
   - **CRM**: Contacts, Companies, Deals, Tickets, Custom Objects, Associations, Pipelines, Properties
   - **Marketing**: Email, Events, Forms, Landing Pages, Blog, Social Media, Campaigns
@@ -29,10 +30,11 @@ HubSpot's developer platform extends the CRM beyond standard objects (Contacts, 
   - **CMS**: Pages, Blog Posts, Templates, HubDB, Domains, Files
   - **Automation**: Workflows, Webhooks
   - **Commerce**: Payments, Invoices, Subscriptions, Products, Line Items
-- **Pagination**: cursor-based (after/before)
-- **Search**: POST /crm/v3/objects/{object}/search with filters, sorts, property selection
-- **Batch operations**: batch create, read, update, upsert
-- **Rate limits**: 100 requests per 10 seconds (varies by plan and endpoint)
+  - **Intelligence**: Breeze Intelligence, Enrichment, Intent signals (2025+)
+- **Pagination**: cursor-based (after/before with `limit` param)
+- **Search API**: `POST /crm/v3/objects/{object}/search` with filter groups, sorts, property selection, and full-text search
+- **Batch operations**: batch create, read, update, upsert (up to 100 records per batch)
+- **Rate limits**: 100 requests per 10 seconds per app (varies by plan and endpoint)
 - **Daily limits**: varies — 250k/day (Free), 500k/day (Starter), 1M+/day (Enterprise)
 
 ### Private Apps

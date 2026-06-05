@@ -22,6 +22,7 @@ HubSpot Service Hub equips customer support and success teams with tools to mana
 
 ### Knowledge Base
 - **Article creation**: rich text editor with modules (Pro+)
+- **AI article generation from tickets**: auto-generate draft knowledge base articles from resolved tickets — Breeze AI extracts the question, solution, and context from ticket threads and produces a complete article draft ready for review and publishing
 - **Article categorization**: by topic, product, or custom categories
 - **SEO settings**: meta description, URL slug, canonical URL
 - **Smart content**: show different articles based on contact properties
@@ -39,6 +40,7 @@ HubSpot Service Hub equips customer support and success teams with tools to mana
 - **Bot types**: ticket creation bot, lead qualification bot, meeting booking bot, website chat bot, knowledge base bot
 - **Simple bot builder**: rule-based question/answer flows (Free)
 - **Advanced bots**: conditional branching, API calls (Pro+)
+- **Breeze AI chatbot responses**: LLM-powered replies that understand natural language and intent beyond rigid rule trees — bots can answer complex questions, paraphrase, handle typos, and hold contextual multi-turn conversations without every branch being hand-written
 - **Bot handoff**: escalate to human agent when bot can't resolve
 - **Bot analytics**: resolved vs handed-off, conversation logs
 - **Multi-language bots**: create flows in different languages
@@ -60,6 +62,7 @@ HubSpot Service Hub equips customer support and success teams with tools to mana
 - **Survey triggers**: property change, workflow enrollment, ticket close
 - **Survey analytics**: response rate, score trends, segment by team/product
 - **Feedback reporting**: sentiment tracking over time, by rep, by issue type
+- **Predictive NPS/CSAT scoring**: Breeze AI analyzes ticket language, sentiment, resolution time, and historical patterns to predict a customer's likely CSAT or NPS score before the survey is even sent — flag at-risk accounts proactively
 
 ### Customer Success Workspace (Pro+)
 - **Health scoring**: custom health score formulas based on usage, engagement, support history
@@ -75,10 +78,12 @@ HubSpot Service Hub equips customer support and success teams with tools to mana
 ### Multi-Channel Inbox
 - **Email**: connect shared inbox (support@, help@, etc.)
 - **Live chat**: website chat widget
-- **Messaging channels (Pro+)**: Facebook Messenger, WhatsApp, Instagram DM (limited)
+- **Messaging channels (Pro+)**: Facebook Messenger, **WhatsApp** (full integration — connect WhatsApp Business Account, send/receive messages, share media/files, use templates for proactive outreach, reply from inbox, trigger workflows from WhatsApp messages), Instagram DM (limited)
 - **Bot conversations**: seamlessly continue from bot → human
 - **Omnichannel view**: all channels in one inbox with unified history
+- **AI summarization**: Breeze AI auto-summarizes long conversation threads into a concise bullet-point synopsis so agents can catch up instantly without scrolling through pages of chat history
 - **Macros**: pre-written replies for common scenarios
+- **AI-suggested reply macros**: Breeze AI proposes relevant reply macros based on the conversation context, ticket type, and customer history — agents can insert with one click instead of hunting through a list
 - **Canned responses**: shared snippets across team
 - **Collision detection**: see when another agent is viewing/replying to a ticket
 - **Team mentions**: @mention to pull in another agent

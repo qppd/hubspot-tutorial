@@ -9,6 +9,10 @@ HubSpot is a CRM platform that connects marketing, sales, service, CMS, operatio
 
 ```
 ┌─────────────────────────────────────────────────────┐
+│              BREEZE AI PLATFORM                      │
+│  Breeze Copilot · Breeze Intelligence · AI Agents   │
+│  AI Content · AI Lead Scoring · Predictive Analytics│
+├─────────────────────────────────────────────────────┤
 │                  COMMERCE HUB                        │
 │  Payments, Invoicing, Subscriptions, CPQ            │
 ├─────────────────────────────────────────────────────┤
@@ -45,7 +49,7 @@ HubSpot is a CRM platform that connects marketing, sales, service, CMS, operatio
 | **Marketing Hub** | Email, forms, landing pages, SEO, ads, automation | Inbound marketing teams | Free tier, paid from ~$20/mo |
 | **Sales Hub** | Pipelines, sequences, meetings, quotes, forecasting | B2B sales teams | Free tier, paid from ~$15/mo |
 | **Service Hub** | Ticketing, KB, chatbots, feedback, CSAT | Customer support/success | Free tier, paid from ~$20/mo |
-| **CMS/Content Hub** | Website builder, blog, HubL, custom modules, AI content | Web dev, content teams | Free tier, paid from ~$25/mo |
+| **Content Hub** (CMS) | Website builder, blog, HubL, custom modules, AI content | Web dev, content teams | Free tier, paid from ~$25/mo |
 | **Operations Hub** | Data sync, data quality, programmable automation | Ops/revenue operations | Free tier, paid from ~$30/mo |
 | **Commerce Hub** | Payments, invoicing, subscriptions, CPQ | SaaS, e-commerce, B2B sales | Add-on pricing |
 
@@ -58,8 +62,8 @@ You don't need all Hubs. Common combos:
 | B2B inbound + sales pipeline | CRM + Marketing + Sales |
 | SaaS with subscriptions | CRM + Sales + Commerce |
 | E-commerce + support | CRM + Marketing + Commerce + Service |
-| Multi-channel enterprise | All Hubs + Operations + CMS |
-| Developer platform + custom objects | CRM + Operations (for automation) + CMS (for website) |
+| Multi-channel enterprise | All Hubs + Operations + Content Hub |
+| Developer platform + custom objects | CRM + Operations (for automation) + Content Hub (for website) |
 
 ## Licensing Models
 
@@ -111,6 +115,46 @@ Granular access control:
 - Property-level permissions: restrict edit access to specific properties
 - Teams: isolate data by geography, business unit, or product line
 
+## AI & Breeze Intelligence
+
+HubSpot's **Breeze AI** platform (launched 2024–2025) embeds artificial intelligence across every Hub. Breeze consists of two layers:
+
+**Breeze Copilot**
+- Conversational AI assistant available throughout the HubSpot UI
+- Answers questions about your CRM data, suggests next actions
+- Can create workflows, write email copy, generate reports, and auto-fill properties
+- Context-aware — knows which record, list, or dashboard you're viewing
+- Triggered via the Breeze icon or by typing "/" in any text field
+
+**Breeze Intelligence**
+- Enriches CRM records with firmographic and technographic data from 260M+ company profiles
+- Intent signals (buying signals based on web research behavior)
+- AI-powered lead scoring and predictive analytics
+- Automated data cleansing and deduplication
+- Available as a paid add-on to any Hub
+
+**AI Features by Hub**
+
+| Feature | Hub Availability |
+|---------|-----------------|
+| **AI Content Generation** (blog posts, emails, landing page copy, social posts) | Marketing Hub, Content Hub |
+| **AI Lead Scoring** (predictive scoring based on behavioral data) | Marketing Hub (Pro+) |
+| **AI Snippet Recommendations** (suggested email/reply content) | Sales Hub, Service Hub |
+| **AI Chatbot / Agent** (conversational bots with LLM-powered replies) | Service Hub, Marketing Hub |
+| **Predictive Analytics** (forecast deal probability, churn risk) | Sales Hub, Service Hub (Enterprise) |
+| **AI Summaries** (auto-generated call summaries, ticket recaps) | Sales Hub, Service Hub |
+| **Content AI** (generate images, rewrite tone, translate content) | Content Hub |
+| **Smart CRM** (auto-suggest properties, auto-enrich records) | CRM Platform (Pro+) |
+
+> Breeze AI is included in **Enterprise** tiers and available as an add-on for **Professional** tiers. Breeze Intelligence is a paid add-on available to all paid tiers.
+
+## Sandbox Accounts
+
+Enterprise accounts get access to **Sandbox** environments — isolated copies of your HubSpot portal for testing:
+- **Standard Sandbox**: full copy of your production portal (data, settings, integrations)
+- **Developer Sandbox**: lightweight environment for API and custom code testing
+- Sandboxes are safe spaces to test workflows, automation, custom objects, and integrations before deploying to production
+
 ## Getting Started
 
 ### Step 1: Sign up
@@ -153,7 +197,7 @@ This tutorial covers each Hub in detail:
 | 02 | **Marketing Hub** | Email, Forms, Landing Pages, SEO/Blog, Social, Ads, Campaigns, Automation |
 | 03 | **Sales Hub** | Sequences, Meetings, Calling, Deals, Quotes, Playbooks, Forecasting, CI |
 | 04 | **Service Hub** | Ticketing, Knowledge Base, Chatbots, Feedback, CSAT/NPS, SLA, Customer Success |
-| 05 | **CMS / Content Hub** | Website Builder, HubL, Custom Modules, Blogging, Content AI, Local Dev |
+| 05 | **Content Hub** (CMS) | Website Builder, HubL, Custom Modules, Blogging, Content AI, Local Dev |
 | 06 | **Operations Hub** | Data Sync, Data Quality, Programmable Automation, Datasets, Calculated Properties |
 | 07 | **Commerce Hub** | Payments, Invoicing, Subscriptions, CPQ, Accounting Integration |
 | 08 | **Custom Objects & API** | Custom Objects, REST API, GraphQL, Webhooks, Private/Public Apps, SDKs |
