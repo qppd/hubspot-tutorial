@@ -638,3 +638,212 @@ If you pause data sync for more than 30 days, some connections may need to be re
 
 ### 8. Environment Variables
 Custom-coded action environment variables are stored at the portal level. Be careful not to commit sensitive values (API keys, tokens) to version control.
+
+---
+
+## Operations Hub Advanced Tutorials
+
+### Tutorial 1: Building a Data Quality Pipeline
+
+**Goal**: Automatically clean, enrich, and deduplicate every new contact that enters the CRM.
+
+**Step 1: Create property standardization rules**
+
+1. **Operations** > **Data Quality** > **Data Standardization** > Create rule
+2. Object: Contacts
+3. Rules:
+   - Property: First name → Capitalize → "john" becomes "John"
+   - Property: Last name → Capitalize → "smith" becomes "Smith"
+   - Property: Email → Lowercase → "John@Example.COM" becomes "john@example.com"
+   - Property: Phone → Format → "5551234567" becomes "(555) 123-4567"
+4. Trigger: Run on every update
+5. Save
+
+**Step 2: Create deduplication rule**
+
+1. **Operations** > **Data Quality** > **Deduplication** > Create rule
+2. Object: Contacts
+3. Match criteria: Email (exact match), confidence 100%
+4. Match criteria: First name + Last name + Phone (fuzzy name, exact phone), confidence 85%
+5. Match criteria: Company + Job title + Phone (fuzzy company, exact phone, exact title), confidence 80%
+6. Action for high confidence (>90%): Auto-merge into oldest record
+7. Action for medium confidence (70-90%): Create review task for admin
+8. Schedule: Run daily at 2 AM
+9. Save
+
+**Step 3: Create enrichment workflow**
+
+1. **Automation** > **Workflows** > Create workflow
+2. Trigger: Contact created
+3. Actions:
+   - Branch: If email contains "@" → extract domain → set property "Email Domain"
+   - Branch: If company name is empty AND email domain exists → Search for company by domain
+     - If found: Associate contact to company
+     - If not found: Create company with domain, enrich via Breeze Intelligence, associate contact
+   - Check for duplicate: Search contacts by email → if existing active contact found → flag for review
+   - Set property: Data Quality Score = "In Progress"
+4. Save and turn on
+
+### Tutorial 2: SQL Dataset for Sales Analytics
+
+**Goal**: Create a dataset that shows sales rep performance with deal velocity, win rates, and pipeline health.
+
+```sql
+WITH rep_performance AS (
+  SELECT
+    u.email AS rep_email,
+    u.first_name || ' ' || u.last_name AS rep_name,
+    COUNT(d.id) AS total_deals,
+    SUM(CASE WHEN d.dealstage = 'closedwon' THEN 1 ELSE 0 END) AS won_deals,
+    SUM(CASE WHEN d.dealstage = 'closedlost' THEN 1 ELSE 0 END) AS lost_deals,
+    SUM(CASE WHEN d.dealstage NOT IN ('closedwon', 'closedlost') THEN 1 ELSE 0 END) AS open_deals,
+    SUM(d.amount) AS total_pipeline_value,
+    SUM(CASE WHEN d.dealstage = 'closedwon' THEN d.amount ELSE 0 END) AS total_won_value,
+    AVG(CASE WHEN d.dealstage = 'closedwon' 
+      THEN DATE_DIFF(d.closedate, d.createdate, 'day') 
+      ELSE NULL END) AS avg_days_to_close,
+    MAX(d.createdate) AS latest_deal_created
+  FROM deals d
+  LEFT JOIN users u ON d.hubspot_owner_id = u.id
+  WHERE d.createdate >= DATE_ADD(TODAY(), -90, 'day')
+  GROUP BY u.email, u.first_name, u.last_name
+)
+SELECT
+  rep_name,
+  rep_email,
+  total_deals,
+  won_deals,
+  lost_deals,
+  open_deals,
+  ROUND(won_deals * 100.0 / NULLIF(total_deals, 0), 1) AS win_rate_pct,
+  total_pipeline_value,
+  total_won_value,
+  ROUND(avg_days_to_close, 1) AS avg_days_to_close,
+  CASE
+    WHEN won_deals >= 10 AND win_rate_pct >= 40 THEN 'Top Performer'
+    WHEN won_deals >= 5 THEN 'Solid Performer'
+    WHEN won_deals >= 2 THEN 'Developing'
+    ELSE 'Needs Improvement'
+  END AS performance_tier
+FROM rep_performance
+ORDER BY total_won_value DESC;
+```
+
+### Tutorial 3: Custom-Coded Action for Slack Notification
+
+**Goal**: When a high-priority ticket is created in Service Hub, send a formatted notification to a Slack channel.
+
+```javascript
+// Custom-coded workflow action: Send Slack notification for urgent tickets
+exports.main = async (event, callback) => {
+  const { objectId, properties } = event;
+  
+  // Build Slack message
+  const slackMessage = {
+    channel: '#support-urgent',
+    text: `🚨 *Urgent Ticket Created*\n` +
+          `*Ticket:* ${properties.hs_ticket_name || 'No name'}\n` +
+          `*Priority:* ${properties.hs_ticket_priority || 'Unknown'}\n` +
+          `*Contact:* ${properties.email || 'Unknown'}\n` +
+          `*Company:* ${properties.associated_company_name || 'Unknown'}\n` +
+          `*Created:* ${new Date().toLocaleString()}\n\n` +
+          `🔗 <https://app.hubspot.com/contacts/${event.portalId}/ticket/${objectId}|View in HubSpot>`,
+    mrkdwn: true
+  };
+  
+  try {
+    const response = await fetch(process.env.SLACK_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(slackMessage)
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Slack returned ${response.status}`);
+    }
+    
+    callback({ succeeded: true });
+  } catch (error) {
+    // Log error but don't fail the workflow
+    console.error('Slack notification failed:', error.message);
+    callback({ succeeded: true }); // Workflow continues even if Slack fails
+  }
+};
+```
+
+### Tutorial 4: Complex Calculated Properties for SaaS Metrics
+
+**Property 1: Customer Health Score (Contact-level)**
+```
+health_score = 
+  IF(AND(
+    last_login_date > DATE_ADD(TODAY(), -7, "day"),  -- Active in last 7 days
+    open_tickets < 2,                                   -- Fewer than 2 open tickets
+    subscription_status = "active"                      -- Account is paid
+  ), "Healthy",
+  IF(AND(
+    last_login_date > DATE_ADD(TODAY(), -30, "day"),
+    open_tickets < 5,
+    subscription_status = "active"
+  ), "Needs Attention",
+  IF(subscription_status = "past_due", "At Risk", "Critical")))
+```
+
+**Property 2: Days Since Last Activity (Contact-level)**
+```
+days_since_last_activity = DATE_DIFF(hs_last_sales_activity_date, TODAY(), "day")
+```
+
+**Property 3: Account Tier (Company-level rollup)**
+```
+account_tier = IF(
+  SUM(associated_deals, amount) > 100000, "Enterprise",
+  IF(SUM(associated_deals, amount) > 25000, "Mid-Market",
+  IF(SUM(associated_deals, amount) > 5000, "Small Business", "Prospect")))
+```
+
+**Property 4: Urgency Score (Ticket-level)**
+```
+urgency_score = 
+  IF(AND(hs_ticket_priority = "urgent", hs_ticket_status != "closed"), 100,
+  IF(AND(hs_ticket_priority = "high", hs_ticket_status != "closed", 
+    DATE_DIFF(hs_createdate, TODAY(), "day") > 3), 80,
+  IF(hs_ticket_status = "waiting_on_contact", 30, 10)))
+```
+
+---
+
+## Data Sync — Supported Connections Complete Reference
+
+### Full List of Supported Integrations
+
+| Category | Apps | Sync Objects |
+|----------|------|-------------|
+| **CRM** | Salesforce, Microsoft Dynamics 365, Zoho, Pipedrive | Contacts, Companies, Deals, Tasks |
+| **Marketing** | Marketo, Mailchimp, Constant Contact, ActiveCampaign, Klaviyo | Contacts, Lists, Campaigns |
+| **E-commerce** | Shopify, WooCommerce, Magento, BigCommerce | Contacts, Orders/Deals, Products |
+| **Accounting** | QuickBooks Online, Xero, NetSuite, FreshBooks | Customers, Invoices, Payments |
+| **Support** | Zendesk, Freshdesk, Intercom, Jira Service Management | Contacts, Tickets |
+| **Productivity** | Asana, Monday.com, Trello, Wrike | Tasks, Projects |
+| **Data** | Airtable, Google Sheets | All mapped objects |
+| **Enterprise** | Snowflake, BigQuery, Redshift (Data Pipeline) | All objects |
+
+### Connecting to Custom/Unsupported Apps
+
+If an app isn't in the list, you have three options:
+
+**Option 1: Use Zapier/Make/Workato** (best for quick connections)
+1. Create a Zap in Zapier: "When X happens in HubSpot → do Y in Custom App"
+2. Or: "When X happens in Custom App → do Y in HubSpot"
+3. Limited by Zapier's HubSpot triggers/actions
+
+**Option 2: Build a custom integration with webhooks + API** (best for complex needs)
+1. Create a private app in HubSpot with the scopes you need
+2. Set up webhook subscriptions for real-time events
+3. Build your integration server to receive webhooks and call HubSpot API
+4. Handle authentication, retry logic, and error handling
+
+**Option 3: Use a custom connector via Workato** (best for enterprise)
+1. Workato provides SDK for building custom connectors
+2. Deploy as a private connector in your Workato workspace
+3. Use in Workato recipes alongside HubSpot integration

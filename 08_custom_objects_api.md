@@ -818,3 +818,381 @@ The SDK's auto-retry doesn't cover all error scenarios. For production, implemen
 
 ### 8. Custom Object in Workflows
 Custom objects can be used in workflows (triggers and actions), but NOT directly in sequences or email marketing. You must associate the custom object through a deal or contact to use those features.
+
+---
+
+## API Integration Tutorials
+
+### Tutorial 1: Building a Data Import Script (Python)
+
+**Goal**: Import 10,000 contacts from an external system into HubSpot using the batch API for efficiency.
+
+```python
+import hubspot
+from hubspot.crm.contacts import BatchInputSimplePublicObjectInput
+import csv
+import time
+
+client = HubSpot(access_token="YOUR_PRIVATE_APP_TOKEN")
+
+def batch_import_contacts(csv_path, batch_size=100):
+    """Import contacts from CSV using batch API."""
+    
+    # Read contacts from CSV
+    contacts = []
+    with open(csv_path, 'r') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            contacts.append({
+                "email": row["email"],
+                "firstname": row["first_name"],
+                "lastname": row["last_name"],
+                "phone": row["phone"],
+                "company": row["company"],
+                "jobtitle": row["job_title"],
+                "website": row["website"]
+            })
+    
+    print(f"Read {len(contacts)} contacts from CSV")
+    
+    # Process in batches of 100
+    successful = 0
+    errors = 0
+    
+    for i in range(0, len(contacts), batch_size):
+        batch = contacts[i:i + batch_size]
+        
+        try:
+            batch_input = BatchInputSimplePublicObjectInput(
+                inputs=[{
+                    "properties": contact
+                } for contact in batch]
+            )
+            
+            response = client.crm.contacts.batch_api.create(
+                batch_input_simple_public_object_input=batch_input
+            )
+            
+            successful += len(response.results)
+            print(f"Batch {i//batch_size + 1}: Created {len(response.results)} contacts")
+            
+        except Exception as e:
+            errors += len(batch)
+            print(f"Batch {i//batch_size + 1} failed: {e}")
+        
+        # Rate limiting: wait if needed
+        if (i // batch_size) % 5 == 0:
+            time.sleep(1)  # Stay within 100 req/10s limit
+    
+    print(f"\nImport complete: {successful} created, {errors} errors")
+    return successful, errors
+
+# Usage
+batch_import_contacts("contacts_to_import.csv")
+```
+
+### Tutorial 2: Building a Webhook Receiver (Flask)
+
+**Goal**: Receive HubSpot webhooks, verify signatures, and process events.
+
+```python
+from flask import Flask, request, jsonify
+import hmac
+import hashlib
+import json
+from datetime import datetime
+
+app = Flask(__name__)
+WEBHOOK_SECRET = "your-hubspot-webhook-secret"
+
+def verify_signature(payload_body, timestamp, signature):
+    """Verify HMAC-SHA256 signature from HubSpot."""
+    source = payload_body + timestamp
+    expected = hmac.new(
+        WEBHOOK_SECRET.encode('utf-8'),
+        source.encode('utf-8'),
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(signature, expected)
+
+def check_timestamp(timestamp):
+    """Prevent replay attacks by checking timestamp freshness."""
+    now = int(datetime.utcnow().timestamp())
+    event_time = int(timestamp)
+    return abs(now - event_time) < 300  # 5 minute window
+
+def process_contact_creation(event):
+    """Handle new contact created."""
+    contact_id = event['objectId']
+    print(f"New contact created: {contact_id}")
+    # Your logic here: enrich, sync, notify, etc.
+
+def process_deal_stage_change(event):
+    """Handle deal stage change."""
+    deal_id = event['objectId']
+    new_stage = event['propertyValue']
+    print(f"Deal {deal_id} moved to stage: {new_stage}")
+    # Your logic here: trigger external workflow, notify, etc.
+
+@app.route("/webhooks/hubspot", methods=["POST"])
+def hubspot_webhook():
+    """Main webhook endpoint."""
+    
+    # Extract headers
+    signature = request.headers.get("X-HubSpot-Signature-v3")
+    timestamp = request.headers.get("X-HubSpot-Request-Timestamp")
+    body = request.data.decode("utf-8")
+    
+    # Verify
+    if not signature or not timestamp:
+        return jsonify({"error": "Missing headers"}), 401
+    
+    if not verify_signature(body, timestamp, signature):
+        return jsonify({"error": "Invalid signature"}), 401
+    
+    if not check_timestamp(timestamp):
+        return jsonify({"error": "Stale timestamp"}), 401
+    
+    # Process events (HubSpot delivers batches)
+    events = request.json
+    if not isinstance(events, list):
+        events = [events]
+    
+    for event in events:
+        event_type = event.get("subscriptionType")
+        try:
+            if event_type == "contact.creation":
+                process_contact_creation(event)
+            elif event_type == "deal.stageChange":
+                process_deal_stage_change(event)
+            elif event_type == "ticket.creation":
+                process_ticket_creation(event)
+            # Add more event types as needed
+        except Exception as e:
+            print(f"Error processing {event_type}: {e}")
+            # Log but don't fail the whole batch
+    
+    # Always return 200 to acknowledge receipt
+    return jsonify({"status": "ok"}), 200
+
+@app.route("/health", methods=["GET"])
+def health_check():
+    """Health check endpoint for monitoring."""
+    return jsonify({"status": "healthy"})
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080, ssl_context="adhoc")
+```
+
+### Tutorial 3: Complete OAuth 2.0 Implementation (Node.js)
+
+**Goal**: Full OAuth flow for a public HubSpot app with token refresh.
+
+```javascript
+const express = require('express');
+const hubspot = require('@hubspot/api-client');
+const axios = require('axios');
+
+const app = express();
+const CLIENT_ID = 'YOUR_CLIENT_ID';
+const CLIENT_SECRET = 'YOUR_CLIENT_SECRET';
+const REDIRECT_URI = 'https://your-app.com/oauth/callback';
+const SCOPES = ['crm.objects.contacts.read', 'crm.objects.contacts.write'];
+
+// In-memory token store (use database in production)
+const tokenStore = {};
+
+// Step 1: Redirect user to HubSpot authorization page
+app.get('/oauth/authorize', (req, res) => {
+    const authUrl = 'https://app.hubspot.com/oauth/authorize' +
+        `?client_id=${CLIENT_ID}` +
+        `&redirect_uri=${REDIRECT_URI}` +
+        `&scope=${SCOPES.join(' ')}` +
+        `&state=${generateRandomState()}`; // CSRF protection
+    
+    res.redirect(authUrl);
+});
+
+// Step 2: Handle OAuth callback
+app.get('/oauth/callback', async (req, res) => {
+    const { code, state } = req.query;
+    
+    // Verify state to prevent CSRF
+    if (!verifyState(state)) {
+        return res.status(401).send('Invalid state parameter');
+    }
+    
+    try {
+        // Exchange code for tokens
+        const response = await axios.post(
+            'https://api.hubapi.com/oauth/v1/token',
+            new URLSearchParams({
+                grant_type: 'authorization_code',
+                client_id: CLIENT_ID,
+                client_secret: CLIENT_SECRET,
+                redirect_uri: REDIRECT_URI,
+                code: code
+            }),
+            { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+        );
+        
+        const { access_token, refresh_token, expires_in } = response.data;
+        
+        // Store tokens securely
+        const userId = extractUserId(state);
+        tokenStore[userId] = {
+            accessToken: access_token,
+            refreshToken: refresh_token,
+            expiresAt: Date.now() + (expires_in * 1000)
+        };
+        
+        // Create HubSpot client with the access token
+        const hubspotClient = new hubspot.Client({
+            accessToken: access_token
+        });
+        
+        // Fetch user's portal info
+        const portalInfo = await hubspotClient.apiRequest({
+            method: 'GET',
+            path: '/account-info/v3/details'
+        });
+        
+        res.json({
+            message: 'Authorization successful',
+            portal: portalInfo.portalId
+        });
+        
+    } catch (error) {
+        console.error('OAuth error:', error.response?.data || error.message);
+        res.status(500).send('Authorization failed');
+    }
+});
+
+// Step 3: Refresh token middleware
+async function getValidToken(userId) {
+    const token = tokenStore[userId];
+    if (!token) throw new Error('No token found');
+    
+    // Check if token is expired (with 5 minute buffer)
+    if (Date.now() > token.expiresAt - 300000) {
+        try {
+            const response = await axios.post(
+                'https://api.hubapi.com/oauth/v1/token',
+                new URLSearchParams({
+                    grant_type: 'refresh_token',
+                    client_id: CLIENT_ID,
+                    client_secret: CLIENT_SECRET,
+                    refresh_token: token.refreshToken
+                }),
+                { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+            );
+            
+            const { access_token, refresh_token, expires_in } = response.data;
+            
+            // Update stored tokens
+            token.accessToken = access_token;
+            token.refreshToken = refresh_token;
+            token.expiresAt = Date.now() + (expires_in * 1000);
+            
+        } catch (error) {
+            console.error('Token refresh failed:', error.message);
+            throw new Error('Token refresh failed');
+        }
+    }
+    
+    return token.accessToken;
+}
+
+// Helper: API route using HubSpot client
+app.get('/api/contacts', async (req, res) => {
+    try {
+        const userId = req.query.userId; // Get from session/auth
+        const token = await getValidToken(userId);
+        
+        const hubspotClient = new hubspot.Client({ accessToken: token });
+        
+        const contacts = await hubspotClient.crm.contacts.basicApi.getPage(
+            50, undefined, ['email', 'firstname', 'lastname']
+        );
+        
+        res.json(contacts.results);
+        
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.listen(3000, () => {
+    console.log('OAuth app running on port 3000');
+});
+```
+
+### Tutorial 4: Search API — Advanced Query Examples
+
+**Use Case 1: Find contacts who opened a specific email AND visited pricing page**
+
+```python
+import hubspot
+from hubspot.crm.contacts import ApiException, PublicObjectSearchRequest, Filter, FilterGroup
+
+client = HubSpot(access_token="YOUR_TOKEN")
+
+# Build search request
+search_request = PublicObjectSearchRequest(
+    filter_groups=[
+        FilterGroup(filters=[
+            Filter(property_name="hs_email_click", operator="GT", value="0"),
+            Filter(property_name="hs_analytics_last_visit_timestamp", operator="GT", 
+                   value="2025-01-01")
+        ]),
+        # Second group (OR condition)
+        FilterGroup(filters=[
+            Filter(property_name="lifecyclestage", operator="EQ", value="opportunity")
+        ])
+    ],
+    properties=["email", "firstname", "lastname", "company", "hs_email_click"],
+    sorts=[{"property_name": "hs_email_click", "direction": "DESCENDING"}],
+    limit=100
+)
+
+results = client.crm.contacts.search_api.do_search(
+    public_object_search_request=search_request
+)
+
+print(f"Found {results.total} matching contacts")
+```
+
+**Use Case 2: Find companies with no recent activity**
+
+```python
+search_request = PublicObjectSearchRequest(
+    filter_groups=[FilterGroup(filters=[
+        Filter(property_name="hs_last_activity_date", operator="LT",
+               value=datetime.now() - timedelta(days=90)),
+        Filter(property_name="lifecyclestage", operator="NEQ", value="customer"),
+        Filter(property_name="hs_num_open_deals", operator="EQ", value="0")
+    ])],
+    properties=["name", "domain", "hs_last_activity_date"],
+    limit=200
+)
+```
+
+**Use Case 3: Complex deal pipeline analysis**
+
+```python
+# Deals created in specific pipeline, with amounts over threshold, 
+# NOT in closed stages, sorted by amount descending
+search_request = PublicObjectSearchRequest(
+    filter_groups=[FilterGroup(filters=[
+        Filter(property_name="pipeline", operator="EQ", value="default"),
+        Filter(property_name="amount", operator="GTE", value="10000"),
+        Filter(property_name="dealstage", operator="NOT_IN", 
+               value=["closedwon", "closedlost"]),
+        Filter(property_name="createdate", operator="GTE", 
+               value="2025-06-01")
+    ])],
+    properties=["dealname", "amount", "dealstage", "closedate", "hubspot_owner_id"],
+    sorts=[{"property_name": "amount", "direction": "DESCENDING"}],
+    limit=50
+)
+```

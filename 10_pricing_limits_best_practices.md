@@ -626,3 +626,232 @@ For marketing-only comparison:
 3. Enable two-factor authentication for all users
 4. Review user access quarterly
 5. Set up audit logging (Enterprise) for security compliance
+
+---
+
+## Common Pricing Mistakes & How to Avoid Them
+
+### Mistake 1: Buying Enterprise when Professional Suffices
+
+**The mistake**: Purchasing Enterprise tier for features you won't use, "just in case."
+
+**Cost impact**: Marketing Hub Enterprise ($3,600/mo) vs Pro ($890/mo) = $2,710/mo difference for features you might not need.
+
+**How to avoid**: Before upgrading, make a specific list of Enterprise-only features you NEED:
+- Marketing Hub Enterprise: Multi-touch revenue attribution, predictive lead scoring, custom event triggers
+- Sales Hub Enterprise: Conversation Intelligence, deal splits, advanced forecasting
+- Service Hub Enterprise: SLA management, customer health scoring
+- Content Hub Enterprise: Multi-language (unlimited), git integration, partitions
+- Operations Hub Enterprise: Data pipeline to warehouse
+
+If none are critical, stay on Professional.
+
+### Mistake 2: Ignoring Marketing Contact Count
+
+**The mistake**: Not managing which contacts are "marketing" vs "non-marketing."
+
+**Cost impact**: 5,000 marketing contacts on Marketing Hub Pro = $890 (base 2k) + $250 × 3 = $1,640/mo. Set 3,000 of them to non-marketing = $890/mo. Savings: $750/mo.
+
+**How to avoid**: 
+1. Monthly review: Export list of marketing contacts → identify contacts that don't need marketing emails
+2. Auto-manage with workflows: When lifecycle becomes "Customer" → set as non-marketing
+3. Suppress inactive contacts: 6 months without open → auto-set to non-marketing
+4. Add a "Marketing Eligible" checkbox that controls the actual marketing contact status
+
+### Mistake 3: Overbuying Seats
+
+**The mistake**: Buying Sales Hub Pro for every user, including marketing and service team members.
+
+**Cost impact**: 20 users × $100/mo = $2,000/mo for Sales Hub. If only 10 are actual sales reps: $1,000/mo wasted.
+
+**How to avoid**: Audit seat usage monthly. Export user list from Settings > Users & Teams. Identify users who haven't logged in for 30+ days. Remove their paid seat; they can still access the free CRM.
+
+### Mistake 4: Not Negotiating
+
+**The mistake**: Paying list price on the website.
+
+**Cost impact**: 10-30% savings available just by asking.
+
+**How to avoid**:
+- Always ask for a discount before signing
+- Annual contracts get 10-20% off
+- Multi-year (2-3 year) gets 20-30% off
+- Migrating from a competitor (Salesforce, Zoho) gets migration pricing
+- Multiple hubs together gets bundling discounts (10-30%)
+- Ask about "startup discount" if your company is <5 years old
+
+### Mistake 5: Paying for Features You're Not Using
+
+**The mistake**: Upgrading to unlock a feature, but never configuring it.
+
+**How to avoid**: 
+1. Run HubSpot's "Feature Adoption Report" — shows which features are being used
+2. Audit every 90 days: "Did we actually use [feature X] this quarter?"
+3. If not using any Pro/Enterprise features, consider downgrading
+4. Use the "Unused Apps" report to identify idle integrations
+
+### Mistake 6: Incorrect Salesforce Migration Budget
+
+**The mistake**: Underestimating the time and cost of migrating from Salesforce.
+
+**Cost impact**: Companies often budget $5-10k for migration but end up spending $20-50k+.
+
+**How to avoid**: Budget realistically:
+- Data migration: 2-4 weeks (depending on data volume)
+- Workflow rebuilding: 2-6 weeks (this is the most time-consuming part)
+- Report rebuilding: 1-3 weeks
+- Training: 1-2 weeks
+- Parallel run: 2-4 weeks
+- **Total**: 2-4 months with 1-2 dedicated people
+
+---
+
+## HubSpot ROI Calculator
+
+### What to Measure
+
+| Metric | Formula | Example |
+|--------|---------|---------|
+| Time saved per rep/day | (Hours on admin) - (Hours after HubSpot) | 2 hrs → 0.5 hrs = 1.5 hrs saved |
+| Productivity gain | Time saved × hourly cost × number of reps | 1.5 hrs × $50/hr × 10 reps = $750/day |
+| Email automation lift | (Open rate improvement × revenue per lead) | 5% more opens × $100/lead × 100 leads = $500/month |
+| Lead response time improvement | (Old response time) / (New response time) | 24 hrs → 15 min = 96% faster |
+| Increased close rate | (New close rate - Old close rate) × deal volume | 5% improvement × 100 deals × $5k avg = $25,000 |
+| Reduced churn | (Old churn rate - New churn rate) × annual revenue | 3% improvement × $1M ARR = $30,000 saved |
+| Marketing ROI | (Revenue from marketing) / (Marketing spend) | $200k / $50k = 4:1 ROI |
+
+### Sample ROI Calculation
+
+**Scenario**: B2B SaaS company with 10 sales reps, 50k leads/year, $5k average deal size
+
+| Investment | Monthly | Annual |
+|-----------|---------|--------|
+| Marketing Hub Pro | $890 | $10,680 |
+| Sales Hub Pro (10 seats) | $1,000 | $12,000 |
+| Service Hub Pro (5 seats) | $360 | $4,320 |
+| **Total HubSpot Cost** | **$2,250** | **$27,000** |
+
+| Return | Calculation | Annual |
+|--------|-------------|--------|
+| Sales rep productivity | 1.5 hrs/day saved × $50/hr × 250 days × 10 reps | $187,500 |
+| Lead response speed | 10% more leads contacted within 5 minutes → 15 more deals × $5k | $75,000 |
+| Email automation | 10% better lead nurturing → 10 more deals × $5k | $50,000 |
+| Reduced churn | 2% improvement on 500 customers × $1,200/yr | $12,000 |
+| **Total Annual Return** | | **$324,500** |
+| **ROI** | ($324,500 - $27,000) / $27,000 | **1,102%** |
+
+### When HubSpot ROI is Questionable
+
+HubSpot may NOT provide positive ROI if:
+- You have fewer than 5 team members who would use it
+- Your sales process is simpler than what HubSpot offers (email + spreadsheet works)
+- You don't need marketing automation (your business comes from repeat customers/networking)
+- You're not willing to invest time in setup and training (HubSpot is powerful but requires configuration)
+- Your team resists using CRM (adoption is the #1 failure reason)
+
+---
+
+## HubSpot Alternatives Comparison — Expanded
+
+### HubSpot vs Salesforce
+
+| Factor | HubSpot | Salesforce |
+|--------|---------|------------|
+| **Ideal customer** | 5-500 employees, inbound-focused | 50-10,000+ employees, enterprise |
+| **Ease of use** | ★★★★★ (Consumer-grade UX) | ★★★ (Powerful but complex) |
+| **Time to value** | Days to weeks | Weeks to months |
+| **Customization** | Good (simple, limited) | Excellent (unlimited, complex) |
+| **Marketing automation** | Built-in (excellent) | Separate product (Pardot/MC, extra cost) |
+| **Email marketing** | Built-in | Requires Marketing Cloud |
+| **Service/Support** | Built-in (good) | Service Cloud (extra cost) |
+| **Mobile app** | Excellent | Good |
+| **AI** | Breeze (built-in, inclusive) | Einstein (extra cost per feature) |
+| **App marketplace** | 1,000+ apps | 5,000+ apps |
+| **Data storage** | Unlimited on Pro+ | 10GB-1TB depending on tier |
+| **API limits** | 250k-1M+/day | 15k-1M+/day depending on tier |
+| **Support quality** | Good (phone, chat, email, community) | Variable (dependent on contract) |
+| **Training** | HubSpot Academy (free, excellent) | Trailhead (free, excellent) |
+| **Typical monthly cost** | $500-5,000 | $3,000-50,000+ |
+| **Implementation cost** | $2-10k | $50-500k+ |
+| **Vendor lock-in** | Low (CSV export, API access) | Medium (complex data model) |
+
+### HubSpot vs Zoho
+
+| Factor | HubSpot | Zoho |
+|--------|---------|------|
+| **Ideal customer** | 5-200 employees | 1-500 employees |
+| **Ease of use** | ★★★★★ | ★★★★ |
+| **Typical monthly cost** | $500-3,000 | $50-500 |
+| **Marketing automation** | Best-in-class | Good |
+| **Email marketing** | Excellent | Good (limited sends) |
+| **Sales features** | Excellent | Good |
+| **Service features** | Excellent | Good |
+| **Customization** | Limited | Very flexible |
+| **Mobile app** | Excellent | Good |
+| **Integration ecosystem** | 1,000+ native apps | 500+ apps |
+| **Support** | Excellent | Limited on lower tiers |
+| **Data privacy/GDPR** | Strong | Strong |
+
+### HubSpot vs Pipedrive
+
+| Factor | HubSpot | Pipedrive |
+|--------|---------|-----------|
+| **Ideal customer** | Full-stack CRM needs | Pure pipeline management |
+| **Ease of use** | ★★★★★ | ★★★★★ |
+| **Pipeline management** | Excellent | Excellent (their focus) |
+| **Marketing** | Built-in (full suite) | Minimal (integration needed) |
+| **Service** | Built-in (full suite) | None (integration needed) |
+| **Reporting** | Excellent | Good |
+| **AI features** | Breeze (built-in) | Limited (AI Sales Assistant) |
+| **Typical monthly cost** | $500-3,000 | $50-500 |
+| **Best for** | Companies needing CRM + marketing + service | Companies focused only on sales pipeline |
+
+### HubSpot vs ActiveCampaign vs Mailchimp (Marketing Only)
+
+| Factor | HubSpot | ActiveCampaign | Mailchimp |
+|--------|---------|---------------|-----------|
+| **Email design** | ★★★★ | ★★★★★ | ★★★★★ |
+| **Automation** | ★★★★★ | ★★★★★ | ★★★ |
+| **CRM integration** | ★★★★★ (native) | ★★★ | ★★★ |
+| **Lead scoring** | ★★★★★ | ★★★★ | ★★ |
+| **Landing pages** | ★★★★★ | ★★★ | ★★★ |
+| **Forms** | ★★★★★ | ★★★★ | ★★★ |
+| **Reporting** | ★★★★★ | ★★★★ | ★★★★ |
+| **Typical monthly cost (1k contacts)** | $890 | $79 | $59 |
+| **Best for** | Full CRM + marketing | Standalone marketing automation | Simple email sends |
+
+---
+
+## HubSpot Implementation ROI by Industry
+
+### B2B SaaS (10-50 employees)
+
+| Investment | Typical ROI | Timeframe |
+|-----------|-------------|-----------|
+| $2,000-4,000/mo | 3-5× on marketing spend, 20% faster sales cycles | 3-6 months |
+
+**Key drivers**: Lead scoring automates qualification, sequences accelerate follow-up, conversation intelligence improves rep performance.
+
+### B2B Services/Agency (10-30 employees)
+
+| Investment | Typical ROI | Timeframe |
+|-----------|-------------|-----------|
+| $1,000-2,500/mo | 2-4× on marketing, 30% improvement in lead response | 1-3 months |
+
+**Key drivers**: Meeting links reduce scheduling overhead, email templates standardize outreach, pipeline visibility improves forecasting.
+
+### E-commerce (5-20 employees)
+
+| Investment | Typical ROI | Timeframe |
+|-----------|-------------|-----------|
+| $500-2,000/mo | 10-20% recovery of abandoned carts, 15% higher repeat purchase | 1-2 months |
+
+**Key drivers**: Abandoned cart automation, post-purchase sequences, customer segmentation for campaigns.
+
+### Enterprise (100-500 employees)
+
+| Investment | Typical ROI | Timeframe |
+|-----------|-------------|-----------|
+| $10,000-30,000/mo | 15-30% reduction in sales admin time, 5-10% increase in win rate | 6-12 months |
+
+**Key drivers**: Full automation across departments, unified data eliminates manual sync, AI features at Enterprise tier.
