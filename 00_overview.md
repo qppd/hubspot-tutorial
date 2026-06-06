@@ -1702,3 +1702,129 @@ Breeze AI is built on a multi-model architecture:
 ---
 
 *This is Chapter 0 of the HubSpot Complete Tutorial series. Continue to Chapter 1: CRM Foundation for the deep dive into HubSpot's core data platform.*
+
+---
+
+## Choosing the Right HubSpot Plan — Decision Framework
+
+### Starter Plan Is For You If...
+- You have 1-5 employees using the system
+- You need shared inbox (Conversations) and basic CRM
+- Basic email marketing and meeting scheduling
+- Simple contact management
+- You don't need custom reporting, workflows, or automation
+- Monthly budget under €100
+
+### Professional Plan Is For You If...
+- You have 5-50 employees on the platform
+- You need automation: workflows, sequences, lead scoring
+- Custom reporting and dashboards
+- A/B testing for email and landing pages
+- Custom objects and properties
+- Team-based access control
+- HubDB, custom modules, serverless functions (Content Hub)
+- Monthly budget under €1,000
+
+### Enterprise Plan Is For You If...
+- You have 50+ employees across multiple teams/departments
+- You need data partitioning (multi-brand, multi-region)
+- Single sign-on (SSO) and advanced security
+- Multiple sandbox environments
+- Custom roles with property-level permissions
+- Predictive lead scoring
+- Custom event triggers and advanced workflow capabilities
+- Hierarchical teams and rollup reporting
+- Audit logs and data loss prevention
+- Monthly budget over €1,000
+
+### Plan Upgrade Path — What to Expect
+| Upgrade | Additional Cost/Month | Key Benefits |
+|---------|---------------------|--------------|
+| Free → Starter | ~€50-100 | Conversations inbox, meeting scheduling, basic email |
+| Starter → Pro | ~€450-800 | Workflows, automation, custom reporting, lead scoring |
+| Pro → Enterprise | ~€1,000-3,000+ | SSO, partitions, custom roles, sandboxes, audit logs |
+
+*Note: Actual pricing varies. Marketing Hub contacts, Sales Hub seats, and Service Hub seats are separate line items that add cost beyond the base plan.*
+
+---
+
+## Implementation Roadmap — 90-Day Plan
+
+### Week 1-2: Foundation
+- [ ] Purchase and configure HubSpot subscription
+- [ ] Set up user accounts and roles (Admin, Marketing, Sales, Service)
+- [ ] Connect email (Gmail/Outlook integration)
+- [ ] Install HubSpot tracking code on website
+- [ ] Import initial contact list (CSV)
+- [ ] Set up company and deals CRM structure
+
+### Week 3-4: CRM Setup
+- [ ] Create custom properties for your business (industry-specific fields)
+- [ ] Set up deal pipeline stages matching your sales process
+- [ ] Configure lead scoring model (basic)
+- [ ] Create active lists for key segments
+- [ ] Set up team structure and permissions
+- [ ] Create first dashboards
+
+### Week 5-6: Marketing
+- [ ] Build first email template with brand styling
+- [ ] Create forms and landing pages for lead capture
+- [ ] Set up first marketing workflow (lead nurture)
+- [ ] Configure blog and SEO settings
+- [ ] Create first campaign
+- [ ] Connect social media accounts
+
+### Week 7-8: Sales
+- [ ] Set up sequences for sales outreach
+- [ ] Configure meeting scheduling (meetings link)
+- [ ] Set up call logging (HubSpot Calling or integration)
+- [ ] Create deal stages with required properties
+- [ ] Configure pipeline rotation settings
+- [ ] Train sales team on CRM usage
+
+### Week 9-10: Service
+- [ ] Set up Conversations inbox
+- [ ] Create ticket pipeline and SLAs
+- [ ] Configure knowledge base
+- [ ] Build chatbot (basic flows)
+- [ ] Set up email-to-ticket forwarding
+- [ ] Configure customer feedback surveys
+
+### Week 11-12: Optimization
+- [ ] Review analytics and adjust workflows
+- [ ] A/B test email subject lines and landing pages
+- [ ] Refine lead scoring based on historical data
+- [ ] Build executive dashboards
+- [ ] Document processes and best practices
+- [ ] Schedule regular data quality audits
+
+---
+
+## HubSpot Glossary — Key Terms
+
+| Term | Definition |
+|------|-----------|
+| **Contact** | An individual person in your CRM (customer, lead, prospect) |
+| **Company** | An organization record, can have multiple contacts |
+| **Deal** | A sales opportunity with stages, amount, close date |
+| **Ticket** | A support request or customer issue |
+| **Custom Object** | A user-defined object (e.g., Project, Course, Property) |
+| **Property** | A data field on any object (e.g., "Phone Number", "Annual Revenue") |
+| **Pipeline** | A sequence of stages for tracking deal progress |
+| **List** | A group of contacts (static = manual, active = dynamic) |
+| **Workflow** | Automated sequences of actions triggered by events |
+| **Sequence** | A series of sales emails/tasks (Sales Hub) |
+| **Smart Content** | Content that changes based on contact properties (e.g., industry) |
+| **Progressive Profiling** | Shows new form fields on repeat visits |
+| **Lifecycle Stage** | A contact's stage (Subscriber → Lead → MQL → SQL → Opportunity → Customer → Evangelist) |
+| **Lead Score** | Numeric score based on fit + behavior |
+| **UTM Parameters** | URL tags to track campaign performance |
+| **CTA** | Call-to-action (button, link, or image prompting action) |
+| **HubDB** | A database system for structured content (Content Hub) |
+| **HubL** | HubSpot's templating language (like Liquid or Jinja2) |
+| **OAuth 2.0** | Authentication protocol for HubSpot API integrations |
+| **Webhook** | HTTP callback that triggers an action when an event occurs |
+| **Sandbox** | An isolated testing environment (Enterprise) |
+| **Partitioning** | Data isolation between business units (Enterprise) |
+| **Rollup Property** | Aggregated value from associated records (Operations Hub) |
+| **Calculated Property** | Formula-based property (Operations Hub) |

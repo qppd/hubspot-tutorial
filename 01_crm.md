@@ -1009,3 +1009,238 @@ When you "delete" a contact, they go to the recycle bin (30 days). But deleted c
 
 ### Use Case 5: Service-first CRM
 **Setup**: Heavy use of tickets and SLAs. Companies enriched with support plan type. Properties track: "Current SLA", "Escalation level", "Last support interaction." Rollup: total open tickets per company shown on company record.
+
+---
+
+## CRM Tutorials
+
+### Tutorial 1: Complete Contact Import & Data Cleanup
+
+**Goal**: Import 10,000 contacts from a CSV export, clean the data, remove duplicates, and set up ongoing data quality automation.
+
+**Step 1: Prepare Your CSV**
+1. Export contacts from your current system as CSV
+2. Ensure columns match HubSpot properties:
+   - `email` → Contact.Email
+   - `first_name` → Contact.FirstName
+   - `last_name` → Contact.LastName
+   - `phone` → Contact.Phone
+   - `company_name` → Company.Name
+   - `job_title` → Contact.JobTitle
+   - `industry` → Company.Industry
+   - `notes` → Contact.Notes
+3. Save as UTF-8 with BOM encoding (avoids character issues with é, ñ, ü)
+4. Check for common issues:
+   - Remove rows where email is completely empty (can't identify without it)
+   - Standardize phone numbers to same format (use find/replace)
+   - Capitalize names properly ("john doe" → "John Doe")
+   - Remove duplicate rows (same email appearing multiple times)
+
+**Step 2: Create a Test Import**
+1. **Contacts** > **Import** > Import from file
+2. Upload 10-20 test rows first (not the full file)
+3. Verify column mapping is correct
+4. Check that auto-detected fields are mapped to the right properties
+5. Review unmapped columns — decide whether to create new properties or skip
+6. Run the test import
+
+**Step 3: Verify Test Import Results**
+1. Check 5-10 imported contacts in the CRM
+2. Verify: Names correct? Companies created/associated? Custom fields populated?
+3. If errors: Fix mapping issues, adjust CSV, re-test
+
+**Step 4: Run Full Import**
+1. After test passes, upload the full CSV
+2. Set import options:
+   - **Duplicate handling**: Update existing records (match by email)
+   - **Create companies**: Yes (auto-create companies from company_name column)
+   - **Assign owners**: No (leave unassigned for later routing)
+   - **Marketing contacts**: Set all to non-marketing initially (save costs)
+3. Start import — runs in background, email notification when complete
+
+**Step 5: Post-Import Cleanup with Workflow**
+1. Create workflow: "New Contact Data Quality"
+2. Trigger: Contact created (from import)
+3. Actions:
+   - **Standardize phone**: If phone starts with "1" and no parenthesis, format to (xxx) xxx-xxxx
+   - **Capitalize name**: Set firstname = UPPER(firstname) — wait, HubL has proper case function
+   - **Enrich from email domain**: Extract domain, search for matching company, associate
+   - **Check for duplicate**: If another contact exists with same email, flag for merge
+   - **Set lifecycle**: Default to "Lead" for imported contacts
+4. Turn on workflow
+
+**Step 6: Ongoing Deduplication**
+1. **Operations** > **Data Quality** > **Deduplication** > Create rule
+2. Run daily dedup:
+   - Exact email match → auto-merge (100% confidence)
+   - Same first+last name + same phone → auto-merge (90% confidence)
+   - Same company + same job title + similar name → flag for review (70% confidence)
+3. Schedule weekly review of flagged duplicates
+
+### Tutorial 2: Building Custom Reports & Dashboards
+
+**Goal**: Create a set of executive dashboards that give at-a-glance visibility into CRM health.
+
+**Dashboard 1: Sales Leadership Dashboard**
+
+Add these reports to a dashboard named "Sales Leadership Weekly Review":
+
+**Report 1: Pipeline by Stage**
+- Type: Single object (Deals)
+- Visualization: Stacked bar chart
+- X-axis: Deal stage
+- Y-axis: Amount (sum)
+- Color: By forecast category (Commit, Best Case, Pipeline)
+- Filter: Close date is this quarter, Not closed won/lost
+- Purpose: See total pipeline value per stage
+
+**Report 2: Deals Closing This Month**
+- Type: Single object (Deals)
+- Visualization: Table
+- Columns: Deal name, Amount, Close date, Owner, Company, Stage
+- Filter: Close date is this month, Not closed won/lost
+- Purpose: Quick reference for this month's expected revenue
+
+**Report 3: Rep Performance Comparison**
+- Type: Cross-object (Deals + Users)
+- Visualization: Horizontal bar chart
+- Y-axis: Deal owner
+- X-axis: Amount (sum of closed won this quarter)
+- Filter: Deal stage is closed won, Close date is this quarter
+- Purpose: See who's closing the most revenue
+
+**Report 4: Sales Activity Trend**
+- Type: Trends
+- Visualization: Multi-line chart
+- Lines: Emails sent, Calls made, Meetings logged (daily count)
+- Date range: Last 30 days
+- Purpose: Track team activity levels
+
+**Report 5: Conversion Funnel**
+- Type: Funnel
+- Stages: Lead → MQL → SQL → Opportunity → Customer
+- Filter: Created this quarter
+- Purpose: Visualize drop-off at each stage
+
+**Dashboard 2: Marketing ROI Dashboard**
+
+**Report 1: Contacts by Source**
+- Type: Single object (Contacts)
+- Visualization: Pie chart
+- Segment: Original source (Organic, Paid, Referral, Social, Email, Direct)
+- Filter: Created this quarter
+- Purpose: See which channels generate the most contacts
+
+**Report 2: Revenue by Source**
+- Type: Cross-object (Contacts + Deals) with attribution
+- Visualization: Bar chart
+- X-axis: Original source
+- Y-axis: Total closed won amount
+- Filter: Close date this quarter
+- Purpose: Compare channel quality (not just quantity)
+
+**Report 3: Campaign ROI**
+- Type: Cross-object (Campaigns + Deals)
+- Visualization: Table
+- Columns: Campaign name, Cost, Revenue attributed, ROI %
+- Filter: Date range this year
+- Purpose: See which campaigns are worth the investment
+
+**Dashboard 3: Data Quality Dashboard**
+
+**Report 1: Data Completeness**
+- Type: Single object (Contacts)
+- Visualization: Gauge chart
+- Metric: % of contacts with complete required fields (email, firstname, phone, company)
+- Purpose: Track data quality improvement over time
+
+**Report 2: Duplicate Count**
+- Type: Custom (from Operations Hub data quality)
+- Visualization: Single number with trend arrow
+- Metric: Current duplicates found
+- Purpose: Monitor dedup effectiveness
+
+### Tutorial 3: Managing Multi-Company Account Hierarchies
+
+**Goal**: Set up parent-child company relationships for enterprise account management.
+
+**Step 1: Create Companies**
+1. **Contacts** > **Companies** > Create company
+2. Create parent company: "Acme Corporation" (HQ)
+3. Create child companies: "Acme North America", "Acme Europe", "Acme Asia"
+4. Create sub-child companies: "Acme USA", "Acme Canada" (under Acme North America)
+
+**Step 2: Set Up Hierarchy (Enterprise)**
+1. Open "Acme Corporation" company record
+2. Go to **Hierarchy** tab
+3. Click "Add child"
+4. Search and add "Acme North America", "Acme Europe", "Acme Asia"
+5. Open "Acme North America" → Hierarchy tab
+6. Click "Add child" → Add "Acme USA", "Acme Canada"
+
+**Step 3: Visualize the Hierarchy**
+```
+Acme Corporation (Parent - Top)
+├── Acme North America (Child)
+│   ├── Acme USA (Grandchild)
+│   └── Acme Canada (Grandchild)
+├── Acme Europe (Child)
+│   ├── Acme UK (Grandchild)
+│   └── Acme Germany (Grandchild)
+└── Acme Asia (Child)
+    ├── Acme Japan (Grandchild)
+    └── Acme Singapore (Grandchild)
+```
+
+**Step 4: Roll Up Reporting**
+- Create rollup properties on parent company:
+  - `Total Contacts (All Regions)` = `COUNT(all_associated_contacts)` — includes children
+  - `Total Revenue (All Regions)` = `SUM(all_associated_deals, amount)`
+  - `Open Support Tickets (All Regions)` = `COUNT(all_associated_tickets, status = "open")`
+- Use in dashboards: Parent company shows global metrics
+- Filter reports by hierarchy level
+
+### Tutorial 4: Using Associations for Complex Customer Relationships
+
+**Goal**: Properly model a B2B scenario where multiple contacts at one company interact with multiple deals and tickets.
+
+**Scenario**: A manufacturing company — "MegaCorp" — has:
+- 5 contacts (CEO, CFO, Plant Manager, IT Director, Procurement Officer)
+- 3 active deals (new equipment, software license, service contract)
+- 4 open tickets (technical issues, billing question, onboarding, training)
+
+**Step 1: Set Up Association Labels**
+1. Settings > Data Management > Associations
+2. Create labels for Contact → Deal:
+   - "Decision Maker" / "Deal for"
+   - "Influencer" / "Influenced by"
+   - "End User" / "Used by"
+3. Create labels for Contact → Company:
+   - "Primary Contact" / "Primary for"
+   - "Billing Contact" / "Billing for"
+   - "Technical Contact" / "Technical for"
+
+**Step 2: Create Records with Correct Associations**
+1. Create MegaCorp company
+2. Create 5 contacts, all associated to MegaCorp
+3. Create 3 deals, each with different association labels:
+   - New Equipment Deal: CEO (Decision Maker), Plant Manager (End User), Procurement (Influencer)
+   - Software License Deal: CEO (Decision Maker), IT Director (End User), CFO (Influencer)
+   - Service Contract: CFO (Decision Maker), Plant Manager (End User)
+4. Create 4 tickets, associated to relevant contacts:
+   - Technical issue → Plant Manager (contact on ticket)
+   - Billing → CFO (contact on ticket)
+   - Onboarding → IT Director (contact on ticket)
+   - Training → All contacts (company ticket)
+
+**Step 3: Use Associations in Reporting**
+1. Create report: "Deal Value by Role"
+   - Cross-object: Deals → Contacts (via association)
+   - Group by: Association label
+   - Show: Sum of deal amount per role
+   - Insight: "Decision Makers are associated with 80% of deal value"
+2. Create report: "Ticket Volume by Company Role"
+   - Cross-object: Tickets → Contacts
+   - Group by: Association label
+   - Show: Count of tickets
+   - Insight: "End Users file 60% of tickets, Decision Makers file 5%"

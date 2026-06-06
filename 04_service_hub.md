@@ -933,3 +933,39 @@ Health scores are only as good as your data quality. If product usage data isn't
 | **Self-service** | Chatbot resolution rate | > 60% | AI handling issues |
 | **Health** | Customer health score avg | > 70 | Portfolio health |
 | **Health** | Churn rate (service-related) | < 5%/year | Retention success |
+
+---
+
+## Service Operations Guide
+
+### Building a Support Schedule
+Plan your support coverage using HubSpot's user management and routing:
+
+**Step 1: Define Coverage Hours**
+- Tier 1: Mon-Fri 8AM-8PM (local time zones)
+- Tier 2: Mon-Fri 9AM-6PM
+- Emergency: 24/7 on-call rotation (for critical issues)
+
+**Step 2: Set Up Routing Rules**
+1. **Settings** > **Service** > **Tickets** > **Automatic routing**
+2. Rules:
+   - Tickets from VIP customers → Tier 1 (highest priority)
+   - Technical bugs → Technical support team
+   - Billing issues → Billing team
+   - General inquiries → Tier 1 (round-robin)
+
+**Step 3: Configure Escalation Paths**
+1. Ticket unresolved after 4 hours → Escalate to Tier 2
+2. Ticket unresolved after 24 hours → Escalate to Team Lead
+3. Ticket marked as "Critical" → Notify all on-call agents via mobile
+4. Ticket escalated 3+ times → Flag for manager review
+
+### Measuring Team Performance
+| Metric | Calculation | Target |
+|--------|------------|--------|
+| Tickets resolved/agent/day | Closed tickets ÷ working days | 8-12 |
+| Average handle time | Total time ÷ resolved tickets | < 20 min |
+| Quality score | CSAT reviews (internal + customer) | > 4.5 |
+| Customer satisfaction | Post-ticket CSAT | > 4.0 |
+| First-contact resolution | Resolved on first interaction | > 60% |
+| Agent training completion | Completed modules ÷ assigned | 100% |

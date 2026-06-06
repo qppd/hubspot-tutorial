@@ -1,5 +1,7 @@
 # HubSpot Complete Tutorial — The Definitive Guide
 
+> **48,000+ words** across 12 chapters covering every HubSpot hub, feature, and capability.
+
 A comprehensive, deeply detailed tutorial covering the **entire HubSpot platform**. From CRM foundation to advanced development — written for marketers, sales teams, service professionals, developers, and operations managers.
 
 **Format**: Tutorial-style with step-by-step instructions, configuration walkthroughs, best practices, real-world examples, common gotchas, and use cases for every feature.

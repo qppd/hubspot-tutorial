@@ -1004,3 +1004,349 @@ Social posts scheduled in HubSpot might have slight UI differences vs native pos
 
 ### 10. Ad Tracking Accuracy
 UTM parameters are the most reliable tracking method. Auto-tagging from ad platforms works but can miss some interactions. Combine UTM + HubSpot tracking for best results.
+
+---
+
+## Marketing Hub Tutorials
+
+### Tutorial 1: Building a Complete Email Campaign
+
+**Goal**: Plan, create, launch, and analyze a marketing email campaign from start to finish.
+
+**Step 1: Define Campaign Goals**
+1. Navigate to **Marketing** > **Campaigns** > Create campaign
+2. Name: "Q3 Product Launch — Email Series"
+3. Goal: Generate 100 demo requests from existing leads
+4. Budget: $2,000 (content creation, no paid ads)
+5. Timeline: 4 weeks (1 email per week)
+6. Target audience: Existing leads who haven't requested a demo yet
+
+**Step 2: Create Your Audience List**
+1. **Contacts** > **Lists** > Create active list
+2. Name: "Q3 Launch — Target Audience"
+3. Criteria:
+   - Lifecycle stage is "Lead" OR "MQL"
+   - Has not submitted "Demo Request" form
+   - Email subscription status is "Subscribed"
+   - Created in last 90 days
+4. Save — list auto-populates with matching contacts
+
+**Step 3: Design Email Series (4 emails)**
+
+**Email 1 — Teaser (Day 0)**
+- Subject: "Something big is coming, {{ contact.firstname }}"
+- Preview text: "You won't want to miss this announcement"
+- Body: Build anticipation, hint at new features, include countdown
+- CTA: "Get notified" (link to interest page)
+- Personalization: `{{ contact.firstname }}`, `{{ contact.company }}`
+
+**Email 2 — Launch (Day 7)**
+- Subject: "Introducing [Product Name] — available now"
+- Preview text: "See what's new and how it helps your team"
+- Body: Feature highlights, benefits, customer quote
+- CTA: "See it in action" (link to demo request form)
+- Smart content: Show different features based on contact's industry
+
+**Email 3 — Social Proof (Day 14)**
+- Subject: "How [Customer Name] achieved 3× results with [Product Name]"
+- Preview text: "Real results from real customers"
+- Body: Case study summary, key metrics, testimonial
+- CTA: "Read full case study" + "Request demo"
+- Personalization: Include company name in case study context
+
+**Email 4 — Final Push + Offer (Day 21)**
+- Subject: "Last chance: Your exclusive early adopter offer"
+- Preview text: "20% off for the first 50 customers"
+- Body: Recap of features, urgency ("limited time"), offer details
+- CTA: "Claim your discount" (link to payment/checkout)
+- A/B test: Test subject line A ("Last chance...") vs B ("Exclusive offer ends soon")
+
+**Step 4: Set Up Email Automation in Editor**
+1. **Marketing** > **Email** > Create automated email
+2. Choose: Automated email (trigger-based, not broadcast)
+3. Enable A/B testing on Email 4:
+   - Variant A: "Last chance: Your exclusive early adopter offer"
+   - Variant B: "Exclusive offer ends soon: 20% off [Product Name]"
+   - Test size: 30% of list
+   - Winner based on: Click rate
+4. Set send time optimization: Enable (send when each contact is most likely to open)
+
+**Step 5: Create Campaign Workflow**
+1. **Automation** > **Workflows** > Create workflow
+2. Trigger: Contact added to "Q3 Launch — Target Audience" list
+3. Sequence:
+   - Day 0: Send Email 1 (teaser)
+   - Delay: 7 days
+   - Branch: If form submitted "Demo Request" → exit workflow (goal met)
+   - Day 7: Send Email 2 (launch)
+   - Delay: 7 days
+   - Branch: If demo requested → exit
+   - Day 14: Send Email 3 (case study)
+   - Delay: 7 days
+   - Day 21: Send Email 4 (offer) — with A/B test
+   - After 14 more days: If no demo request → add to "Long-term nurture" list
+4. Goals: Contact submits "Demo Request" form → exit workflow
+5. Turn on workflow
+
+**Step 6: Launch and Monitor**
+1. Review all 4 emails for rendering on desktop and mobile
+2. Send test emails to yourself
+3. Check all links work correctly
+4. Review campaign analytics daily for the first week:
+   - Open rates (target: 25%+)
+   - Click rates (target: 3%+)
+   - Unsubscribe rate (alert if > 0.5%)
+   - Bounce rate (alert if > 3%)
+5. A/B test winner declared after 24 hours → winning variant sent to remaining list
+
+**Step 7: Post-Campaign Analysis**
+1. **Marketing** > **Campaigns** > Open "Q3 Product Launch"
+2. Review KPIs:
+   - Total emails sent, delivered, opened, clicked
+   - Unsubscribes and bounces
+   - Conversions: How many demo requests from the campaign?
+   - Revenue: How many deals created from campaign leads?
+   - ROI: Revenue attributed ÷ campaign cost
+3. Create a campaign report: Save as dashboard
+
+### Tutorial 2: Building a Multi-Channel Lead Generation System
+
+**Goal**: Create an automated system that captures leads from multiple channels and funnels them into a unified nurture workflow.
+
+**Step 1: Create Lead Capture Forms**
+
+**Form 1: Newsletter Signup (Blog)**
+- Type: Slide-in form (less intrusive on blog pages)
+- Fields: Email (required), First Name (required)
+- Trigger: Show after 10 seconds on blog
+- Follow-up: Send welcome email with latest content
+
+**Form 2: Ebook Download (Landing Page)**
+- Type: Embedded form on dedicated landing page
+- Fields: Email, First Name, Last Name, Company, Job Title, Phone
+- Progressive profiling: Return visitors only see 2 new fields
+- Follow-up: Send download link, enroll in nurture sequence
+
+**Form 3: Demo Request (Website)**
+- Type: Pop-up form on pricing page
+- Fields: Email, First Name, Company, Company Size, Phone
+- Trigger: Show when visitor scrolls past pricing table
+- Follow-up: Create high-priority task for SDR to call within 1 hour
+
+**Form 4: Contact Us (Website)**
+- Type: Embedded form on Contact page
+- Fields: Email, First Name, Last Name, Company, Message (multi-line)
+- Follow-up: Create ticket for general inquiry
+
+**Step 2: Set Up Progressive Profiling**
+1. **Marketing** > **Forms** > Edit "Ebook Download" form
+2. Enable progressive profiling
+3. First submission fields: Email, First Name (identity)
+4. Second submission: Last Name, Company
+5. Third submission: Job Title, Phone
+6. Fourth submission: Company Size, Industry
+
+**Step 3: Create Channel-Specific Workflows**
+
+**Workflow: Blog Subscriber**
+1. Trigger: Form submission (Newsletter Signup)
+2. Actions:
+   - Send welcome email with recent blog posts
+   - Set lifecycle = "Subscriber"
+   - Add to "Blog Subscribers" list
+   - If email domain matches known company → associate to company
+
+**Workflow: Content Downloader**
+1. Trigger: Form submission (Ebook Download)
+2. Actions:
+   - Send download link email immediately
+   - Set lifecycle = "Lead"
+   - Set lead source = "Ebook: [Title]"
+   - Add to "Content Engaged" list
+   - Delay 3 days → Send follow-up email with related content
+   - Delay 7 days → Enroll in "Demo Nurture" sequence
+
+**Workflow: Demo Request (High Priority)**
+1. Trigger: Form submission (Demo Request)
+2. Actions:
+   - Send confirmation email with meeting link
+   - Set lifecycle = "MQL"
+   - Set lead status = "Hot"
+   - Create task for SDR: "Call {{ contact.firstname }} at {{ contact.company }} within 1 hour"
+   - Send Slack notification to #new-leads
+   - Enroll in "Demo Prep" sequence
+
+**Step 4: Create Unified Nurture Sequence**
+1. **Sales** > **Sequences** > Create sequence
+2. Name: "Demo Nurture — 5 Step"
+3. Steps:
+   - Day 0: Email — "Thanks for your interest. Here's how [Product] works"
+   - Day 3: Email — Case study relevant to their industry
+   - Day 6: Email — "FAQ: What customers ask before booking a demo"
+   - Day 10: Email — Product comparison vs competitors
+   - Day 14: Email — "Ready to see it in action?" with meeting link
+4. Goal: Meeting booked
+5. Unenrollment: Reply, meeting booked, demo requested
+
+**Step 5: Measure Channel Effectiveness**
+1. Create report: "Lead Generation by Channel"
+   - Source: Original source drill-down (Organic, Paid, Referral, Social, Email, Direct)
+   - Metric: Contacts created, MQLs, SQLs, Customers
+   - View: Which channels generate the most volume vs highest quality
+2. Create report: "Cost Per Lead by Channel"
+   - If using paid ads: Import ad spend data
+   - Calculate: Total spend ÷ contacts created per channel
+   - View: Which channels are most cost-efficient
+
+### Tutorial 3: Setting Up A/B Testing for Continuous Optimization
+
+**Goal**: Systematically test and improve email and landing page performance through A/B testing.
+
+**Step 1: Email Subject Line Testing**
+
+Create a test plan:
+| Test | Control | Variant | Goal |
+|------|---------|---------|------|
+| Subject line length | "New feature announcement" (29 chars) | "Introducing [Feature]: Save 10 hours/week" (49 chars) | Higher open rate |
+| Personalization | "Hi there" | "Hi {{ contact.firstname }}" | Higher open rate |
+| Urgency | No urgency | "Limited time: Offer ends Friday" | Higher click rate |
+| CTA placement | CTA at bottom only | CTA at top + bottom | Higher click rate |
+| Imagery | Stock photo | Screenshot of product | Higher click rate |
+
+**Setting up the test**:
+1. Create email → Enable A/B testing
+2. Select "Subject line" as test variable
+3. Variant A: "New feature announcement"
+4. Variant B: "Introducing [Feature]: Save 10 hours/week"
+5. Test size: 30% of list
+6. Winner based on: Open rate
+7. Winning variant sends to remaining 70%
+
+**Step 2: Landing Page Testing**
+
+| Test | Control | Variant | Goal |
+|------|---------|---------|------|
+| Headline | "Download our ebook" | "Learn how top companies increased revenue by 40%" | Higher conversion |
+| Form length | 5 fields | 3 fields | Higher submission rate |
+| CTA text | "Submit" | "Get my free copy" | Higher click rate |
+| Layout | Text on left, form on right | Form on left, text on right | Higher conversion |
+| Social proof | None | Customer logos + testimonial | Higher trust |
+
+**Setting up the test**:
+1. **Marketing** > **Landing Pages** > Open page → Create test
+2. Select "Adaptive test" (multiple variants)
+3. Create 3 variants: Control (current), Variant A (new headline), Variant B (new headline + social proof)
+4. Traffic split: 33/33/34
+5. Goal metric: Form submission rate
+6. Minimum sample: 500 visitors before declaring winner
+7. Launch — HubSpot auto-optimizes traffic to best performer
+
+**Step 3: Analyze and Iterate**
+1. Review test results after minimum sample is reached
+2. Statistical significance: HubSpot shows confidence level (95%+ recommended)
+3. Apply winner: Publish the winning variant as the new default
+4. Create next test: Build on learnings (e.g., if shorter forms convert better, test even shorter)
+
+### Tutorial 4: Building an Automated Webinar Funnel
+
+**Goal**: Drive registrations, attendance, and post-webinar conversions using HubSpot automation.
+
+**Step 1: Create Registration Page**
+1. **Marketing** > **Landing Pages** > Create
+2. Use "Webinar Registration" template
+3. Content: Headline, date/time, speaker bio, agenda, key takeaways
+4. Form: Email, First Name, Last Name, Company, Job Title
+5. CTA: "Save my spot"
+6. Thank-you page: Confirmation with calendar link, webinar link, "Add to calendar" button
+7. Set up tracking: UTM parameters for promotion channels
+
+**Step 2: Build Registration Workflow**
+1. Trigger: Form submitted (Webinar Registration)
+2. Actions:
+   - Send confirmation email with webinar link and calendar attachment
+   - Add to "Webinar Registrants" list
+   - Set property "Webinar Registered" = true
+   - Delay 1 day: Send pre-webinar reminder email
+   - Delay 3 days (if webinar is 1 week away): Send reminder with speaker highlight
+   - Delay 1 day before: Send "See you tomorrow!" email with technical requirements
+   - Delay 1 hour before: Send final reminder with webinar link
+
+**Step 3: Build Attendance Tracking**
+1. Create custom property: "Webinar Attended" (boolean)
+2. On the webinar landing page, add tracking code that fires on page load
+3. Create workflow: Triggered when webinar page is loaded
+   - Set "Webinar Attended" = true
+   - Set lifecycle = "MQL" (if was "Lead")
+   - Add to "Webinar Attendees" list
+
+**Step 4: Build Post-Webinar Follow-up**
+1. Trigger: "Webinar Attended" becomes true
+2. Actions:
+   - Send thank-you email with recording link and slides
+   - Send follow-up survey (CES: "How was the webinar?")
+   - Enroll in "Post-Webinar Nurture" sequence:
+     - Day 0: Email with recording + related resources
+     - Day 3: Email with case study related to webinar topic
+     - Day 7: Email with demo offer (meeting link)
+     - Day 14: Email with "Did you miss this?" (key takeaways)
+   - If survey score is 4-5 → Add to "Hot Lead" list
+   - If survey score is 1-2 → Create task for CS: "Follow up with dissatisfied attendee"
+
+**Step 5: Measure Webinar ROI**
+1. Create report: "Webinar Performance"
+   - Registrations: Total signups
+   - Attendance rate: Attendees ÷ Registrants (target: 40%+)
+   - Lead conversion: MQLs from webinar
+   - Revenue: Deals created from webinar-attributed contacts
+   - Cost: Promotion spend + content creation
+   - ROI: Revenue ÷ Cost
+
+---
+
+## Marketing Hub Metrics — What to Track
+
+### Email Metrics
+| Metric | Target | Red Flag |
+|--------|--------|---------|
+| Delivery rate | > 97% | < 95% (check list quality) |
+| Open rate | > 25% | < 15% |
+| Click rate (CTR) | > 3% | < 1% |
+| Click-to-open rate (CTOR) | > 15% | < 10% |
+| Unsubscribe rate | < 0.5% | > 1% |
+| Bounce rate (hard) | < 1% | > 3% |
+| Spam complaint rate | < 0.1% | > 0.1% (deliverability risk) |
+| Reply rate | > 0.5% | < 0.1% (no engagement) |
+
+### Landing Page Metrics
+| Metric | Target | Red Flag |
+|--------|--------|---------|
+| Conversion rate | > 10% | < 3% |
+| Bounce rate | < 60% | > 80% |
+| Average time on page | > 60s | < 20s |
+| Form abandonment | < 70% | > 85% |
+
+### Blog & SEO Metrics
+| Metric | Target |
+|--------|--------|
+| Monthly blog traffic growth | > 10% month-over-month |
+| Average time on article | > 3 minutes |
+| Pages per session | > 2 |
+| Organic traffic % of total | > 40% |
+| Keyword rankings in top 10 | Increasing |
+| Content cluster completeness | 80%+ |
+
+### Social Media Metrics
+| Metric | Target |
+|--------|--------|
+| Engagement rate | > 2% |
+| Click-through rate | > 0.5% |
+| Follower growth | > 5% monthly |
+| Posts per week | 3-5 minimum |
+
+### Automation & Workflow Metrics
+| Metric | Target | Red Flag |
+|--------|--------|---------|
+| Workflow enrollment rate | Meets expectations | < 50% of projected |
+| Email open rate in workflow | > 30% | < 20% |
+| Goal completion rate | > 10% | < 3% |
+| Workflow to-list conversion | > 5% | < 1% |
