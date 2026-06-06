@@ -780,3 +780,228 @@ For companies selling configurable physical products, CPQ is essential.
 ### Hybrid Approach
 
 Many businesses use both: HubSpot Commerce for quotes + invoicing, and a dedicated e-commerce platform for the online store. Connect them via Operations Hub Data Sync or Zapier.
+
+---
+
+## Commerce Hub Tutorials — Advanced
+
+### Tutorial 4: Recurring Invoice Automation
+
+**Goal**: Automate recurring invoicing for retainer-based clients, saving hours of manual work each month.
+
+**Step 1: Set Up Products for Retainers**
+1. **Commerce** > **Products** > Create product
+2. Product A: "Marketing Retainer — Bronze" — $2,000/month
+3. Product B: "Marketing Retainer — Silver" — $5,000/month
+4. Product C: "Marketing Retainer — Gold" — $10,000/month
+5. Set billing interval: Monthly
+
+**Step 2: Create Recurring Invoice Template**
+1. **Commerce** > **Invoices** > **Templates** > Create template
+2. Name: "Monthly Retainer Invoice"
+3. Content:
+   - Header: Company logo, name, address
+   - Line items: Dynamic (from associated deal or subscription)
+   - Subtotal: Sum of line items
+   - Tax: 0% (or configured rate)
+   - Total: Subtotal
+   - Payment terms: Net 30
+   - Footer: "Thank you for your continued partnership."
+4. Default due days: 30
+
+**Step 3: Build Invoice Automation Workflow**
+```
+Trigger: Subscription active AND billing date = Today (monthly)
+Actions:
+  Create invoice from subscription template
+  Set invoice amount = subscription amount
+  Set due date = Today + 30 days
+  Send invoice to contact email
+  Log invoice on contact timeline
+  Create task for finance: "Verify monthly invoice batch"
+```
+
+**Step 4: Payment Tracking Automation**
+```
+Trigger: Invoice payment received
+Actions:
+  Set invoice status = "Paid"
+  Update deal: Amount paid this month
+  Send receipt to contact
+  If payment is late (> 30 days past due)
+    → Set subscription status = "Past Due"
+    → Create task for account manager: "Follow up on past due invoice"
+    → If 60 days past due → Send final notice → Pause subscription
+```
+
+### Tutorial 5: One-Time Payment Page for Events
+
+**Goal**: Create a payment page for event registration that collects payment immediately.
+
+**Step 1: Create Product**
+1. **Commerce** > **Products** > Create product
+2. Name: "Summit 2025 — Standard Ticket"
+3. Type: One-time purchase
+4. Price: $299.00
+5. Description: "Full access to all sessions, lunch included"
+6. SKU: TKT-SUMMIT25-STD
+
+**Step 2: Create Payment Link**
+1. **Commerce** > **Payment Links** > Create
+2. Name: "Summit 2025 Registration"
+3. Choose product: Summit 2025 Standard Ticket
+4. Allow quantity selection (up to 5 per order)
+5. Customize checkout:
+   - Title: "Register for Summit 2025"
+   - Description: "June 15, 2025 — Manila Convention Center"
+   - Collect: Name, Email, Company, Phone
+   - Thank-you page: "You're registered! Check your email for event details."
+6. Share payment link via email, website, or social media
+
+**Step 3: Post-Purchase Automation**
+```
+Trigger: Payment received for Summit 2025 ticket
+Actions:
+  Send confirmation email with event details, QR code
+  Add contact to "Summit 2025 Attendees" list
+  Create event check-in record
+  Send calendar invite (.ics attachment)
+  After event: Send follow-up survey and replay link
+```
+
+### Tutorial 6: Payment Reconciliation
+
+**Goal**: Automatically reconcile payments received in HubSpot with bank deposits and accounting software.
+
+**Step 1: Set Up Payment Reconciliation**
+1. **Settings** > **Commerce** > **Payments** > **Reconciliation**
+2. Enable auto-reconciliation
+3. Connect bank account (via Plaid integration) or upload bank statement CSV
+4. Match rules:
+   - Exact amount match: Auto-match
+   - Amount within 1%: Flag for review
+   - Amount mismatch: Manual review required
+
+**Step 2: Reconciliation Workflow**
+```
+Trigger: Bank deposit matched to invoice
+Actions:
+  Mark invoice as "Settled"
+  Update deal: "Payment Settled" = true
+  If all invoices in deal are settled → Move deal to "Closed Won"
+  Create journal entry in connected accounting system
+```
+
+**Step 3: Handle Unmatched Payments**
+```
+Trigger: Bank deposit with no matching invoice
+Actions:
+  Create "Unidentified Payment" ticket for finance team
+  Include: Amount, Date, Sender name, Transaction ID
+  Set priority: Amount > $1,000 → High, else Normal
+  Escalate if unresolved in 5 business days
+```
+
+### Tutorial 7: Multi-Currency Commerce Setup
+
+**Goal**: Set up Commerce Hub to handle multiple currencies for international sales.
+
+**Step 1: Configure Currencies**
+1. **Settings** > **Commerce** > **Currencies** > Add currency
+2. Primary currency: USD (for reporting)
+3. Accepted currencies: EUR, GBP, CAD, AUD, JPY, PHP
+4. Set exchange rate update: Automatic (daily from market rates) or Manual
+
+**Step 2: Set Prices in Multiple Currencies**
+1. **Commerce** > **Products** > Edit product
+2. For each product, set prices:
+   - USD: $99.00
+   - EUR: €92.00
+   - GBP: £79.00
+   - PHP: ₱5,500
+3. HubSpot shows the price in the customer's detected currency
+
+**Step 3: Configure Currency Display**
+1. **Settings** > **Commerce** > **Checkout** > Currency display
+2. Options:
+   - Auto-detect: Show price in visitor's browser language/region
+   - Manual selector: Let customer choose currency at checkout
+   - All in primary: Show all prices in USD with approximate local equivalent
+
+**Step 4: Handle Multi-Currency Reporting**
+1. All revenue converted to primary currency (USD) for reporting
+2. Create custom reports filtering by transaction currency
+3. Monitor FX gain/loss for multi-currency transactions:
+   - Invoice in EUR at €100
+   - Payment received when EUR/USD = 1.10
+   - Reconciled at $110 (vs $108 at invoicing time)
+   - $2 FX gain automatically tracked
+
+**Step 5: Multi-Currency Tax Handling**
+1. **Settings** > **Commerce** > **Taxes**
+2. Configure tax rules per country:
+   - US: State-level sales tax (Nexus-based)
+   - EU: VAT based on customer country
+   - UK: VAT at 20%
+   - Philippines: 12% VAT
+3. Tax calculated at checkout based on customer location and currency
+
+### Tutorial 8: Commerce Analytics Dashboard
+
+**Goal**: Build a comprehensive commerce analytics dashboard.
+
+**Dashboard: Commerce Performance**
+
+**Report 1: Revenue Overview**
+- Single numbers: Today's Revenue, This Month, This Quarter, This Year
+- Trend arrows: % vs same period last year
+
+**Report 2: Revenue by Product**
+- Horizontal bar chart
+- X-axis: Revenue
+- Y-axis: Product name
+- Color: By product category
+
+**Report 3: Payment Methods Breakdown**
+- Pie chart
+- Segments: Credit Card, PayPal, Bank Transfer, Invoice
+- Value: Total amount per method
+
+**Report 4: Monthly Recurring Revenue (MRR)**
+- Line chart
+- X-axis: Month
+- Y-axis: MRR
+- Annotations: New subscriptions, Churned subscriptions, Upgrades/downgrades
+
+**Report 5: Churn Rate**
+- Line chart (downward trend is good)
+- X-axis: Month
+- Y-axis: Churn %
+- Target line: Industry average
+
+**Report 6: Average Order Value**
+- Single number with trend
+- Also show by product category: Table
+
+**Report 7: Payment Failures**
+- Single number: Failed payments this month
+- Table: Failed payments by customer, amount, date, retry count
+- Action: "Retry payment" button for manual retries
+
+**Report 8: Tax Collected**
+- Single number: Total tax collected this period
+- Breakdown by jurisdiction: Table
+
+**Key Commerce Metrics to Track:**
+| Metric | Formula | Target |
+|--------|---------|--------|
+| MRR (Monthly Recurring Revenue) | Sum of all active subscription amounts | Growing month-over-month |
+| ARR (Annual Recurring Revenue) | MRR × 12 | Growing year-over-year |
+| Churn Rate (monthly) | Cancelled subscriptions / Active subscriptions at start | < 5%/month (SaaS) or < 2%/month (Enterprise) |
+| Customer Lifetime Value (LTV) | Average deal value × Average years as customer | > 3× CAC |
+| Customer Acquisition Cost (CAC) | Total sales + marketing cost / New customers acquired | Decreasing or stable |
+| LTV:CAC Ratio | LTV / CAC | > 3:1 (healthy) |
+| Average Payment Collection Time | Days from invoice to payment | < 15 days |
+| Failed Payment Rate | Failed payments / Total attempts | < 3% |
+| Quote-to-Close Rate | Won quotes / Total quotes sent | > 60% |
+| Net Revenue Retention (NRR) | (Starting MRR + Upgrades - Downgrades - Churn) / Starting MRR | > 100% (growing from existing customers) |

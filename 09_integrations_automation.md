@@ -851,4 +851,394 @@ def process_webhook_batch(events):
                     event["objectId"], 
                     event["propertyValue"]
                 )
+
+---
+
+## Integrations Tutorials — Advanced
+
+### Tutorial 4: Salesforce-HubSpot Sync Architecture
+
+**Goal**: Design a bidirectional sync between HubSpot and Salesforce that keeps both systems consistent without data loss.
+
+**Phase 1: Determine Sync Strategy**
+
+**Option A: HubSpot Operations Hub Data Sync** (Best for most teams)
+1. **Settings** > **Integrations** > **Data Sync** > Add connection
+2. Select Salesforce
+3. Choose sync direction per object:
+   - Contacts: Bidirectional (updates from either system sync to the other)
+   - Companies: Salesforce → HubSpot (Salesforce is source of truth)
+   - Deals: HubSpot → Salesforce (HubSpot is source of truth)
+   - Tasks: HubSpot → Salesforce
+4. Configure field mapping:
+   - HubSpot `email` ↔ Salesforce `Email`
+   - HubSpot `firstname` ↔ Salesforce `FirstName`
+   - HubSpot `lastname` ↔ Salesforce `LastName`
+   - HubSpot `phone` ↔ Salesforce `Phone`
+   - Custom field: HubSpot `lead_score` → Salesforce `Lead_Score__c`
+5. Set conflict resolution: Last updated wins (with audit log)
+
+**Option B: Custom Middleware** (Best for complex mapping needs)
+1. Build a middleware service (Node.js or Python)
+2. Receive webhooks from both systems
+3. Transform data formats
+4. Handle complex business logic
+5. Sync to the other system via API
+
+**Phase 2: Handle Common Sync Challenges**
+
+**Challenge 1: Record Ownership**
+- HubSpot owner → Salesforce owner mapping
+- Create a custom field in both systems matching owner IDs
+- Sync owner assignments weekly
+
+**Challenge 2: Duplicate Detection**
+- Set up matching rules: Match by email (preferred) or by external ID
+- When a new contact appears in Salesforce, check HubSpot by email before creating
+- Create a "Sync Log" custom object to track duplicates found and resolved
+
+**Challenge 3: Deleted Records**
+- HubSpot soft-deletes contacts (recycle bin)
+- Salesforce hard-deletes
+- Strategy: Don't delete in HubSpot when deleted in Salesforce — instead, set a "Deleted in Salesforce" flag and update the contact to non-marketing
+
+**Phase 3: Monitor Sync Health**
+Create a "Salesforce Sync Health" dashboard:
+- **Sync Status** — Last successful sync time, current sync status (Running, Idle, Error)
+- **Sync Errors (24h)** — Count of failed sync operations
+- **Records Synced** — Contacts, Companies, Deals synced today
+- **Conflict Queue** — Number of unresolved conflicts
+- **Lag Time** — How far behind the sync is running
+
+### Tutorial 5: Building a Slack Integration for Sales Alerts
+
+**Goal**: Create real-time Slack notifications for important sales events using HubSpot webhooks.
+
+**Step 1: Create Slack App**
+1. Go to [api.slack.com/apps](https://api.slack.com/apps) → Create New App
+2. Name: "HubSpot Sales Alerts"
+3. Select workspace
+4. Enable Incoming Webhooks → Activate
+5. Copy webhook URL: `https://hooks.slack.com/services/T00/B00/xxxxx`
+
+**Step 2: Set Up HubSpot Webhooks**
+1. **Settings** > **Integrations** > **Webhooks** > Create webhook
+2. Subscribe to events:
+   - `deal.stageChange` — When a deal moves to "Closed Won" or "Closed Lost"
+   - `deal.propertyChange` — When deal amount changes
+   - `contact.creation` — When a new high-value contact is created
+3. Target URL: Your middleware endpoint (or serverless function)
+
+**Step 3: Build Slack Notification Formatting**
+```python
+import requests
+import json
+from datetime import datetime
+
+SLACK_WEBHOOK = "https://hooks.slack.com/services/T00/B00/xxxxx"
+
+def send_deal_notification(event_type, deal_data):
+    """Send formatted deal notification to Slack."""
+    
+    colors = {
+        'closedwon': '#36A64F',    # Green
+        'closedlost': '#FF0000',   # Red
+        'default': '#3B82F6'       # Blue
+    }
+    
+    blocks = [
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": f"🚀 {event_type.replace('_', ' ').title()}"
+            }
+        },
+        {
+            "type": "section",
+            "fields": [
+                {"type": "mrkdwn", "text": f"*Deal:* {deal_data.get('dealname', 'Unknown')}"},
+                {"type": "mrkdwn", "text": f"*Amount:* ${deal_data.get('amount', 0):,.2f}"},
+                {"type": "mrkdwn", "text": f"*Owner:* {deal_data.get('owner', 'Unassigned')}"},
+                {"type": "mrkdwn", "text": f"*Company:* {deal_data.get('company', 'Unknown')}"},
+            ]
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": f"*Time:* {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
+                        f"<{deal_data.get('hubspot_url', '#')}|View in HubSpot>"
+            }
+        }
+    ]
+    
+    payload = {
+        "attachments": [{
+            "color": colors.get(event_type, colors['default']),
+            "blocks": blocks
+        }]
+    }
+    
+    response = requests.post(SLACK_WEBHOOK, json=payload)
+    return response.status_code == 200
+```
+
+**Step 4: Create Notification Rules**
+
+| Event | Channel | Message Format | Throttle? |
+|-------|---------|---------------|-----------|
+| Deal Closed Won (>$10K) | #sales-wins | Celebratory with amount, owner, company | No — celebrate every win |
+| Deal Closed Won (<$10K) | #sales-wins | Plain summary | No |
+| Deal Closed Lost (any) | #sales-leadership | Brief with loss reason | Yes — don't flood channel |
+| Deal Amount > Doubled | #sales-leadership | Alert with rep name and new amount | Yes |
+| New Enterprise Contact | #sales-leads | Contact details and company info | Yes — only for VIP |
+| Weekly Pipeline Summary | #sales-team | Aggregated numbers | Every Monday 9 AM |
+
+### Tutorial 6: Zapier/Make (Integromat) Automation Recipes
+
+**Goal**: Build powerful automations using Zapier or Make as the middleware between HubSpot and other apps.
+
+**Recipe 1: HubSpot → Google Sheets CRM Backup**
+1. **Trigger**: New contact created in HubSpot
+2. **Action**: Add row to Google Sheet
+3. Columns: Timestamp, Email, First Name, Last Name, Phone, Company, Created Date, Lifecycle Stage
+4. **Filter**: Only if contact is NOT already in sheet (dedup by email)
+
+**Recipe 2: HubSpot → Mailchimp List Sync**
+1. **Trigger**: Contact lifecycle stage changes to "MQL"
+2. **Action**: Add/update subscriber in Mailchimp list "Hot Leads"
+3. **Mapping**: Email, First Name, Last Name, Company
+4. **Tags**: "MQL", source channel
+
+**Recipe 3: Typeform → HubSpot Form Connector**
+1. **Trigger**: New Typeform submission received
+2. **Actions**:
+   - Create HubSpot contact from Typeform responses
+   - Map Typeform fields to HubSpot properties
+   - Add contact to "Typeform Leads" list
+   - Create task: "Follow up with Typeform lead"
+
+**Recipe 4: HubSpot → QuickBooks Invoice Creator**
+1. **Trigger**: Deal closed won in HubSpot
+2. **Actions**:
+   - Create invoice in QuickBooks
+   - Add line items from deal products
+   - Set customer from associated company
+   - Send invoice to contact email
+   - Log QuickBooks invoice ID back to HubSpot deal
+
+**Recipe 5: HubSpot Calendar → Google Calendar Sync**
+1. **Trigger**: Meeting booked in HubSpot
+2. **Actions**:
+   - Create Google Calendar event
+   - Add contact as guest
+   - Add meeting notes and preparation link
+   - Create Slack reminder 15 minutes before
+
+### Tutorial 7: Enterprise SSO and SCIM Setup
+
+**Goal**: Configure Single Sign-On (SSO) and System for Cross-domain Identity Management (SCIM) for enterprise user management.
+
+**Step 1: Configure SSO (Enterprise)**
+1. **Settings** > **Account Management** > **Security** > **Single Sign-On**
+2. Choose identity provider: Okta, Azure AD, OneLogin, or custom SAML 2.0
+3. Download HubSpot metadata XML
+4. In your IdP:
+   - Create a new SAML application
+   - Upload HubSpot metadata
+   - Map attributes: Email → user.email, First Name → user.firstName, Last Name → user.lastName
+   - Assign users/groups to the HubSpot app
+5. In HubSpot SSO settings:
+   - Upload IdP metadata XML
+   - Set default user role: "Viewer" (least privilege)
+   - Enable Just-in-Time (JIT) provisioning: Creates HubSpot account on first SSO login
+6. Test SSO with a test user account
+7. Enforce SSO: "Require SSO for all users"
+
+**Step 2: Configure SCIM (Enterprise)**
+1. **Settings** > **Account Management** > **Integrations** > **SCIM**
+2. Enable SCIM
+3. Copy SCIM endpoint URL and API token
+4. In your IdP (Okta/Azure AD):
+   - Configure SCIM provisioning
+   - Map HubSpot SCIM endpoint
+   - Set attribute mapping
+   - Enable: Create users, Update attributes, Deactivate users
+5. Test provisioning: Add a test user in IdP, verify they appear in HubSpot
+
+**Step 3: Set Up User Groups and Role Mapping**
+| IdP Group | HubSpot Role | Notes |
+|-----------|-------------|-------|
+| hubspot-admins | Super Admin | Full access, all hubs |
+| hubspot-marketing | Marketing Manager | Marketing Hub, Reports |
+| hubspot-sales | Sales Manager | Sales Hub, CRM |
+| hubspot-sales-rep | Sales Rep | Sales Hub, limited |
+| hubspot-support | Service Agent | Service Hub, Tickets |
+| hubspot-viewers | View Only | Read-only across all hubs |
+
+**Step 4: Audit User Activity**
+1. **Settings** > **Account Management** > **Users & Teams** > **Audit Log** (Enterprise)
+2. Track:
+   - User creation and deactivation
+   - Role changes
+   - Failed SSO login attempts
+   - API token creation/deletion
+3. Schedule monthly access review
+
+### Tutorial 8: Custom Integration with REST API + OAuth
+
+**Goal**: Build a complete custom integration from scratch that authenticates with OAuth 2.0 and performs CRUD operations.
+
+**Step 1: Create Private App in HubSpot**
+1. **Settings** > **Integrations** > **Private Apps** > Create private app
+2. Name: "My Custom Integration"
+3. Scopes:
+   - `crm.objects.contacts.read`
+   - `crm.objects.contacts.write`
+   - `crm.objects.deals.read`
+   - `crm.objects.deals.write`
+   - `crm.schemas.custom_objects.read`
+4. Generate access token
+5. Copy token and store securely (never commit to version control)
+
+**Step 2: Python Integration Client**
+```python
+import requests
+import json
+from typing import Dict, List, Optional
+
+class HubSpotClient:
+    """A complete HubSpot API client with error handling and pagination."""
+    
+    def __init__(self, access_token: str):
+        self.base_url = "https://api.hubapi.com"
+        self.headers = {
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json"
+        }
+    
+    def get_contact(self, email: str) -> Optional[Dict]:
+        """Get a contact by email."""
+        response = requests.post(
+            f"{self.base_url}/crm/v3/objects/contacts/search",
+            headers=self.headers,
+            json={
+                "filterGroups": [{
+                    "filters": [{
+                        "propertyName": "email",
+                        "operator": "EQ",
+                        "value": email
+                    }]
+                }],
+                "properties": ["email", "firstname", "lastname", "phone", "company"]
+            }
+        )
+        
+        if response.status_code == 200:
+            results = response.json().get("results", [])
+            return results[0] if results else None
+        return None
+    
+    def create_contact(self, properties: Dict) -> Dict:
+        """Create a new contact."""
+        response = requests.post(
+            f"{self.base_url}/crm/v3/objects/contacts",
+            headers=self.headers,
+            json={"properties": properties}
+        )
+        response.raise_for_status()
+        return response.json()
+    
+    def update_contact(self, contact_id: str, properties: Dict) -> Dict:
+        """Update an existing contact."""
+        response = requests.patch(
+            f"{self.base_url}/crm/v3/objects/contacts/{contact_id}",
+            headers=self.headers,
+            json={"properties": properties}
+        )
+        response.raise_for_status()
+        return response.json()
+    
+    def upsert_contact(self, email: str, properties: Dict) -> Dict:
+        """Create or update a contact (upsert by email)."""
+        existing = self.get_contact(email)
+        if existing:
+            return self.update_contact(existing["id"], properties)
+        else:
+            properties["email"] = email
+            return self.create_contact(properties)
+    
+    def get_all_deals(self, properties: List[str] = None) -> List[Dict]:
+        """Get all deals with pagination."""
+        if properties is None:
+            properties = ["dealname", "amount", "dealstage", "closedate", "pipeline"]
+        
+        all_deals = []
+        after = None
+        
+        while True:
+            params = {
+                "limit": 100,
+                "properties": properties
+            }
+            if after:
+                params["after"] = after
+            
+            response = requests.get(
+                f"{self.base_url}/crm/v3/objects/deals",
+                headers=self.headers,
+                params=params
+            )
+            response.raise_for_status()
+            data = response.json()
+            
+            all_deals.extend(data.get("results", []))
+            
+            paging = data.get("paging", {})
+            next_page = paging.get("next", {})
+            after = next_page.get("after")
+            
+            if not after:
+                break
+        
+        return all_deals
+
+# Usage
+client = HubSpotClient("your-private-app-token")
+
+# Upsert a contact
+contact = client.upsert_contact("john@example.com", {
+    "firstname": "John",
+    "lastname": "Doe",
+    "phone": "+1-555-0123",
+    "company": "Acme Corp",
+    "jobtitle": "CTO"
+})
+
+# Get all deals this quarter
+deals = client.get_all_deals()
+print(f"Found {len(deals)} deals")
+```
+
+**Step 3: Error Handling Strategy**
+| Error | Cause | Retry? | Action |
+|-------|-------|--------|--------|
+| 200 OK | Success | No | Parse and process |
+| 401 Unauthorized | Token expired/invalid | No | Regenerate token |
+| 429 Rate Limited | Too many requests | Yes | Wait Retry-After header seconds |
+| 502 Bad Gateway | HubSpot temporary | Yes | Wait 5s, retry up to 3 times |
+| 503 Service Unavailable | HubSpot overloaded | Yes | Wait 10s, retry up to 3 times |
+| 500 Internal Error | HubSpot bug | Yes | Wait 30s, retry once, then alert |
+
+**Step 4: Monitor Integration Health**
+1. Create a status page dashboard:
+   - **API Calls Today** — Count of API requests made
+   - **Error Rate** — % of API calls that failed (target: < 1%)
+   - **Average Response Time** — How fast is the API responding
+   - **Last Successful Sync** — Timestamp of last full sync
+2. Set up alerts:
+   - Error rate > 5% in 10 minutes → Page on-call engineer
+   - No successful sync in 4 hours → Alert operations team
+   - API response time > 3 seconds average → Investigate slowdown
 ```

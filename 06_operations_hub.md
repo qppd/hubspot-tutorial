@@ -847,3 +847,405 @@ If an app isn't in the list, you have three options:
 1. Workato provides SDK for building custom connectors
 2. Deploy as a private connector in your Workato workspace
 3. Use in Workato recipes alongside HubSpot integration
+
+---
+
+## Operations Hub Tutorials — Advanced
+
+### Tutorial 5: Data Quality Automation Framework
+
+**Goal**: Build a comprehensive data quality system that continuously cleanses, enriches, and validates your CRM data.
+
+**Step 1: Create Data Quality Metrics**
+1. Create calculated properties to track quality scores:
+   - `contact_completeness_score` = (weighted sum of filled fields / total weighted fields) × 100
+   - `company_completeness_score` = Same formula for company fields
+   - `deal_data_quality` = PASS/FAIL based on: amount > 0, close date set, stage valid, owner assigned
+
+**Step 2: Build Data Validation Workflows**
+
+**Workflow 1: Contact Completeness Check**
+```
+Trigger: Contact created OR any standard property changes
+Branch: 
+  IF email is empty → Create task: "Missing email — update or remove contact"
+  IF phone is empty AND lifecycle = "Customer" → Create task: "Missing phone for customer"
+  IF jobtitle is empty AND lifecycle = "MQL" → Set property "Needs Enrichment" = true
+  IF company is empty AND email contains company domain → Auto-associate to matching company
+  IF firstname or lastname is empty → Set lifecycle not to progress until filled
+```
+
+**Workflow 2: Duplicate Prevention**
+```
+Trigger: Contact created
+Actions:
+  Search for existing contact with same email
+  IF exact match found → Merge (keep earlier record, update properties from new)
+  IF same firstname+lastname+company found → Flag as "Potential Duplicate"
+  → Create review task for data steward
+  → Add to "Duplicates to Review" list
+```
+
+**Workflow 3: Address Standardization**
+```
+Trigger: Any address property changes
+Actions:
+  Standardize state: Convert to 2-letter code ("California" → "CA")
+  Standardize country: Convert full name to ISO code
+  Format zip code: Ensure 5-digit format for US addresses
+  Concatenate address fields into a single "Full Address" property
+```
+
+**Step 3: Build Data Enrichment Automation**
+1. Use Clearbit/HubSpot enrichment (if enabled):
+   - Enrich new contacts automatically
+   - Enrich existing contacts quarterly
+2. Build enrichment workflow:
+   ```
+   Trigger: Contact created OR "Needs Enrichment" = true
+   Actions:
+     Run enrich action → Populate company, job title, phone, social profiles
+     IF enrichment failed → Create task: "Manually enrich contact"
+     IF enrichment succeeded → Set "Last Enriched Date" = Today
+   ```
+
+**Step 4: Create a Data Quality Dashboard**
+1. **Reports** > **Dashboards** > Create "Data Quality HQ"
+2. Add reports:
+   - **Contact Completeness Distribution** — Bar chart: % complete buckets (0-25%, 25-50%, 50-75%, 75-100%)
+   - **Incomplete Records** — Table: contacts with completeness < 60%, sorted by oldest
+   - **Duplicates Found** — Single number: current duplicate count with trend
+   - **Duplicates Resolved** — Single number: duplicates resolved this month
+   - **Enrichment Coverage** — Gauge: % of contacts enriched
+   - **Data Quality Score Trend** — Line chart: average completeness over time
+
+**Step 5: Schedule Regular Audits**
+- Weekly: Review new duplicates flagged by workflow
+- Monthly: Run full data quality report, fix systemic issues
+- Quarterly: Review property usage — remove unused properties, add missing ones
+
+### Tutorial 6: Advanced SQL Analytics Playbook
+
+**Goal**: Use Custom-Coded Workflow Actions + HubSpot Data Pipeline for advanced analytics beyond standard reporting.
+
+**Pattern 1: Customer Lifetime Value Calculation**
+```sql
+WITH customer_lifetime AS (
+  SELECT
+    c.id AS contact_id,
+    c.email,
+    c.first_name || ' ' || c.last_name AS contact_name,
+    MIN(d.createdate) AS first_deal_date,
+    MAX(d.closedate) AS latest_deal_date,
+    COUNT(DISTINCT d.id) AS total_deals,
+    SUM(CASE WHEN d.dealstage = 'closedwon' THEN d.amount ELSE 0 END) AS total_revenue,
+    COUNT(DISTINCT t.id) AS total_tickets,
+    AVG(CASE WHEN t.hs_time_to_close IS NOT NULL 
+      THEN t.hs_time_to_close ELSE NULL END) AS avg_resolution_time_hours
+  FROM contacts c
+  LEFT JOIN deals d ON d.associated_contact_ids CONTAINS c.id
+  LEFT JOIN tickets t ON t.associated_contact_ids CONTAINS c.id
+  WHERE d.createdate >= DATE_ADD(TODAY(), -365, 'day')
+  GROUP BY c.id, c.email, c.first_name, c.last_name
+)
+SELECT
+  contact_name,
+  email,
+  first_deal_date,
+  latest_deal_date,
+  total_deals,
+  total_revenue,
+  ROUND(total_revenue / NULLIF(total_deals, 0), 2) AS avg_deal_value,
+  total_tickets,
+  CASE
+    WHEN total_revenue >= 50000 THEN 'Tier 1: VIP'
+    WHEN total_revenue >= 10000 THEN 'Tier 2: High Value'
+    WHEN total_revenue >= 1000 THEN 'Tier 3: Standard'
+    ELSE 'Tier 4: Low Value'
+  END AS value_tier,
+  ROUND(DATE_DIFF(latest_deal_date, first_deal_date, 'day') / NULLIF(total_deals, 0), 0) AS days_between_deals
+FROM customer_lifetime
+ORDER BY total_revenue DESC;
+```
+
+**Pattern 2: Lead Source ROI Analysis**
+```sql
+WITH source_analysis AS (
+  SELECT
+    c.hs_lead_status AS source,
+    COUNT(DISTINCT c.id) AS total_contacts,
+    COUNT(DISTINCT d.id) AS total_deals_created,
+    COUNT(DISTINCT CASE WHEN d.dealstage = 'closedwon' THEN d.id END) AS won_deals,
+    SUM(CASE WHEN d.dealstage = 'closedwon' THEN d.amount ELSE 0 END) AS revenue,
+    AVG(CASE WHEN d.dealstage = 'closedwon' 
+      THEN DATE_DIFF(d.closedate, d.createdate, 'day') END) AS avg_days_to_close
+  FROM contacts c
+  LEFT JOIN deals d ON d.associated_contact_ids CONTAINS c.id
+  WHERE c.createdate >= DATE_ADD(TODAY(), -180, 'day')
+  GROUP BY c.hs_lead_status
+)
+SELECT
+  source,
+  total_contacts,
+  total_deals_created,
+  won_deals,
+  ROUND(won_deals * 100.0 / NULLIF(total_deals_created, 0), 1) AS conversion_rate,
+  revenue,
+  ROUND(revenue / NULLIF(total_contacts, 0), 2) AS revenue_per_contact,
+  ROUND(avg_days_to_close, 0) AS avg_days_to_close,
+  -- Hypothetical cost per lead per source
+  CASE source
+    WHEN 'ORGANIC' THEN ROUND(revenue * 0.05, 2)
+    WHEN 'PAID' THEN ROUND(revenue * 0.25, 2)
+    WHEN 'REFERRAL' THEN ROUND(revenue * 0.02, 2)
+    WHEN 'SOCIAL' THEN ROUND(revenue * 0.15, 2)
+    ELSE ROUND(revenue * 0.10, 2)
+  END AS estimated_cost,
+  ROUND(revenue / NULLIF(
+    CASE source
+      WHEN 'ORGANIC' THEN revenue * 0.05
+      WHEN 'PAID' THEN revenue * 0.25
+      WHEN 'REFERRAL' THEN revenue * 0.02
+      WHEN 'SOCIAL' THEN revenue * 0.15
+      ELSE revenue * 0.10
+    END, 0), 1) AS estimated_roi
+FROM source_analysis
+ORDER BY revenue DESC;
+```
+
+**Pattern 3: Pipeline Velocity Analysis**
+```sql
+WITH stage_transitions AS (
+  SELECT
+    d.id AS deal_id,
+    d.dealname,
+    d.amount,
+    d.hubspot_owner_id,
+    MIN(CASE WHEN dh.from_stage IS NULL AND dh.to_stage IS NOT NULL 
+      THEN dh.timestamp END) AS entered_pipeline_date,
+    MAX(CASE WHEN dh.to_stage = 'closedwon' THEN dh.timestamp END) AS won_date
+  FROM deals d
+  LEFT JOIN deal_history dh ON dh.deal_id = d.id
+  WHERE d.createdate >= DATE_ADD(TODAY(), -90, 'day')
+  GROUP BY d.id, d.dealname, d.amount, d.hubspot_owner_id
+),
+stage_timing AS (
+  SELECT
+    deal_id,
+    dealname,
+    amount,
+    hubspot_owner_id,
+    entered_pipeline_date,
+    won_date,
+    DATE_DIFF(COALESCE(won_date, TODAY()), entered_pipeline_date, 'day') AS days_in_pipeline
+  FROM stage_transitions
+  WHERE entered_pipeline_date IS NOT NULL
+)
+SELECT
+  CASE
+    WHEN amount >= 50000 THEN 'Enterprise ($50K+)'
+    WHEN amount >= 10000 THEN 'Mid-Market ($10K-$50K)'
+    ELSE 'SMB (Under $10K)'
+  END AS deal_segment,
+  COUNT(*) AS total_deals,
+  SUM(CASE WHEN won_date IS NOT NULL THEN 1 ELSE 0 END) AS won_deals,
+  ROUND(AVG(CASE WHEN won_date IS NOT NULL THEN days_in_pipeline END), 0) AS avg_cycle_days,
+  ROUND(AVG(amount), 2) AS avg_deal_size,
+  ROUND(SUM(CASE WHEN won_date IS NOT NULL THEN amount END) / 
+    NULLIF(COUNT(*), 0), 2) AS weighted_pipeline_value
+FROM stage_timing
+GROUP BY deal_segment
+ORDER BY avg_deal_size DESC;
+```
+
+### Tutorial 7: Event-Driven Data Sync Architecture
+
+**Goal**: Design and implement a real-time data synchronization system between HubSpot and an external database using webhooks, custom-coded actions, and API calls.
+
+**Architecture Overview:**
+```
+External System → Webhook → HubSpot → Custom-Coded Action → External API
+     ↑                                                        │
+     └─────────────────── Data Sync Loop ─────────────────────┘
+```
+
+**Step 1: Set Up Outbound Sync (HubSpot → External System)**
+1. Create webhook subscription in HubSpot:
+   - Events: `contact.creation`, `contact.propertyChange`, `deal.creation`, `deal.stageChange`
+   - Target: Your external API endpoint
+   - Include property values in payload
+
+2. Build the webhook receiver:
+```python
+from flask import Flask, request, jsonify
+import requests
+
+app = Flask(__name__)
+EXTERNAL_API = "https://your-system.com/api/sync"
+
+@app.route('/webhook/hubspot-sync', methods=['POST'])
+def receive_sync():
+    events = request.json
+    
+    for event in events:
+        sync_payload = {
+            'event_type': event['subscriptionType'],
+            'object_type': event['objectType'],
+            'object_id': event['objectId'],
+            'property_name': event.get('propertyName'),
+            'property_value': event.get('propertyValue'),
+            'timestamp': event['occurredAt'],
+            'portal_id': event['portalId']
+        }
+        
+        # Forward to external system
+        response = requests.post(EXTERNAL_API, json=sync_payload, timeout=5)
+        
+        if response.status_code != 200:
+            # Log failed sync for retry
+            log_failed_event(event['subscriptionId'], 'retry_queue')
+    
+    return jsonify({'status': 'ok'}), 200
+```
+
+**Step 2: Set Up Inbound Sync (External System → HubSpot)**
+1. Create a custom-coded workflow action that receives data from external system
+2. Process can be triggered by:
+   - An API call from external system
+   - A daily batch import
+   - A webhook from external system
+
+**Step 3: Handle Conflict Resolution**
+When both systems update the same record simultaneously:
+1. Timestamp comparison: Latest update wins
+2. Field-level sync: Only update changed fields, not the entire record
+3. Sync status tracking: Add `last_sync_at` and `sync_source` properties to track origin
+4. Error queue: Failed syncs go to a "sync errors" list for manual resolution
+
+**Step 4: Monitor Sync Health**
+Create a dashboard:
+- **Sync Lag** — How far behind is the sync? (target: < 5 minutes)
+- **Failed Syncs** — Count of failed syncs in last 24 hours
+- **Records Synced** — Total records synced per day
+- **Error Rate** — % of syncs that fail (target: < 0.1%)
+
+### Tutorial 8: Data Pipeline — Connecting HubSpot to Snowflake
+
+**Goal**: Set up HubSpot's Data Pipeline to sync CRM data to Snowflake for enterprise analytics.
+
+**Prerequisites**: Operations Hub Enterprise, Snowflake account with warehouse.
+
+**Step 1: Configure Snowflake Destination**
+1. **Settings** > **Integrations** > **Data Pipeline** > Add destination
+2. Select Snowflake
+3. Enter Snowflake connection details:
+   - Account URL: `your-account.snowflakecomputing.com`
+   - Database: `HUBSPOT_ANALYTICS`
+   - Schema: `RAW`
+   - Warehouse: `HUBSPOT_LOADING`
+   - Role: `HUBSPOT_SYNC_ROLE`
+4. Authentication: Key pair authentication (recommended) or user/password
+
+**Step 2: Select Objects to Sync**
+1. Choose sync frequency: Every 1, 4, 12, or 24 hours
+2. Select objects:
+   - Contacts (all properties)
+   - Companies
+   - Deals
+   - Line items
+   - Products
+   - Tickets
+   - Marketing emails
+   - Forms
+   - Custom objects (select specific ones)
+3. Historical backfill: Choose how much history to sync (30, 60, 90, or all)
+
+**Step 3: Create Snowflake Views for Analytics**
+```sql
+-- Create a master customer 360 view
+CREATE OR REPLACE VIEW ANALYTICS.CUSTOMER_360 AS
+SELECT
+    c.id AS contact_id,
+    c.email,
+    c.first_name,
+    c.last_name,
+    c.hs_lead_status,
+    c.createdate AS contact_created,
+    co.name AS company_name,
+    co.industry,
+    co.annualrevenue,
+    COUNT(DISTINCT d.id) AS total_deals,
+    SUM(CASE WHEN d.dealstage = 'closedwon' THEN d.amount ELSE 0 END) AS total_revenue,
+    MAX(d.closedate) AS last_purchase_date,
+    COUNT(DISTINCT t.id) AS total_tickets,
+    AVG(t.hs_time_to_close) AS avg_resolution_hours
+FROM RAW.CONTACTS c
+LEFT JOIN RAW.COMPANIES co ON c.associatedcompanyid = co.id
+LEFT JOIN RAW.DEALS d ON ARRAY_CONTAINS(c.id::VARIANT, d.associated_contact_ids)
+LEFT JOIN RAW.TICKETS t ON ARRAY_CONTAINS(c.id::VARIANT, t.associated_contact_ids)
+GROUP BY 1,2,3,4,5,6,7,8,9;
+
+-- Create a pipeline velocity report
+CREATE OR REPLACE VIEW ANALYTICS.PIPELINE_VELOCITY AS
+SELECT
+    DATE_TRUNC('month', d.createdate) AS pipeline_month,
+    d.pipeline,
+    COUNT(*) AS deals_created,
+    SUM(CASE WHEN d.dealstage = 'closedwon' THEN 1 ELSE 0 END) AS deals_won,
+    SUM(CASE WHEN d.dealstage = 'closedwon' THEN d.amount ELSE 0 END) AS revenue_won,
+    AVG(CASE WHEN d.dealstage = 'closedwon' 
+        THEN DATEDIFF('day', d.createdate, d.closedate) END) AS avg_cycle_days,
+    SUM(d.amount) AS total_pipeline_value
+FROM RAW.DEALS d
+GROUP BY 1, 2;
+```
+
+**Step 4: Create Looker/Power BI Dashboards**
+Connect your BI tool to Snowflake and create:
+- Revenue waterfall by month
+- Forecast vs. actuals comparison
+- Customer cohort analysis
+- Sales activity trends
+- Marketing ROI by channel
+
+### Tutorial 9: Data Cleanup Campaign — Systematic Data Hygiene
+
+**Goal**: Run a structured data cleanup campaign to improve CRM data quality by 50%+.
+
+**Phase 1: Audit (Week 1)**
+1. Run data quality reports to identify problem areas:
+   - Contacts with missing email: `SELECT COUNT(*) FROM contacts WHERE email IS NULL`
+   - Deals without amounts: `SELECT COUNT(*) FROM deals WHERE amount IS NULL AND dealstage NOT IN ('closedlost')`
+   - Companies with no contacts: `SELECT COUNT(*) FROM companies c LEFT JOIN contacts co ON c.id = co.associatedcompanyid WHERE co.id IS NULL`
+   - Duplicate emails: `SELECT email, COUNT(*) FROM contacts GROUP BY email HAVING COUNT(*) > 1`
+2. Create a "Data Cleanup Needed" list and add all problematic records
+3. Prioritize: Fix data that impacts revenue first (deals, active contacts)
+
+**Phase 2: Cleanse (Week 2-3)**
+1. Bulk update missing fields:
+   - Enrich missing company data using email domain
+   - Standardize phone formats
+   - Fill in industries from company website
+2. Merge duplicates:
+   - Start with exact email matches (auto-merge)
+   - Review fuzzy matches manually
+3. Archive/deactivate:
+   - Bounced emails: Set as non-marketing
+   - Unsubscribed for > 1 year: Mark as "inactive"
+   - No activity in 2 years: Archive
+
+**Phase 3: Prevent (Week 4+)**
+1. Create validation workflows (see Tutorial 5)
+2. Set required properties on deal stage transitions
+3. Add form validation rules
+4. Schedule monthly cleanup review
+5. Train team on data entry best practices
+
+**Cleanup Results Template:**
+| Area | Before | After | Improvement |
+|------|--------|-------|-------------|
+| Contacts with complete data | 45% | 85% | +40% |
+| Duplicate contacts | 1,234 | 89 | -93% |
+| Deals with amounts | 72% | 98% | +26% |
+| Companies with contacts | 60% | 92% | +32% |
+| Bounced/unsubscribed cleaned | 0 | 450 cleaned | New process |

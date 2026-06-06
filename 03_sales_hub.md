@@ -1012,4 +1012,390 @@ Exchange rate conversions can produce rounding differences in reporting. Auto-up
 | Discovery questions asked | 5+ per call |
 | Objections handled | 80%+ handled well |
 | Next steps defined | 90%+ of calls |
-| Sentiment score | Positive or neutral in 80%+ of calls |
+
+---
+
+## Sales Hub Tutorials — Advanced
+
+### Tutorial 5: Sales Territory Management
+
+**Goal**: Set up and manage sales territories with rules-based assignment, custom reporting, and performance tracking.
+
+**Step 1: Define Territories**
+1. Create a custom property: `Sales Territory` (dropdown select) on Contact and Company objects
+2. Options: North America, EMEA, APAC, LATAM
+3. Create a second property: `Territory Type` — Enterprise, Commercial, SMB
+
+**Step 2: Create Territory Rules**
+1. **Settings** > **Sales** > **Assignment rules** > Create rule
+2. Rule 1: If Company.Country = "US" OR "Canada" AND Contact.JobTitle contains "VP" or "C-level" → Set Territory = "North America Enterprise"
+3. Rule 2: If Company.Country = "US" OR "Canada" AND Company.Employees < 200 → Set Territory = "North America SMB"
+4. Rule 3: If Company.Country = "UK", "Germany", "France" → Set Territory = "EMEA"
+5. Run rules on import and on property changes
+
+**Step 3: Create Territory-Specific Pipelines**
+1. **Settings** > **Data Management** > **Pipelines** > Create pipeline
+2. Create a separate pipeline for Enterprise deals (longer cycle, more stages)
+3. Create a separate pipeline for SMB deals (shorter cycle, fewer stages)
+4. Set default pipeline based on territory property using workflow
+
+**Step 4: Assign Owners by Territory**
+1. Create HubSpot teams: "NA Sales", "EMEA Sales", "APAC Sales"
+2. Create round-robin assignment rules:
+   - Contact created in NA → Assign to next available NA rep
+   - Deal created in EMEA → Assign to EMEA team lead
+3. Set up lead rotation: Distribute leads evenly across territory reps
+
+**Step 5: Territory Performance Dashboard**
+Create reports:
+1. **Pipeline by Territory** — Stacked bar chart, deal amount grouped by Territory property
+2. **Win Rate by Territory** — Funnel chart comparing conversion at each stage per region
+3. **Rep Performance by Territory** — Table showing: Rep, Territory, Deals Won, Revenue, Quota Attainment
+4. **Territory Coverage** — Map visualization showing contacts grouped by country with deal amounts
+
+### Tutorial 6: Advanced Sales Automation Patterns
+
+**Pattern 1: Automated Lead Scoring Based on Email Engagement**
+```
+Trigger: Contact opens marketing email
+Branch: If contact has opened 3+ emails in last 7 days AND clicked at least 1 link
+  → Set Lead Score = Lead Score + 10
+  → If Lead Score > 80 → Set Lifecycle Stage = "MQL"
+  → Create task for SDR: "Hot lead — call within 2 hours"
+Branch: If contact has NOT opened any email in 30 days
+  → Set Lead Score = Lead Score - 5
+  → If Lead Score < 20 → Move to re-engagement sequence
+```
+
+**Pattern 2: Deal Stage Progression Enforcer**
+```
+Trigger: Deal stage changes
+Branch: If new stage = "Proposal Sent" AND Custom Property "Proposal Value" is empty
+  → Move deal back to previous stage
+  → Create task for owner: "Fill in Proposal Value before moving to Proposal Sent"
+  → Send notification to owner with link to deal
+Branch: If new stage = "Closed Won" AND "Signed Contract" file property is empty
+  → Prevent stage change, notify manager
+```
+
+**Pattern 3: Churn Prevention for Existing Customers**
+```
+Trigger: Contact lifecycle = "Customer" AND Last activity date > 60 days
+Branch: If associated deal count = 0 AND no tickets created in 90 days
+  → Set Customer Health = "At Risk"
+  → Create high-priority task for Account Manager: "Proactive check-in call"
+  → Send automated email to customer: "We haven't heard from you — here's what's new"
+  → Add to "At Risk Customers" list for reporting
+```
+
+**Pattern 4: Multi-Product Cross-Sell Automation**
+```
+Trigger: Deal closed won on Product A
+Actions:
+  → Set property "Customer owns Product A" = true
+  → Delay 30 days
+  → Branch: If no other deals exist for Product B
+    → Create task for Account Manager: "Cross-sell opportunity — introduce Product B"
+    → Send email template: "Since you're loving Product A, meet Product B"
+    → Add to "Cross-sell Pipeline" list
+  → Delay 60 days
+  → Branch: If Product B deal not created AND Account Manager task not completed
+    → Notify Sales Manager of missed cross-sell opportunity
+```
+
+**Pattern 5: Automated Renewal Management**
+```
+Trigger: Deal closed won AND contract_end_date is within 90 days
+Actions:
+  → Set property "Renewal Status" = "Upcoming"
+  → Add to "Upcoming Renewals" list
+  → Create task for Account Manager: "Start renewal conversation"
+  → Delay 60 days
+  → Branch: If renewal deal NOT created
+    → Send automated renewal reminder to customer
+    → Escalate to Sales Manager
+  → Delay 30 days (at end date)
+  → Branch: If no renewal deal created
+    → Set lifecycle = "Lost Customer"
+    → Create churn analysis task
+```
+
+### Tutorial 7: Sales Onboarding — Training New Reps on HubSpot
+
+**Goal**: Create a structured onboarding program that gets new sales reps productive in HubSpot within 2 weeks.
+
+**Week 1: Foundation**
+- **Day 1-2**: Account setup
+  - Create HubSpot user account with appropriate permissions
+  - Install HubSpot Sales Hub extension (Chrome/Outlook)
+  - Connect personal email (Gmail/Outlook integration)
+  - Set up meeting link
+- **Day 3**: CRM basics
+  - Contact creation and management
+  - Understanding the timeline and activity logging
+  - Searching and filtering contacts
+  - Using the sidebar when browsing websites
+- **Day 4**: Deal management
+  - Creating and updating deals
+  - Understanding pipeline stages and probabilities
+  - Moving deals through stages
+  - Logging deal activities
+- **Day 5**: Task management
+  - Creating and completing tasks
+  - Using task queues
+  - Setting reminders and priorities
+  - Managing daily workflow
+
+**Week 2: Advanced Features**
+- **Day 6-7**: Sequences
+  - Understanding sequence structure
+  - Enrolling contacts in sequences
+  - Monitoring sequence performance
+  - Creating personal sequences
+- **Day 8**: Calling
+  - Using HubSpot Calling
+  - Logging calls manually
+  - Recording calls (if enabled)
+  - Call analytics review
+- **Day 9**: Meetings and scheduling
+  - Using meeting links
+  - Round-robin meeting booking
+  - Meeting types (discovery, demo, proposal)
+  - Post-meeting automation
+- **Day 10**: Reports and dashboards
+  - Understanding personal dashboards
+  - Weekly self-review
+  - Pipeline health check
+  - Activity trends
+
+**Creating a HubSpot Onboarding Checklist**:
+1. **Settings** > **Sales** > **Playbooks** > Create onboarding playbook
+2. Name: "New Rep Onboarding — Week 1 Check"
+3. Trigger: New user created in HubSpot
+4. Content: Day-by-day checklist with links to training resources
+5. Auto-assign: Assigned to manager for sign-off each week
+
+### Tutorial 8: Mobile Sales Hub — Field Sales Guide
+
+**Goal**: Use HubSpot's mobile app effectively for field sales, meetings, and on-the-go deal management.
+
+**Step 1: Install and Configure**
+1. Download HubSpot mobile app (iOS/Android)
+2. Log in with your HubSpot credentials
+3. Enable push notifications for:
+   - Task reminders
+   - New leads assigned
+   - Deal stage changes
+   - Meeting reminders
+4. Configure offline mode: Sync contacts and deals for offline access
+
+**Step 2: Daily Mobile Workflow**
+1. **Morning** (before leaving):
+   - Check today's tasks and meetings
+   - Review pipeline updates from overnight
+   - Download any documents needed for onsite meetings
+2. **During meetings**:
+   - Open contact record, review history before walking in
+   - Log meeting with notes in real-time
+   - Create or update deal immediately after
+   - Take photo of business card → HubSpot OCR creates contact
+3. **Travel time**:
+   - Listen to call recordings (Conversation Intelligence)
+   - Review upcoming deals in pipeline view
+   - Complete quick tasks (approve quotes, respond to notifications)
+4. **End of day**:
+   - Log any missed activities
+   - Update deal stages from the day's meetings
+   - Preview tomorrow's schedule
+
+**Step 3: Mobile-Specific Features**
+- **QR code scanner**: Scan QR codes from business cards or event badges
+- **Voice-to-text**: Dictate notes and call summaries
+- **GPS check-in**: Log location with meeting records
+- **Quick actions**: 3D touch / long-press for: New contact, Log call, New deal, New task
+- **Document scanning**: Use camera to scan and upload contracts
+- **Offline creation**: Create contacts and deals without internet, auto-sync when connected
+
+**Step 4: Mobile Reporting**
+1. Open HubSpot app → **Analytics** tab
+2. Key mobile dashboards:
+   - **My Pipeline**: Deals by stage with amounts
+   - **My Activity**: Emails, calls, meetings trend (last 7 days)
+   - **My Performance**: Deals won this month, quota attainment
+   - **Team Leaderboard** (managers): Rep activity comparison
+
+### Tutorial 9: Sales Analytics Deep Dive — Building a Forecast Model
+
+**Goal**: Build an accurate sales forecasting system using HubSpot data that predicts revenue within 10% accuracy.
+
+**Step 1: Clean Your Data Foundation**
+Before any forecasting, ensure data quality:
+1. Verify deal amounts are accurate (not placeholder values)
+2. Confirm close dates are realistic (check for "forever in current stage" deals)
+3. Review pipeline stage probability: if your 50% stage only converts 20%, adjust the probability
+4. Archive deals older than 6 months in early stages (they're stale)
+
+**Step 2: Configure HubSpot Forecast Settings**
+1. **Sales** > **Forecasting** > **Settings**
+2. Select forecast type:
+   - **Revenue forecast**: $ amounts from deals
+   - **Count forecast**: Number of deals expected to close
+3. Set forecast period: Monthly, Quarterly, or Custom
+4. Select team/individual views
+5. Configure categories:
+   - **Commit**: Deals you're highly confident will close (80-100% probability)
+   - **Best Case**: Deals likely to close but with some risk (50-80%)
+   - **Pipeline**: All remaining open deals
+6. Include/exclude specific pipelines from forecast
+
+**Step 3: Build a Weighted Pipeline Forecast**
+1. Create a calculated property: `Weighted Amount`
+2. Formula: `deal_amount * deal_stage_probability`
+3. Example: $10,000 deal at 50% stage = $5,000 weighted
+4. Create report: Sum of Weighted Amount by close month
+5. Compare to historical actuals: "In Q3 last year, weighted pipeline was 2.5× actual — apply same ratio"
+
+**Step 4: Create Predictive Model Using Historical Data**
+1. Export deal data for last 12 months:
+   - Columns: Created date, Close date, Amount, Stage history, Owner, Source
+2. Calculate key metrics:
+   ```
+   Win rate by source:
+   - Inbound leads: 35% → Apply 0.35 to inbound pipeline
+   - Outbound prospecting: 22% → Apply 0.22 to outbound pipeline
+   - Partner referrals: 48% → Apply 0.48 to partner pipeline
+
+   Average days in stage:
+   - Demo → Proposal: 14 days
+   - Proposal → Negotiation: 10 days
+   - Negotiation → Closed Won: 7 days
+   → Total: 31 days average from first stage to close
+   ```
+3. Create forecast model:
+   ```
+   Expected Revenue = Σ(Deal Amount × Historical Win Rate by Segment)
+   
+   Q2 Forecast = 
+     (Inbound Pipeline × 0.35) + 
+     (Outbound Pipeline × 0.22) + 
+     (Partner Pipeline × 0.48)
+   ```
+4. Build HubSpot dashboard comparing:
+   - Actual revenue vs. weighted pipeline forecast
+   - Forecast accuracy % (target: 90%+)
+   - Variance by rep
+
+**Step 5: Automate Forecast Updates**
+1. Schedule weekly pipeline review workflow:
+   - Every Monday at 9 AM: Send forecast snapshot to sales leaders
+   - Include: Current total, % to quota, top 5 deals at risk
+2. Set up alerts:
+   - Alert if >30% of commit deals slip past their close date
+   - Alert if total pipeline drops below 3× quota
+
+**Step 6: Review and Refine**
+1. Monthly: Compare forecast vs. actual
+2. Calculate forecast accuracy: `1 - |(Actual - Forecast)| / Actual`
+3. Adjust stage probabilities based on actual conversion data
+4. Refine segment definitions as products/markets change
+
+### Tutorial 10: Sales Enablement with Playbooks and Content
+
+**Goal**: Build a comprehensive sales enablement system that equips reps with the right content, questions, and scripts at every stage of the deal.
+
+**Step 1: Map Content to Deal Stages**
+Create a content matrix:
+
+| Deal Stage | Rep Needs | Playbook Content |
+|-----------|-----------|-----------------|
+| Discovery | Qualification questions, ICP criteria | BANT/MEDDIC question templates, disqualification criteria |
+| Demo | Product positioning, competitive intelligence | Product comparison charts, demo scripts, competitive battlecards |
+| Proposal | Pricing guidance, negotiation limits | Pricing guidelines, discount approval thresholds, proposal templates |
+| Closing | Objection handling, urgency creation | Closing scripts, ROI calculator, testimonials, case studies |
+| Post-Sale | Handoff checklist, onboarding | Handoff document template, onboarding sequence |
+
+**Step 2: Create Stage-Specific Playbooks**
+
+**Discovery Playbook**:
+1. Questions to ask:
+   - "What triggered you to start looking for a solution now?"
+   - "What's the budget range you've allocated?"
+   - "Who else is involved in the decision?"
+   - "What happens if you don't solve this problem?"
+   - "How are you currently handling this?"
+2. Red flags: No budget, no timeline, single contact won't introduce others
+3. Qualification criteria: Must have M (Metrics), E (Economic buyer), D (Decision criteria), D (Decision process), I (Identify pain), C (Champion)
+
+**Demo Playbook**:
+1. Pre-demo checklist: Confirm attendees, test equipment, review contact's industry
+2. Demo structure:
+   - 5 min: Recap discovery findings
+   - 20 min: Product demonstration tailored to pain points
+   - 5 min: Competitive differentiation
+   - 10 min: Q&A
+   - 10 min: Next steps and timeline
+3. Follow-up: Summary email with key features shown, recording link, next meeting date
+
+**Objection Handling Playbook**:
+| Objection | Response Strategy |
+|-----------|------------------|
+| "Too expensive" | ROI calculation, show cost vs. savings, offer payment plan |
+| "Not now" | Understand timeline, create urgency with limited-time offer |
+| "Using competitor" | Competitor comparison, pain points with current solution |
+| "Need to think about it" | Specific questions: "What specifically are you thinking about?" |
+| "Need to talk to team" | Offer to join team meeting, provide summary document |
+
+**Step 3: Link Playbooks to Deal Stages**
+1. **Settings** > **Sales** > **Playbooks** > Set triggers
+2. When deal enters Discovery stage → Suggest Discovery Playbook
+3. When deal enters Demo stage → Suggest Demo Playbook + [Competitor Name] Battlecard
+4. When deal enters Closing stage → Suggest Objection Handling Playbook + Proposal Templates
+
+**Step 4: Measure Playbook Effectiveness**
+1. Create report: "Playbook Usage by Rep" — how often is each playbook opened?
+2. Create report: "Deal Velocity with vs. without Playbook" — do deals using playbooks close faster?
+3. Create report: "Win Rate with Playbook Usage" — compare win rates for deals using playbooks vs those that don't
+4. Survey reps quarterly: "Which playbooks are most helpful? What's missing?"
+
+---
+
+## Sales Hub Configuration Checklist
+
+### Initial Setup
+- [ ] Connect email integration (Gmail/Outlook)
+- [ ] Install Sales Hub Chrome extension
+- [ ] Configure meeting link (round-robin, types)
+- [ ] Set up HubSpot Calling (VoIP)
+- [ ] Enable conversation intelligence (recording + AI)
+- [ ] Create deal pipelines matching your sales process
+- [ ] Configure pipeline stages with probabilities
+- [ ] Set up stage-to-stage rules (required properties)
+
+### Team Configuration
+- [ ] Create user accounts for all sales reps
+- [ ] Set up teams (NA Sales, EMEA Sales, Enterprise, SMB)
+- [ ] Configure role-based permissions
+- [ ] Create assignment rules (round-robin, rules-based)
+- [ ] Set up deal splits for shared commission (Enterprise)
+
+### Automation
+- [ ] Create lead assignment workflow
+- [ ] Build sequence templates (cold outreach, follow-up, re-engagement)
+- [ ] Configure quote approval workflow
+- [ ] Set up deal stage enforcer rules
+- [ ] Create renewal reminder automation
+- [ ] Build lead scoring model
+
+### Reporting
+- [ ] Create sales leader dashboard (pipeline, velocity, win rate)
+- [ ] Create rep performance dashboard (activity, conversion)
+- [ ] Configure forecasting (commit, best case, pipeline)
+- [ ] Set up weekly forecast email delivery
+- [ ] Build deal source tracking report
+
+### Continuous Improvement
+- [ ] Review win/loss reasons monthly (customize deal loss reasons)
+- [ ] Update playbooks based on rep feedback quarterly
+- [ ] Refine lead scoring based on actual conversion data
+- [ ] Audit pipeline health (stalled deals, stage time averages)
+- [ ] Conduct quarterly forecast accuracy review
