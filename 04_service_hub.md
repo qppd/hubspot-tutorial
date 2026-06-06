@@ -708,3 +708,228 @@ The AI Agent is powerful but can't do everything. It doesn't have access to exte
 
 ### 8. Health Score Accuracy
 Health scores are only as good as your data quality. If product usage data isn't syncing or surveys aren't being sent, health scores will be incomplete or misleading.
+
+---
+
+## Service Hub Tutorials
+
+### Tutorial 1: Setting Up a Complete Help Desk
+
+**Goal**: Configure a fully functional help desk with ticket pipelines, email-to-ticket, auto-assignment, SLA tracking, and performance dashboards.
+
+**Step 1: Configure Email-to-Ticket**
+1. **Settings** > **Service** > **Email-to-ticket** > Set up address
+2. Choose your support email: `support@yourcompany.com`
+3. Configure: New email → Create ticket (or existing thread → update ticket)
+4. Set default pipeline: "Standard Support"
+5. Default ticket type: "Question" (adjust per topic detection)
+6. Default priority: "Medium" (adjust per sender property)
+
+**Step 2: Build Ticket Pipelines**
+1. **Settings** > **Data Management** > **Pipelines** > **Tickets**
+2. Create pipeline: "Standard Support"
+   - Stage 1: New (auto-assigned)
+   - Stage 2: Open (agent acknowledged)
+   - Stage 3: In Progress (agent working)
+   - Stage 4: Waiting on Customer (need info)
+   - Stage 5: Resolved (solution provided)
+   - Stage 6: Closed (customer confirmed)
+3. Create pipeline: "Escalations"
+   - Stage 1: Triage (initial assessment)
+   - Stage 2: Technical Review (engineering review)
+   - Stage 3: Development (bug fix in progress)
+   - Stage 4: QA (testing fix)
+   - Stage 5: Deployed (fix live)
+   - Stage 6: Confirmed Closed (customer verified)
+
+**Step 3: Set Up Auto-Assignment Rules**
+1. **Settings** > **Service** > **Ticket assignment**
+2. Create rules:
+   - Ticket type = "Billing" → assign to Billing team (round-robin)
+   - Priority = "Urgent" → assign to Senior team (round-robin)
+   - Company size > 500 employees → assign to Enterprise support team
+   - Default: Any unassigned → assign to General support (round-robin)
+
+**Step 4: Create Canned Responses**
+1. **Conversations** > **Canned Responses** > Create
+2. Common responses:
+   - "Thanks for reaching out. We'll respond within 4 hours."
+   - "Can you please provide a screenshot of the error?"
+   - "We've escalated this to our engineering team. Reference: TICKET-XXXX"
+   - "This issue is resolved. Please confirm or respond within 3 days."
+
+**Step 5: Build Service Dashboard**
+1. **Reports** > **Dashboards** > Create dashboard
+2. Name: "Service Desk Performance"
+3. Add reports:
+   - Tickets created vs resolved (daily line chart)
+   - Open tickets by priority (bar chart)
+   - Average first response time (single number)
+   - CSAT score trend (line chart)
+   - Agent workload (table: agent name, open tickets, avg response time)
+   - SLA compliance rate (gauge chart: target 95%+)
+4. Schedule email to service manager every morning at 8 AM
+
+### Tutorial 2: Building an AI-Powered Support Bot
+
+**Goal**: Create a chatbot that autonomously resolves common issues using Breeze AI and your knowledge base.
+
+**Step 1: Build Your Knowledge Base**
+1. **Service** > **Knowledge Base** > Create article
+2. Create articles for the 10 most common issues:
+   - How to reset password
+   - How to update billing info
+   - How to cancel subscription
+   - How to invite team members
+   - Troubleshooting login errors
+   - Understanding your invoice
+   - etc.
+3. For each article: Write clear title, step-by-step instructions, add images/screenshots, categorize correctly
+4. Publish and verify search works
+
+**Step 2: Create AI Agent**
+1. **Service** > **Chatflows** > Create chatflow > AI Agent
+2. Name: "Support Bot — Tier 1"
+3. Connect knowledge base: Select all published articles
+4. Set personality: "Friendly and helpful. Explain technical concepts simply."
+5. Capabilities:
+   - Answer questions from KB ✓
+   - Create tickets ✓
+   - Check order status ✓
+   - Book meetings ✓
+   - Update account info (password, email) ✓
+6. Guardrails:
+   - CAN discuss: Account management, billing, troubleshooting, features
+   - CANNOT discuss: Legal terms, medical advice, competitor pricing
+   - Always escalate if customer asks for refund (requires human)
+   - Always escalate if customer expresses frustration 3+ times
+
+**Step 3: Configure Handoff Rules**
+1. AI Agent → Human handoff conditions:
+   - Customer says "talk to agent" or "human"
+   - Customer expresses frustration (sentiment analysis)
+   - Same question asked 3+ times (AI can't resolve)
+   - Request involves refund or account deletion
+2. Handoff behavior: Transfer full conversation history to agent
+3. Agent sees: Chat transcript, AI suggestions for resolution, related KB articles
+
+**Step 4: Monitor Bot Performance**
+1. **Service** > **Chatflows** > Select your bot > Analytics
+2. Key metrics to track:
+   - Resolution rate: % of conversations resolved by bot without human handoff
+   - Handoff rate: % escalated to human
+   - Customer satisfaction: CSAT for bot vs human interactions
+   - Average conversation length: Bot vs human
+   - Common unresolved topics: What people ask that bot can't answer → create new KB articles
+
+### Tutorial 3: Customer Health Scoring & Proactive Retention
+
+**Goal**: Identify at-risk customers before they churn using health scoring and automated interventions.
+
+**Step 1: Define Health Score Components**
+1. **Service** > **Customer Success** > **Health Scoring** (Enterprise)
+2. Add component: Product Usage — 30% weight
+   - Active in last 7 days: 100 points
+   - Active in last 30 days: 60 points
+   - Active in last 90 days: 30 points
+   - No activity in 90+ days: 0 points
+3. Add component: Support Engagement — 25% weight
+   - 0 open tickets: 100 points
+   - 1-2 open tickets (normal): 70 points
+   - 3-5 open tickets: 30 points
+   - 5+ open tickets: 0 points
+4. Add component: Payment Status — 25% weight
+   - Up to date: 100 points
+   - Past due < 15 days: 50 points
+   - Past due 15-30 days: 20 points
+   - Past due 30+ days: 0 points
+5. Add component: NPS/CSAT — 20% weight
+   - NPS 9-10 or CSAT 5: 100 points
+   - NPS 7-8 or CSAT 4: 70 points
+   - NPS 0-6 or CSAT 1-3: 20 points
+   - No survey data: 50 points (neutral)
+
+**Step 2: Set Health Score Thresholds**
+- Healthy (80-100): Green — Good standing, upsell ready
+- Neutral (50-79): Yellow — Monitor, send check-in
+- At Risk (20-49): Orange — Proactive outreach needed
+- Critical (0-19): Red — Immediate intervention required
+
+**Step 3: Build Proactive Workflows**
+
+**Workflow: At-Risk Customer Alert**
+1. Trigger: Health score drops below 50 (becomes "At Risk")
+2. Actions:
+   - Create high-priority task for CSM: "Health check — [company name]"
+   - Send notification to CSM via Slack or email
+   - Set contact property "Risk Flag" = true
+   - If no action in 48 hours: Escalate to CS manager
+
+**Workflow: Churn Prevention Sequence**
+1. Trigger: Health score "At Risk" for 7+ days
+2. Actions:
+   - Step 1: Send personalized email from CSM with usage tips
+   - Step 2: 3 days later — Offer free training session
+   - Step 3: 5 days later — Offer discount or extended trial
+   - Step 4: 7 days later — Create task: "Executive retention call needed"
+
+**Workflow: Happy Customer → Upsell Opportunity**
+1. Trigger: Health score > 85 for 30+ days
+2. Actions:
+   - Add to "Expansion Candidates" list
+   - Set property "Upsell Ready" = true
+   - Notify account manager
+   - Enroll in upsell sequence
+
+### Tutorial 4: Building a Self-Service Customer Portal
+
+**Goal**: Create a knowledge base and support portal that empowers customers to help themselves, reducing ticket volume.
+
+**Step 1: Organize Knowledge Base**
+1. **Service** > **Knowledge Base** > Manage categories
+2. Create categories:
+   - Getting Started (onboarding, setup, first steps)
+   - Account Management (profile, password, settings)
+   - Billing & Plans (invoices, upgrades, cancellations)
+   - Troubleshooting (common errors, fixes)
+   - FAQs (frequent questions)
+3. Create content for each category — aim for 5+ articles per category
+4. Set up SEO: Custom meta descriptions, URL slugs, NOINDEX for internal-only articles
+
+**Step 2: Configure KB Search**
+1. KB search is automatic — HubSpot indexes all published articles
+2. Optimize articles for search:
+   - Use clear, question-based titles: "How do I reset my password?"
+   - Include keywords: "password reset, forgot password, can't log in"
+   - Use step-by-step formatting with numbered lists
+   - Add "See also" links to related articles
+3. Check "Zero result searches" in KB analytics — create content for what customers can't find
+
+**Step 3: Measure Ticket Deflection**
+1. Create report: "KB Influence on Tickets"
+2. Metrics to track:
+   - KB article views before ticket creation
+   - % of visitors who find answer in KB vs filing ticket
+   - Top deflected issues: Articles with high views and low related tickets
+3. Goal: 20%+ of potential tickets deflected by KB articles
+
+---
+
+## Service Hub Metrics — What to Track
+
+| Category | Metric | Target | Why |
+|----------|--------|--------|-----|
+| **Volume** | Tickets created/week | Varies | Identifies trends, seasonality |
+| **Volume** | Tickets by source | Varies | Which channels are busiest? |
+| **Efficiency** | First response time | < 1 hour | Impact on CSAT |
+| **Efficiency** | Average resolution time | < 24 hours | Efficiency metric |
+| **Efficiency** | Ticket reopen rate | < 10% | Quality of resolution |
+| **Efficiency** | Agent utilization | 70-80% | Workload balance |
+| **Quality** | CSAT score | > 4.0 / 5.0 | Customer happiness |
+| **Quality** | NPS | > 50 | Overall loyalty |
+| **Quality** | SLA compliance | > 95% | Meeting commitments |
+| **Self-service** | KB article views | Increasing | Self-service adoption |
+| **Self-service** | Ticket deflection rate | > 20% | KB preventing tickets |
+| **Self-service** | Chatbot resolution rate | > 60% | AI handling issues |
+| **Health** | Customer health score avg | > 70 | Portfolio health |
+| **Health** | Churn rate (service-related) | < 5%/year | Retention success |

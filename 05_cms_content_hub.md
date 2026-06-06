@@ -877,3 +877,348 @@ The Git integration (Enterprise) only syncs code files, not content. Blog posts,
 
 ### 8. Multi-Language URL Structure
 Changing the URL structure after publishing will break existing links. Plan your URL structure (`/lang/` prefix vs subdomain) before publishing translated content.
+
+---
+
+## Content Hub Tutorials
+
+### Tutorial 1: Building a Complete Website from Scratch
+
+**Goal**: Create a fully functional business website with pages, blog, content, and forms using Content Hub.
+
+**Step 1: Choose and Install a Theme**
+1. **Marketing** > **Website** > **Themes**
+2. Browse the marketplace for a theme that matches your industry
+3. Preview themes with sample content
+4. Click "Install theme" on your chosen theme
+5. After installation, configure theme settings:
+   - **Brand colors**: Set primary, secondary, and accent colors to match your brand
+   - **Fonts**: Choose heading and body fonts from Google Fonts or upload custom fonts
+   - **Logo**: Upload your logo (SVG preferred for responsive scaling)
+   - **Header**: Choose header layout (centered logo, left-aligned with nav)
+   - **Footer**: Configure footer columns (about, links, social, contact form)
+
+**Step 2: Create Your Pages**
+1. **Marketing** > **Website** > **Website Pages** > Create
+2. Create pages in this order:
+   - **Homepage**: Hero section, value props, testimonials, CTA
+   - **About**: Company story, team photos, mission
+   - **Products/Services**: Feature descriptions, pricing
+   - **Contact**: Form module, map, phone/email
+   - **Privacy Policy**: Legal compliance
+   - **Terms of Service**: Legal compliance
+
+**Step 3: Set Up Global Content**
+1. Edit the **Header** module:
+   - Navigation links: Home, About, Services, Blog, Contact
+   - CTA button: "Get Started" (links to contact page)
+   - Logo: Upload with link to homepage
+   - Mobile menu: Enable hamburger menu for mobile
+2. Edit the **Footer** module:
+   - 3-column layout: Quick Links | Contact Info | Social
+   - Copyright: "© 2025 [Company Name]. All rights reserved."
+   - Privacy and Terms links
+   - Newsletter signup form module
+
+**Step 4: Configure SEO Settings**
+1. **Settings** > **Content** > **SEO**
+2. Set global defaults:
+   - Title tag suffix: " | [Company Name]"
+   - Default meta description: [Company description]
+   - OG image: Default social sharing image
+   - Sitemap: Auto-generated
+3. Per-page SEO in page settings:
+   - Homepage: Meta title "Home | [Company Name]", meta description with keywords
+   - About: Meta title "About Us | [Company Name]"
+   - Each page gets unique title and description
+
+**Step 5: Connect Custom Domain**
+1. **Settings** > **Content** > **Domains & URLs** > **Connected domains**
+2. Click "Connect a domain"
+3. Enter your domain: `www.yourcompany.com`
+4. HubSpot provides CNAME record: `www → www.yourcompany.hubspot.com`
+5. Add CNAME to your DNS provider (GoDaddy, Cloudflare, AWS Route53)
+6. Wait for DNS propagation (5-30 minutes)
+7. SSL certificate auto-provisions
+8. Set primary domain
+
+### Tutorial 2: Building a Custom HubL Template
+
+**Goal**: Create a custom page template with HubL that displays dynamic content from HubDB.
+
+**Scenario**: A real estate website needs a property listing page that displays properties from a HubDB table.
+
+**Step 1: Create the HubDB Table**
+1. **Design Tools** → **HubDB** → Create table
+2. Table name: "Properties"
+3. Add columns:
+   - `name` (Text) — Property title
+   - `price` (Number) — Listing price
+   - `bedrooms` (Number) — Number of bedrooms
+   - `bathrooms` (Number) — Number of bathrooms
+   - `sqft` (Number) — Square footage
+   - `image` (Image) — Property photo
+   - `description` (Rich text) — Property description
+   - `status` (Select: For Sale, Pending, Sold)
+   - `featured` (Boolean) — Show on homepage?
+4. Add 10-20 sample property rows
+5. Publish the table
+
+**Step 2: Create the HubL Template**
+1. **Design Tools** → **New file** → **Template**
+2. Template type: Standard page
+3. Write the HubL code:
+```hubL
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Properties Listing
+  screenshotPath: ../images/properties-template.png
+-->
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+<div class="properties-page">
+  <div class="page-header">
+    <h1>Available Properties</h1>
+    <p>Browse our selection of premium properties</p>
+  </div>
+
+  {# Fetch properties from HubDB #}
+  {% set properties = hubdb_table_rows("Properties", "orderBy=-price&limit=12") %}
+  
+  {# Filter tabs #}
+  <div class="filter-tabs">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="For Sale">For Sale</button>
+    <button data-filter="Pending">Pending</button>
+    <button data-filter="Sold">Sold</button>
+  </div>
+
+  {# Property grid #}
+  <div class="property-grid">
+    {% for property in properties %}
+    <div class="property-card" data-status="{{ property.status }}">
+      {% if property.image and property.image.src %}
+        <div class="property-image">
+          <img src="{{ property.image.src }}" alt="{{ property.name }}" loading="lazy">
+          <span class="status-badge status-{{ property.status|lower|replace(' ', '-') }}">
+            {{ property.status }}
+          </span>
+        </div>
+      {% endif %}
+      
+      <div class="property-details">
+        <h3>{{ property.name }}</h3>
+        <div class="price">${{ property.price|format('number') }}</div>
+        
+        <div class="specs">
+          <span>🛏️ {{ property.bedrooms }} beds</span>
+          <span>🛁 {{ property.bathrooms }} baths</span>
+          <span>📐 {{ property.sqft|format('number') }} sqft</span>
+        </div>
+        
+        <div class="property-description">
+          {{ property.description|truncate(150) }}
+        </div>
+        
+        <a href="/properties/{{ property.hs_id }}" class="btn btn-primary">
+          View Details →
+        </a>
+      </div>
+    </div>
+    {% else %}
+    <div class="no-results">
+      <h3>No properties found</h3>
+      <p>Check back soon for new listings.</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  {# Dynamic page for individual properties #}
+  {% if dynamic_page_hubdb_row %}
+    {% set property = dynamic_page_hubdb_row %}
+    <div class="property-detail">
+      <img src="{{ property.image.src }}" alt="{{ property.name }}">
+      <h1>{{ property.name }}</h1>
+      <div class="price">${{ property.price|format('number') }}</div>
+      <div class="full-description">{{ property.description }}</div>
+    </div>
+  {% endif %}
+</div>
+{% endblock body %}
+```
+
+**Step 3: Create Dynamic Page Settings**
+1. **Marketing** > **Website** > **Website Pages** > Create
+2. Select your new template "Properties Listing"
+3. In settings: Enable "Dynamic page" and select your "Properties" HubDB table
+4. URL structure: `/properties/` for listing, `/properties/{row-id}` for individual
+5. Publish the page
+
+**Step 4: Add CSS Styling**
+```css
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+}
+
+.property-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.property-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.property-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-for-sale { background: #e8f5e9; color: #2e7d32; }
+.status-pending { background: #fff3e0; color: #e65100; }
+.status-sold { background: #fce4ec; color: #c62828; }
+```
+
+### Tutorial 3: Creating a Blog with AI Content
+
+**Goal**: Set up a company blog, create AI-assisted content, optimize for SEO, and measure performance.
+
+**Step 1: Configure Blog Settings**
+1. **Settings** > **Marketing** > **Blog**
+2. Blog homepage URL: `/blog`
+3. Post URL structure: `/blog/post-title` (clean, SEO-friendly)
+4. Enable:
+   - RSS feed (auto-generated)
+   - Comments (moderated)
+   - Author pages (enable bios)
+   - Social sharing (auto-format for LinkedIn, Twitter, Facebook)
+5. Create categories: Product Updates, Industry Insights, How-To Guides, Case Studies
+
+**Step 2: Generate First Blog Post with AI**
+1. **Marketing** > **Blog** > Create blog post
+2. Click the Breeze AI icon in the editor
+3. Select "Generate blog post"
+4. Enter prompt:
+   - Topic: "How to choose a CRM for small business"
+   - Tone: Professional but friendly
+   - Audience: Small business owners with 5-50 employees
+   - Key points: Budget considerations, must-have features, integration requirements, implementation timeline
+   - Length: Medium (800-1000 words)
+   - CTA: "Start your free trial"
+5. Click "Generate"
+6. Review AI output:
+   - Title: "The Complete Guide to Choosing a CRM for Your Small Business"
+   - Sections: Introduction → Why You Need CRM → Key Features → Budget → Integration → Implementation → Conclusion → CTA
+7. Edit and customize: Add personal examples, company-specific data, internal links
+8. Generate featured image: Click image module → "Generate with AI" → "Modern office with team collaborating around a screen"
+9. Set SEO fields: Meta title, meta description, URL slug
+10. Set publish date and publish
+
+**Step 3: Implement Topic Cluster Strategy**
+1. **Marketing** > **Content Strategy** > Add topic
+2. Add pillar topic: "CRM Software"
+3. HubSpot suggests related subtopics:
+   - "CRM for small business" (your post above)
+   - "CRM implementation guide"
+   - "CRM pricing comparison"
+   - "CRM vs spreadsheets"
+   - "CRM features checklist"
+4. Create content for each subtopic
+5. Link each subtopic post back to the pillar page
+6. HubSpot tracks internal links and cluster completeness
+
+### Tutorial 4: Building a Dynamic Product Catalog with HubDB
+
+**Goal**: Create a searchable, filterable product catalog with individual product pages.
+
+**Step 1: Create HubDB Table**
+1. **Design Tools** → **HubDB** → Create table
+2. Name: "Product Catalog"
+3. Columns:
+   - `name` (Text) — Product name
+   - `sku` (Text) — Stock keeping unit
+   - `price` (Number) — Unit price
+   - `category` (Select: Hardware, Software, Services, Accessories)
+   - `description` (Rich text) — Full description
+   - `features` (Multi-select: Cloud, On-Premise, Mobile, API, Analytics, Security)
+   - `image` (Image) — Product photo
+   - `in_stock` (Boolean) — Availability
+   - `featured` (Boolean) — Show on homepage?
+4. Import CSV with your product data
+5. Publish
+
+**Step 2: Query and Display in HubL**
+```hubL
+{# Product listing page #}
+{% set category_filter = request.query_dict.category %}
+{% set feature_filter = request.query_dict.feature %}
+{% set search = request.query_dict.q %}
+
+{# Build query string #}
+{% set query = "limit=50" %}
+{% if category_filter %}{% set query = query ~ "&category=" ~ category_filter %}{% endif %}
+{% if search %}{% set query = query ~ "&name__contains=" ~ search %}{% endif %}
+
+{% set products = hubdb_table_rows("Product Catalog", query) %}
+
+<table class="product-table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>SKU</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td>
+        <strong>{{ product.name }}</strong>
+        <br>
+        <small>{{ product.description|striptags|truncate(80) }}</small>
+      </td>
+      <td>{{ product.sku }}</td>
+      <td><span class="category-badge">{{ product.category }}</span></td>
+      <td>${{ product.price|format('number') }}</td>
+      <td>
+        {% if product.in_stock %}
+          <span class="in-stock">✓ In Stock</span>
+        {% else %}
+          <span class="out-of-stock">✗ Out of Stock</span>
+        {% endif %}
+      </td>
+      <td><a href="/products/{{ product.hs_id }}">View →</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+```

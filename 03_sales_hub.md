@@ -810,3 +810,206 @@ Each rep's split of a deal affects their individual forecast independently. Misc
 
 ### 8. Multi-Currency Rounding
 Exchange rate conversions can produce rounding differences in reporting. Auto-update rates help but manual adjustments may be needed for audit accuracy.
+
+---
+
+## Sales Hub Tutorials
+
+### Tutorial 1: Building a Complete Sales Outreach System
+
+**Goal**: Set up an end-to-end outbound sales process from prospecting to meeting booked.
+
+**Step 1: Configure Email Infrastructure**
+1. **Settings** > **Integrations** > **Email** — Connect your email account
+2. Enable open tracking, click tracking, and attachment tracking
+3. Create 3 starter templates:
+   - Cold outreach template (personalized, value-first)
+   - Follow-up template (social proof, case study link)
+   - Break-up template ("Should I close this out?")
+
+**Step 2: Build Your First Sequence**
+1. **Sales** > **Sequences** > Create sequence
+2. Name: "Standard Outbound — 5 Steps"
+3. Steps:
+   - Day 0: Send cold outreach email (personalized subject line with company name)
+   - Day 2: Wait (2 business days)
+   - Day 2: Send follow-up email with case study link
+   - Day 4: Wait (3 business days)
+   - Day 4: Send break-up email with meeting link
+   - Day 7: Create task: "Try alternate contact or move to nurture"
+4. Enrollment criteria: Contact must have email AND company
+5. Unenrollment triggers: Contact replies OR meeting booked
+6. Send limits: Max 3 emails per week per contact
+
+**Step 3: Create Prospecting Workspace**
+1. **Sales** > **Leads** > **Prospecting Workspace**
+2. Set filters: Lifecycle stage = Lead, Lead status = New
+3. Add columns: Company, Industry, Lead score
+4. Save view as "Priority Prospects"
+5. Create queues: "Call Today", "Send Email", "Follow Up"
+
+**Step 4: Build a Meeting Scheduling Cadence**
+1. Create meeting link: "Discovery Call" — 30 min
+2. Set availability: Mon-Fri, 9 AM-5 PM with 15 min buffer
+3. Add intake questions: "What's your biggest challenge with [product area]?"
+4. Enable automatic reminders: 24 hours and 1 hour before
+
+**Step 5: Monitor and Optimize**
+1. After 30 days, review sequence analytics
+2. Compare open rates, reply rates, meeting booking rates
+3. A/B test subject lines and email content
+4. Identify best-performing template and use as new default
+
+### Tutorial 2: Setting Up Sales Forecasting
+
+**Goal**: Configure accurate revenue forecasting for your sales team.
+
+**Step 1: Verify Deal Stage Probabilities**
+1. **Sales** > **Forecasting** > Configure
+2. Review each stage's probability:
+   | Stage | Current Probability | Actual Close Rate | Adjust? |
+   |-------|-------------------|-------------------|---------|
+   | New Lead | 10% | 8% | No (close enough) |
+   | Qualified | 25% | 22% | No |
+   | Demo Scheduled | 40% | 30% | Yes → 30% |
+   | Demo Completed | 50% | 35% | Yes → 35% |
+   | Proposal Sent | 70% | 60% | Yes → 60% |
+   | Negotiation | 85% | 75% | Yes → 75% |
+   | Closed Won | 100% | 98% | No |
+
+**Step 2: Configure Forecast Categories**
+1. **Commit**: Deals at "Negotiation" stage or later (75%+ confidence)
+2. **Best case**: Deals at "Demo Completed" or "Proposal Sent" (35-60%)
+3. **Pipeline**: All open deals
+
+**Step 3: Set Up Team Hierarchy** (Enterprise)
+1. Settings > Users & Teams > Create team hierarchy
+2. Rep → Team Lead → Regional VP → CRO
+3. Each manager sees rollup of their team's forecast
+4. Breeze AI provides predicted close dates and confidence scores
+
+**Step 4: Create Forecast Reports**
+1. **Reports** > **Dashboards** > Create dashboard
+2. Name: "Weekly Forecast Review"
+3. Add reports:
+   - Forecast by rep (table)
+   - Weighted pipeline by stage (bar chart)
+   - Deals closing this month (list)
+   - Quarter-over-quarter comparison (line chart)
+4. Schedule email delivery every Monday at 9 AM
+
+### Tutorial 3: Conversation Intelligence for Sales Coaching
+
+**Goal**: Use recorded calls and AI analysis to improve your team's sales conversations.
+
+**Step 1: Enable Recordings**
+1. **Settings** > **Sales** > **Calling** > Enable call recording
+2. Choose consent method: Play consent tone before recording begins
+3. Set retention policy: 90 days for coaching purposes
+
+**Step 2: Train Your Team**
+1. Ensure all sales reps use HubSpot Calling for outbound
+2. Explain that recordings are for coaching, not surveillance
+3. Show reps how to access their own recordings and scores
+4. Reps can flag calls where they want specific feedback
+
+**Step 3: Manager Review Process**
+1. **Sales** > **Conversation Intelligence** > Review calls
+2. Filter by: Rep, date range, call outcome
+3. Listen to 2-3 calls per rep per week
+4. Fill in coaching scorecard for each reviewed call
+5. Assign coaching actions:
+   - "Great discovery questions. Work on handling price objections."
+   - "Talk-to-listen ratio was 70/30 — aim for 40/60"
+   - "Missed the buying signal at 12:30 — discuss in 1:1"
+
+**Step 4: Use AI Insights for Team Training**
+1. Review Breeze AI's coaching suggestions
+2. Identify common patterns across the team:
+   - Are reps struggling with the same objection?
+   - Are discovery questions being skipped?
+   - Is the value proposition being communicated clearly?
+3. Create training session based on patterns
+4. Build call playlists for onboarding new hires: "Best Discovery Calls"
+
+### Tutorial 4: Advanced Quote-to-Close Workflow
+
+**Goal**: Automate the quote-to-close process with approvals, e-signatures, and payment collection.
+
+**Step 1: Create Quote Templates**
+1. **Settings** > **Sales** > **Quotes** > **Templates**
+2. Create 3 templates: Standard, Express (under $5k), Enterprise
+3. Each template includes: Header with logo, line items, terms, signature block
+
+**Step 2: Configure Approval Flows**
+1. Auto-approve: Deals under $10,000 with standard terms
+2. Manager approval: Deals $10,000-$50,000 or discount > 20%
+3. VP approval: Deals $50,000-$250,000 or custom terms
+4. Executive approval: Deals over $250,000
+
+**Step 3: Build Approval Workflow**
+1. Trigger: Quote created with amount > $10,000
+2. Action: Set quote status to "Pending Approval"
+3. Action: Send notification to approver with quote details
+4. Action: If approved in 24 hours → send to customer
+5. Action: If not approved in 24 hours → notify requester
+
+**Step 4: Automate Post-Signature Actions**
+1. Trigger: Quote signed
+2. Action: Move deal to "Closed Won"
+3. Action: Attach signed PDF to deal record
+4. Action: Create invoice (Commerce Hub)
+5. Action: Enroll customer in onboarding sequence
+6. Action: Notify fulfillment team via Slack
+
+---
+
+## Sales Metrics — What to Track
+
+### Activity Metrics
+| Metric | Formula | Target | Why It Matters |
+|--------|---------|--------|---------------|
+| Emails sent/day | Count | 40-60 | Volume drives pipeline |
+| Calls made/day | Count | 30-50 | Direct outreach effectiveness |
+| Meetings booked/week | Count | 3-5 | Opportunity creation rate |
+| Activities per deal | Count | 8-12 | Engagement correlates with close rate |
+| Time to first touch | Hours | < 1 hour | Speed-to-lead impacts conversion |
+| Follow-up attempts | Count | 5-8 | Persistence increases contact rate |
+
+### Pipeline Metrics
+| Metric | Formula | Target |
+|--------|---------|--------|
+| Pipeline coverage | Pipeline value / Quota | 3-4× quota |
+| Win rate | Won deals / Total closed deals | 25-35% average |
+| Average deal size | Total won revenue / Won deals | Varies by industry |
+| Sales cycle length | Avg days from creation to close | Varies by deal size |
+| Stalled deals | Deals with no activity in 14+ days | < 10% |
+| Stage conversion | % who move from stage N to N+1 | Monitor per stage |
+
+### Rep Performance Metrics
+| Metric | Formula | Target |
+|--------|---------|--------|
+| Quota attainment | Actual / Quota | 80-100% |
+| Forecast accuracy | Actual vs forecasted | ±10% |
+| Activities/rep/day | Total / Reps | 50-80 |
+| Call-to-meeting conversion | Meetings / Calls | 5-10% |
+| Pipeline created/rep | Value of new deals added | 3-4× quota |
+
+### Sequence Metrics
+| Metric | Target | Red Flag |
+|--------|--------|---------|
+| Open rate | 50-70% | < 40% |
+| Reply rate | 10-20% | < 5% |
+| Meeting booking rate | 3-8% | < 2% |
+| Unsubscribe rate | < 0.5% | > 1% |
+| Bounce rate | < 3% | > 5% |
+| completion rate | N/A (goal is to unenroll early) | > 80% completion = no goals being met |
+
+### Conversation Intelligence Metrics
+| Metric | Target |
+|--------|--------|
+| Talk-to-listen ratio | 40/60 (rep/customer) |
+| Discovery questions asked | 5+ per call |
+| Objections handled | 80%+ handled well |
+| Next steps defined | 90%+ of calls |
+| Sentiment score | Positive or neutral in 80%+ of calls |
