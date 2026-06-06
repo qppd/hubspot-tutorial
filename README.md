@@ -1,52 +1,80 @@
-# HubSpot Tutorial — Complete Guide
+# HubSpot Complete Tutorial — The Definitive Guide
 
-A comprehensive, end-to-end tutorial covering the entire HubSpot platform. From CRM foundation to advanced development — written for marketers, sales teams, developers, and operations professionals.
+> **48,000+ words** across 12 chapters covering every HubSpot hub, feature, and capability.
 
-## Structure
+A comprehensive, deeply detailed tutorial covering the **entire HubSpot platform**. From CRM foundation to advanced development — written for marketers, sales teams, service professionals, developers, and operations managers.
 
-Each chapter is self-contained with:
-- **What It Does** — high-level description
-- **Key Features** — detailed breakdown of every feature including Breeze AI capabilities
-- **Step-by-Step** — actionable procedures (with UI and API paths where relevant)
-- **Limits That Matter** — hard caps per plan tier (Free, Starter, Pro, Enterprise)
-- **Use Cases** — when to use each feature
-- **Common Gotchas** — pitfalls and how to avoid them
+**Format**: Tutorial-style with step-by-step instructions, configuration walkthroughs, best practices, real-world examples, common gotchas, and use cases for every feature.
+
+---
 
 ## Chapters
 
-| # | Chapter | Description |
-|---|---------|-------------|
-| 00 | [Platform Overview](00_overview.md) | Architecture, Hubs comparison, Breeze AI platform, licensing models, getting started |
-| 01 | [CRM Foundation](01_crm.md) | Contacts, Companies, Deals, Tickets, Properties, Pipelines, Lists, Breeze Intelligence enrichment |
-| 02 | [Marketing Hub](02_marketing_hub.md) | Email, Forms, Landing Pages, SEO/Blog, Social, Ads, Campaigns, Automation, Lead Scoring, AI Content |
-| 03 | [Sales Hub](03_sales_hub.md) | Sequences, Meetings, Calling, Quotes, Playbooks, Forecasting, Conversation Intelligence, CPQ |
-| 04 | [Service Hub](04_service_hub.md) | Ticketing, Knowledge Base, Chatbots, Feedback, CSAT/NPS, SLA, Customer Success, AI Summarization |
-| 05 | [CMS / Content Hub](05_cms_content_hub.md) | Website Builder, HubL Templating, Custom Modules, Blogging, HubDB, AI Content, Local Dev |
-| 06 | [Operations Hub](06_operations_hub.md) | Data Sync, Data Quality, Breeze Intelligence Enrichment, Programmable Automation, Datasets |
-| 07 | [Commerce Hub](07_commerce_hub.md) | Payments, Invoicing, Subscriptions, CPQ, Dunning, Accounting Integrations |
-| 08 | [Custom Objects & API](08_custom_objects_api.md) | Custom Objects, REST API, GraphQL, Webhooks, OAuth 2.0, SDKs, Public Apps |
-| 09 | [Integrations & Automation](09_integrations_automation.md) | Native Integrations, iPaaS, Breeze AI Agents, Workflow Patterns, Sequences, Webhook Recipes |
-| 10 | [Pricing, Limits & Best Practices](10_pricing_limits_best_practices.md) | Pricing tiers per Hub, hard limits (all tiers), 22 best practices, common mistakes |
+| # | Chapter | Words | Covers |
+|---|---------|-------|--------|
+| 00 | [HubSpot Platform Overview](00_overview.md) | ~7,200 | Architecture, flywheel philosophy, all 6 hubs overview, Breeze AI platform (Copilot, Breeze Intelligence, AI Agents), licensing models, key concepts (objects, properties, pipelines, workflows, lists), getting started step-by-step, ecosystem, migration, security & compliance, sandboxes |
+| 01 | [CRM Foundation](01_crm.md) | ~6,500 | Contacts (import CSV, merge, lifecycle stages, enrichment, ownership, GDPR), Companies (domains, hierarchies, insights), Deals (pipelines, stages, line items, splits, Kanban board), Tickets (status, priority, pipelines), Properties (all types, custom, calculated formulas, rollup), Pipelines (creation, stage rules, rotation), Lists (static vs active, criteria, AND/OR logic), Activities (email, calls, meetings, notes, tasks), Associations (labels, cardinality), Reporting (custom report builder, attribution) |
+| 02 | [Marketing Hub](02_marketing_hub.md) | ~6,200 | Breeze AI Content Assistant (generation, brand voice, images, translation), Email Marketing (drag-and-drop editor, personalization tokens, smart content, A/B testing, send time optimization, transactional, subscription management), Forms (5 types, progressive profiling, all field types, Captcha, GDPR), Landing Pages (templates, domains, SSL, smart content, SEO), SEO & Blogging (topic clusters, strategy tool, SEO analysis), Social Media (publishing, approval workflows, analytics), Ads (tracking, retargeting, lead ad sync), Campaigns (asset grouping, multi-touch attribution), Marketing Automation (all triggers, actions, branching, goals, re-enrollment), Lead Scoring (fit, behavior, predictive), Analytics (traffic, contacts, ROI, custom dashboards) |
+| 03 | [Sales Hub](03_sales_hub.md) | ~4,700 | Email Tracking & Templates (setup, snippets, AI recommendations, document tracking), Sequences (create, enrollment, unenrollment triggers, conditional branching, analytics), Meetings (scheduling, round-robin, group, calendar sync, buffers), Calling (VoIP setup, local presence, recording, transcription, power dialer), Conversation Intelligence (AI summaries, coaching, keyword spotting, sentiment analysis, scorecards, playlists), Deal Management (board view, line items, splits, auto-assignment), Lead Management (scoring, rotation, prospecting workspace), Quotes (builder, templates, approval workflows, e-signature), Playbooks (MEDDIC, BANT, SPIN, Challenger), Forecasting (setup, categories, team hierarchy, AI predictions, what-if analysis), LinkedIn Sales Navigator, Multi-Currency |
+| 04 | [Service Hub](04_service_hub.md) | ~4,100 | Ticketing (email-to-ticket, status, priority, pipelines, auto-assignment, collaboration), Knowledge Base (article creation, categories, search, multi-language, ticket deflection), Chatbots (flow-based bots, AI Agent with Breeze, routing rules, human handoff, off-hours behavior), Feedback Surveys (CSAT, NPS, CES creation, distribution, timing, analytics), Customer Success (health scoring, renewal management, lifecycle stages), Help Desk (shared inbox, canned responses, assignment rules), Service Automation (workflows for tickets, SLAs, post-resolution check-ins), SLA Management (metrics, targets, breach actions, business hours, reporting), Analytics (ticket volume, agent performance, CSAT trends, SLA compliance), Breeze AI (ticket summaries, agent, predictive churn) |
+| 05 | [Content Hub (CMS)](05_cms_content_hub.md) | ~4,000 | Website Builder (themes, drag-and-drop editor, global content, SEO settings), HubL Templating (variables, filters, control flow, for loops, macros, functions, extends/inheritance), Custom Modules (field schemas, templates, CSS, JS — with code examples), Blogging (setup, content calendar, editor, multi-language, RSS), Content AI (blog generation, image generation, translation, brand voice), Local Development (CLI commands, project structure, git integration), Serverless Functions (Node.js code examples, secrets, logging), HubDB (table creation, row querying, dynamic pages, use cases), Multi-Language (setup, URL structure, language switcher, hreflang), Membership & Gating (password, registration, tiers), Adaptive Testing |
+| 06 | [Operations Hub](06_operations_hub.md) | ~3,000 | Data Sync (bi-directional setup, field mapping, conflict resolution, supported connections), Data Quality (deduplication rules, fuzzy matching, property standardization, dashboard), Programmable Automation (custom-coded actions in JavaScript/Python with code examples, webhook actions, environment variables), Datasets/SQL (query syntax, joins, aggregation, scheduled exports), Calculated Properties (formula syntax, functions, IF/AND/OR, date math), Rollup Properties (SUM, COUNT, AVG on associated records), Data Pipeline (Snowflake, BigQuery, Redshift), Automation Patterns (data quality, account-based alerting, lead-to-account matching, revenue recognition) |
+| 07 | [Commerce Hub](07_commerce_hub.md) | ~2,400 | Payments (Stripe setup, payment links, checkout experience, dispute management, refunds), Invoicing (creation, templates, recurring invoices, automation), Subscriptions (plan creation, subscriber management, lifecycle, dunning management, plan changes), CPQ (product bundles, pricing rules, volume discounts, tiered pricing, contract term discounts, guided selling, approval flows), Accounting Integrations (QuickBooks, Xero, NetSuite setup and sync), Tax Management (manual, Avalara, VAT/GST, jurisdiction support), Billing Portal (self-service setup), Payment Reporting (revenue dashboard, MRR/ARR, churn rate, LTV, reconciliation) |
+| 08 | [Custom Objects & API](08_custom_objects_api.md) | ~3,200 | Custom Objects (create via UI and API, properties, associations, type IDs, records CRUD), REST API (authentication, endpoints, search API with filter operators, batch operations, rate limits, error handling), GraphQL API (queries, nested associations, limitations), Webhooks (event types, setup, HMAC signature verification in JS and Python, payload format, retry policy), Private Apps (create, scopes, token management), Public Apps (OAuth flow, marketplace listing, monetization), SDKs (Python and Node.js with code examples for CRUD, search, batch), Custom Behaviors (cards, actions, bots, timeline events — Enterprise), HubSpot CLI (installation, all commands, project structure) |
+| 09 | [Integrations & Automation](09_integrations_automation.md) | ~2,700 | Native Integrations (Gmail, Outlook, Calendar, Slack, Zoom, WhatsApp, Facebook Messenger, Salesforce, Shopify, LinkedIn Sales Nav, WordPress, DocuSign, Asana), iPaaS (Zapier triggers/actions, Make scenarios, Workato enterprise features — with comparison), Advanced Workflow Patterns (multi-branch orchestration, goal-based with escalation, data quality pipeline, revenue recognition), Sequence Automation Patterns (triggered enrollment, re-engagement, post-purchase upsell), Cross-Hub Automation (Marketing→Sales handoff, Sales→Service onboarding, Service→Sales upsell), Custom Integration Architecture (webhook-based, scheduled sync, real-time bidirectional), Testing & Monitoring (sandbox testing, staging, metrics, alert thresholds) |
+| 10 | [Pricing, Limits & Best Practices](10_pricing_limits_best_practices.md) | ~3,700 | Pricing breakdown per hub (all tiers with marketing contacts pricing), Add-Ons (Breeze Intelligence, video, dedicated IP, API overages, professional services), Cost Optimization Strategies (right-sizing, reducing marketing contacts, bundling, annual contracts, nonprofit discounts, seat management, Operations Hub vs custom dev), Plan Limits (complete reference table for every resource across all tiers), Scaling Strategies (free→starter→pro→enterprise upgrade paths, multi-portal strategy), Migration Guide (Salesforce step-by-step: audit, clean, setup, migrate, test, train, go live; Zoho/Pipedrive migration; tools), Performance Optimization (CRM, automation, content, API), Vendor Comparisons (HubSpot vs Salesforce, Zoho, Pipedrive, ActiveCampaign/Mailchimp), Best Practices Summary (data management, users, automation, reporting, AI, integrations, security) |
 
-## How to use this tutorial
+---
 
-- **New to HubSpot?** Start with chapter 00 (Overview), then 01 (CRM Foundation), then pick the Hub(s) relevant to your role.
-- **Marketers:** Chapters 00 → 01 → 02 → 09 → 10
-- **Sales teams:** Chapters 00 → 01 → 03 → 07 → 09 → 10
-- **Service teams:** Chapters 00 → 01 → 04 → 09 → 10
-- **Developers:** Chapters 00 → 01 → 05 → 08 → 09 → 10
-- **Ops/RevOps:** Chapters 00 → 01 → 06 → 08 → 09 → 10
-- **Everyone:** Read chapter 10 (Limits & Best Practices) — it'll save you from common mistakes.
+## Structure
 
-## Quick Reference
+Each chapter is a self-contained tutorial with:
 
-- **Breeze AI** is HubSpot's 2024–2025 AI platform — mentioned throughout every chapter
-- Breeze Copilot is the conversational AI assistant throughout the HubSpot UI
-- Breeze Intelligence provides firmographic, technographic, and intent data enrichment
-- Chapter 05 covers HubDB (database tables in CMS) — key for structured content
-- Chapter 06 covers Data Sync and custom-coded actions for building integrations
-- Chapter 08 covers the complete developer API reference (REST, GraphQL, Webhooks, OAuth)
+- **What It Is** — Plain English explanation of the feature
+- **Where to Find It** — Exact navigation path (Menu > Submenu > Feature)
+- **Step-by-Step Instructions** — Numbered steps with all configuration options explained
+- **Multiple Examples** — Different scenarios showing feature in practice
+- **Best Practices** — Real-world recommendations from experienced users
+- **Common Mistakes** — Pitfalls and how to avoid them
+- **Limits That Matter** — Hard caps per plan tier (Free, Starter, Pro, Enterprise)
+- **Use Cases** — When and why to use each feature
 
-## Repository
+---
 
-This tutorial is maintained at [github.com/qppd/hubspot-tutorial](https://github.com/qppd/hubspot-tutorial). Contributions welcome via PR or issue.
+## How to Use This Tutorial
+
+1. **Start with Chapter 00** (Platform Overview) if you're new to HubSpot
+2. **Jump to any chapter** based on your role:
+   - **Marketers**: Chapter 02 (Marketing Hub) + Chapter 05 (Content Hub)
+   - **Sales teams**: Chapter 03 (Sales Hub)
+   - **Service/support**: Chapter 04 (Service Hub)
+   - **Developers**: Chapter 08 (Custom Objects & API) + Chapter 05 (Content Hub dev)
+   - **Operations**: Chapter 06 (Operations Hub) + Chapter 09 (Integrations)
+   - **Finance/execs**: Chapter 10 (Pricing & Best Practices)
+3. **Read relevant chapters together** for cross-functional workflows:
+   - Marketing → Sales: Chapters 02 + 03 + 09
+   - Sales → Service: Chapters 03 + 04 + 09
+   - Full stack: Chapters 01 + 02 + 03 + 04 + 06
+
+---
+
+## Target Lengths
+
+| Chapter | Current | Target |
+|---------|---------|--------|
+| 00. Overview | ~7,200 words | 20,000 |
+| 01. CRM | ~6,500 words | 20,000 |
+| 02. Marketing | ~6,200 words | 20,000 |
+| 03. Sales | ~4,700 words | 20,000 |
+| 04. Service | ~4,100 words | 20,000 |
+| 05. Content Hub | ~4,000 words | 20,000 |
+| 06. Operations | ~3,000 words | 20,000 |
+| 07. Commerce | ~2,400 words | 20,000 |
+| 08. API/Dev | ~3,200 words | 20,000 |
+| 09. Integrations | ~2,700 words | 20,000 |
+| 10. Pricing | ~3,700 words | 20,000 |
+| **Total** | **~48,600 words** | **~220,000 words** |
+
+---
+
+*Created with HubSpot Complete Tutorial series. Last updated: June 2026.*

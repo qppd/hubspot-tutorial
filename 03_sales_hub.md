@@ -1,216 +1,812 @@
-# 3. Sales Hub
+# 3. Sales Hub — Complete Tutorial
 
-## What It Does
-HubSpot Sales Hub gives sales teams the tools to manage pipelines, automate outreach, track engagement, and close deals faster. It ranges from free email tracking and meeting scheduling to enterprise forecasting, conversation intelligence, and CPQ.
+## Table of Contents
+1. [Introduction to Sales Hub](#introduction-to-sales-hub)
+2. [Email Tracking & Templates](#email-tracking--templates)
+3. [Sequences — Complete Guide](#sequences--complete-guide)
+4. [Meetings — Complete Guide](#meetings--complete-guide)
+5. [Calling — Complete Guide](#calling--complete-guide)
+6. [Conversation Intelligence (Enterprise)](#conversation-intelligence-enterprise)
+7. [Deal Management — Complete Guide](#deal-management--complete-guide)
+8. [Lead Management — Complete Guide](#lead-management--complete-guide)
+9. [Quotes — Complete Guide](#quotes--complete-guide)
+10. [Playbooks — Complete Guide](#playbooks--complete-guide)
+11. [Forecasting — Complete Guide](#forecasting--complete-guide)
+12. [LinkedIn Sales Navigator Integration](#linkedin-sales-navigator-integration)
+13. [Multi-Currency Reporting](#multi-currency-reporting)
+14. [Limits That Matter](#limits-that-matter)
+15. [Common Gotchas](#common-gotchas)
+16. [Use Cases](#use-cases)
 
-## Key Features
+---
 
-### Email Tracking & Templates
-- **Email tracking**: open notifications, click tracking, link tracking (Free)
-- **Email templates**: save and reuse email templates with personalization tokens
-- **Snippets**: short reusable text blocks for common replies
-- **AI Snippet Recommendations**: Breeze AI suggests relevant snippets based on email context and conversation history (Pro+)
-- **Sequences**: automated series of follow-up emails and tasks
-- **Send later**: schedule emails to send at optimal times
-- **Canned replies**: pre-written responses for common scenarios
-- **Meeting scheduling**: embedded meeting link (Calendar syncs with Google/Outlook)
-- **Documents**: upload and share documents with tracking (who viewed, how long)
-- **Live chat**: website chat routed to sales reps
+## Introduction to Sales Hub
 
-### Sequences (Pro+)
-- Multi-step email + task sequences
-- Auto-enroll from contact lists, deal stages, form submissions
-- Enroll limits per contact to prevent over-sequencing
-- Sequence analytics: reply rate, meeting booked rate, unsubscribe rate
-- Sequence step types: send email, wait/delay, manual task, automate task
-- Conditional branching: skip steps if contact replies
-- Sequence reporting: see which sequences perform best
+Sales Hub equips sales teams with tools to manage pipelines, automate outreach, track buyer engagement, and close more deals. It integrates directly with the CRM so every email, call, meeting, and quote is tracked against the contact's record.
 
-### Meetings
-- **Meeting link**: shareable URL that shows availability
-- **Round-robin**: distribute meetings among team members
-- **Group meetings**: multiple people on one meeting link
-- **Meeting types**: phone call, video call (Zoom/Google Meet/Microsoft Teams), in-person
-- **Meeting goals**: track meeting outcomes (Discovery, Demo, Proposal, Closing)
-- **Calendar sync**: two-way sync with Google Calendar, Office 365, Exchange
-- **Meeting buffers**: add padding between meetings
-- **Custom email reminders**: send before meeting
+### What You Get by Tier
 
-### Calling
-- **HubSpot Calling**: make and receive calls directly in HubSpot (Sales Hub Pro+)
-- **Local presence**: caller ID shows local number (US)
-- **Call recording**: auto-record and store in contact timeline
-- **Call transcription**: AI-powered transcription (Enterprise)
-- **Call logging**: log manual calls with duration, notes, outcome
-- **Power dialer**: auto-dial through call lists (Sales Hub Enterprise)
-- **Call coaching**: review calls with scorecards (Enterprise)
+| Feature | Free | Starter | Pro | Enterprise |
+|---------|------|---------|-----|------------|
+| Email tracking | ✓ | ✓ | ✓ | ✓ |
+| Email templates | 5 | Unlimited | Unlimited | Unlimited |
+| Meeting scheduling | ✓ | ✓ | ✓ | ✓ |
+| Sequences | ✗ | ✗ | ✓ | ✓ |
+| Calling (VoIP) | ✗ | ✗ | ✓ | ✓ |
+| Conversation Intelligence | ✗ | ✗ | ✗ | ✓ |
+| Quotes with e-signature | ✗ | ✗ | ✓ | ✓ |
+| Playbooks | ✗ | ✗ | ✓ | ✓ |
+| Forecasting | ✗ | ✗ | ✓ | ✓ |
+| Deal splits | ✗ | ✗ | ✗ | ✓ |
+| Multi-currency | ✗ | ✗ | ✓ | ✓ |
+| LinkedIn Sales Nav | ✗ | ✗ | ✓ | ✓ |
 
-### Conversation Intelligence (Enterprise)
-- **Call transcription**: full transcription of sales calls
-- **Breeze AI Call Summaries**: auto-generated call summaries with key points, action items, and next steps (Enterprise)
-- **AI Coaching Suggestions**: Breeze AI identifies improvement areas and suggests coaching moments based on call patterns (Enterprise)
-- **Keyword spotting**: flag when specific topics are mentioned (price, competitor, etc.)
-- **Talk-to-listen ratio**: track who talks more
-- **Objection tracking**: identify common objections
-- **Sentiment analysis**: track emotional tone
-- **Coaching scorecards**: review and rate rep calls
-- **Playlist creation**: group calls by topic for training
-- **AI topic recommendations**: suggested keywords based on call content
+### Navigation
 
-### Deal Management
-- **Deal stages**: custom pipelines with probability percentages
-- **Deal board**: Kanban view of pipeline
-- **Deal amount & ROI tracking**: forecast revenue
-- **Breeze AI Deal Insights**: AI-powered deal health scores, next-best-action recommendations, and risk flags based on historical patterns (Enterprise)
-- **Line items**: associate products/services with deals
-- **Discounts**: flat and percentage discounts
-- **Recurring revenue**: track subscription deals
-- **Auto-assignment**: round-robin or rules-based deal assignment
-- **Deal split**: split revenue among multiple reps (Enterprise)
-- **Forecasting**: team forecast, rep forecast, weighted pipeline, commit forecast
-- **Breeze AI Forecasting Predictions**: ML-based predictive forecasts that auto-adjust based on deal velocity, rep activity, and historical close rates (Enterprise)
-- **Forecast categories**: commit, best case, pipeline, closed won/lost
+- **Sales** > **Dashboard** — Sales KPIs at a glance
+- **Sales** > **Deals** — Pipeline board, list, table views
+- **Sales** > **Contacts** — Contact management
+- **Sales** > **Companies** — Account management
+- **Sales** > **Leads** — Lead management (Prospecting workspace)
+- **Sales** > **Quotes** — Quote creation and management
+- **Sales** > **Sequences** — Automated outreach sequences
+- **Sales** > **Meetings** — Meeting links and scheduling
+- **Sales** > **Calls** — Call log and calling
+- **Sales** > **Conversations** — Live chat, email, social inbox
+- **Sales** > **Forecasting** — Revenue forecasting
+- **Sales** > **Playbooks** — Sales methodology guides
+- **Sales** > **Tasks** — Task tracking and queues
+- **Sales** > **Pipelines** — Deal pipeline management
 
-### Lead Management
-- **Lead scoring**: behavioral + demographic scoring (Sales Hub Enterprise)
-- **Predictive lead scoring via Breeze Intelligence**: ML-based lead quality scores enriched with intent data, firmographic signals, and purchase intent from Breeze Intelligence (Enterprise)
-- **Lead rotation**: distribute leads round-robin
-- **Lead status tracking**: New, Attempted to Contact, Connected, Qualified, Unqualified
-- **Lead feed**: real-time notifications of new leads, email opens, page visits
-- **Prospecting workspace**: focused view for lead outreach
-- **Company insights**: technographics, recent funding, hiring news
-- **LinkedIn Sales Navigator integration**: sync contacts and lists with deeper activity sync including InMail messages, profile views, and save-to-CRM actions (Pro+)
+---
 
-### Quotes (Pro+)
-- **Quote builder**: create professional quotes from deal line items
-- **Quote templates**: customizable PDF templates
-- **Discount management**: per-line and overall discounts
-- **Approval workflows**: quotes over threshold require manager approval
-- **Electronic signature**: send with HubSpot native signing or DocuSign/HelloSign
-- **Quote-to-close tracking**: see which quotes are viewed, signed, or expired
-- **Product catalog**: manage products, prices, SKUs, descriptions
-- **Payment links**: attach payment links to quotes (Commerce Hub)
+## Email Tracking & Templates
 
-### Playbooks (Pro+)
-- **Playbook builder**: create guided workflows for reps
-- **Question templates**: discovery questions, qualification questions
-- **Ask Me Anything (AMA)**: dynamic response based on input
-- **Playbook triggers**: auto-assign playbook based on deal stage
-- **Playbook analytics**: adoption rates, completion rates
-- **Sales methodology support**: MEDDIC, BANT, SPIN, Challenger, Command of the Message
+### Email Tracking Setup
 
-### Reporting & Forecasting
-- **Sales analytics**: calls, meetings, emails, sequences, deal velocity
-- **Pipeline report**: by stage, by rep, by source
-- **Deal conversion**: stage-to-stage conversion rates
-- **Activity tracking**: calls, emails, meetings per rep
-- **Forecasting**: custom forecast periods, team hierarchies
-- **Multi-currency reporting**: convert and report deal amounts, revenue, and pipeline values in any base currency with real-time exchange rate support and per-currency breakdowns (Pro+)
-- **Custom report builder**: drag-and-drop report creation
-- **Dashboard sharing**: share with team, exec, or stakeholders
-- **Attribution reporting**: which marketing sources produce closed-won deals
+HubSpot tracks emails you send from your connected inbox (Gmail, Outlook, or Office 365).
 
-## Step-by-Step: Setting Up a Sequence (Sales Pro+)
+**Setting up email tracking**:
+1. **Settings** > **Integrations** > **Email**
+2. Click "Connect your email" or "Connect inbox"
+3. Choose provider: Gmail/Google Workspace, Outlook/Office 365, Exchange
+4. Authenticate with OAuth 2.0
+5. Enable tracking:
+   - **Email open tracking**: Adds a 1x1 invisible tracking pixel
+   - **Click tracking**: Rewrites links to track clicks
+   - **Attachment tracking**: Tracks when attachments are opened (Sales Hub Pro+)
+6. Select default behavior: Track all emails, or offer a toggle button
+7. **Tracking notification**: Get notified when someone opens/clicks
 
-1. Sales > Sequences > Create sequence
-2. Name the sequence and set a goal (Reply, Meeting booked, Call me, etc.)
-3. Add steps in order:
-   - **Send email**: choose template or write from scratch
-   - **Wait**: set delay (hours, days, or next business day)
-   - **Automatic task**: log a call, create a todo for rep
-   - **Manual task**: rep must complete before sequence proceeds
-4. Set enrollment criteria:
-   - Contacts must have email address
-   - Not enrolled in another sequence targeting same goal
-   - Lifecycle stage filters (e.g., Lead or SQL only)
-5. Configure unenrollment triggers:
-   - Contact replies (auto-detect reply or specific keywords)
+**When tracking works best**:
+- Gmail/Google Workspace: Full tracking
+- Outlook/Office 365: Full tracking
+- Third-party SMTP: Limited tracking (no read receipts)
+- Mobile email apps: Opens may be under-reported (Apple Mail Privacy Protection)
+
+### Email Templates
+
+Save and reuse emails with personalization tokens.
+
+**Creating a template**:
+1. **Sales** > **Templates** > Create template
+2. Write your email body
+3. Insert personalization tokens: `{{ contact.firstname }}`, `{{ contact.company }}`, `{{ contact.jobtitle }}`
+4. **Folder organization**: Create folders (Prospecting, Follow-up, Meeting requests, etc.)
+5. **Sharing**: Share with team (private, team, or organization-wide)
+6. **Favorite**: Star frequently used templates
+
+**Template examples by scenario**:
+
+**Cold outreach**:
+```
+Subject: Quick question about {{ contact.company }}
+
+Hi {{ contact.firstname }},
+
+I noticed {{ contact.company }} has been in the {% if contact.industry %}{{ contact.industry }} industry{% else %}industry{% endif %} for a while now, and I had a thought that might be relevant to your work.
+
+We've been helping companies like yours {{ value_proposition }}.
+
+Would you be open to a 15-minute chat next week to discuss?
+
+Best,
+{{ owner.firstname }}
+```
+
+**Follow-up after demo**:
+```
+Subject: Following up on our demo
+
+Hi {{ contact.firstname }},
+
+Thanks again for your time on our demo call. Based on our conversation, I think the {{ deal.dealname }} opportunity at {{ contact.company }} is a great fit for our [Product Name] solution.
+
+I've attached the proposal for your review. Key highlights:
+- {{ deal.line_items.0.name }}
+- {{ deal.dealname }} timeline
+
+Let me know if you have any questions.
+
+Best,
+{{ owner.firstname }}
+```
+
+**Meeting request**:
+```
+Subject: {{ contact.firstname }}, meet {{ owner.firstname }}?
+
+Hi {{ contact.firstname }},
+
+I'd love to learn more about {{ contact.company }}'s goals for {{ contact.year }}. Do you have 15 minutes free next week?
+
+Here's my calendar link to find a time that works for you:
+{{ owner.meetings_link }}
+
+Looking forward to connecting.
+
+Best,
+{{ owner.firstname }}
+```
+
+### Snippets
+
+Snippets are short reusable text blocks for common replies:
+
+1. **Sales** > **Snippets** > Create snippet
+2. Example snippets:
+   - "Let me check with my team" (1-2 day reply)
+   - "Here's the pricing page link"
+   - "Thanks for your time" (post-meeting thank you)
+   - "Can you forward me the PO number?"
+3. Insert snippets in any email with a keyboard shortcut or dropdown
+
+**AI Snippet Recommendations** (Pro+/Breeze):
+- Based on email context and conversation history
+- Breeze AI suggests relevant snippets while you type
+- Click to insert, saving time on common responses
+
+### Document Tracking
+
+Upload and share documents with tracking:
+
+1. **Sales** > **Documents** > Upload
+2. Choose file: PDF, DOCX, XLSX, PPTX
+3. Set sharing permissions: Anyone with link, only specific contacts
+4. Share link via email or sequence
+5. **Tracking**: You'll see:
+   - Who viewed the document
+   - How long they spent on each page
+   - Whether they forwarded it
+   - Time of first view
+
+---
+
+## Sequences — Complete Guide
+
+Sequences are automated multi-step outreach campaigns. They send follow-up emails and create tasks on a schedule until the lead responds or the sequence ends.
+
+### Creating a Sequence — Step-by-Step
+
+1. **Sales** > **Sequences** > Create sequence
+2. **Name** your sequence: "Post-Demo Follow-up" or "Cold Outreach — 5 Steps"
+3. **Set a goal**: What does success look like?
    - Meeting booked
-   - Deal stage changed to Closed Won/Lost
-6. Set send limits: max emails per week per contact
-7. Save and activate
-8. To enroll contacts: go to contact record, click Enroll in Sequence
-9. Monitor in Sequence dashboard: active, completed, replied, bounced
+   - Reply received
+   - Call me back
+   - Custom
+4. **Add steps**:
 
-## Step-by-Step: Creating a Deal Pipeline
+   **Step types**:
+   - **Send email**: Choose template or write from scratch; personalization tokens available
+   - **Wait/Delay**: Specific days, hours, or "next business day" (respects business hours)
+   - **Manual task**: Creates a to-do for the rep (e.g., "Call this lead")
+   - **Automatic task**: Creates a task automatically without rep action required
+   - **Conditional branch** (Pro+): Skip steps based on recipient behavior
 
-1. Sales > Pipelines > Create pipeline
-2. Select object: Deals
-3. Name pipeline (e.g., "Standard Sales Process")
-4. Add stages (example):
-   - Appointment Scheduled (1%)
-   - Qualified to Buy (10%)
-   - Presentation Scheduled (25%)
-   - Decision Maker Bought-In (50%)
-   - Contract Sent (75%)
-   - Closed Won (100%)
-   - Closed Lost (0%)
-5. Configure stage-to-stage rules:
-   - Which stages can move forward/backward
-   - Required properties per stage (e.g., "Close date required from Contract Sent stage")
-6. Add deal rotation rules (optional): round-robin, team-based
-7. Save
+   **Example: 7-Step Cold Outreach Sequence**:
+   | Step | Type | Content | Delay |
+   |------|------|---------|-------|
+   | 1 | Send email | Initial outreach — value proposition | Day 0 |
+   | 2 | Wait | — | 2 days |
+   | 3 | Send email | Follow-up — social proof/case study | Day 2 |
+   | 4 | Wait | — | 3 days |
+   | 5 | Send email | Final outreach — "Should I close this out?" | Day 5 |
+   | 6 | Wait | — | 5 days |
+   | 7 | Create task | "Move to inactive or try alternate channel" | Day 10 |
 
-## Step-by-Step: Creating a Quote
+5. **Set enrollment criteria**: Who can be enrolled?
+   - Contact must have email address
+   - Contact not currently enrolled in another sequence
+   - Lifecycle stage filter (e.g., Lead or SQL only)
+   - Company size, industry, or other property filters
 
-1. Open a deal → More → Create quote
-2. Select quote template
-3. Add line items from product library or custom items
-4. Set discounts (per line or overall)
-5. Add terms and conditions
-6. Configure payment options (if Commerce Hub enabled)
-7. Set expiration date (default: 30 days)
-8. Add signature options: HubSpot native e-signature, DocuSign, PandaDoc
-9. Preview quote as PDF
-10. Send to contact (automatically creates engagement on timeline)
+6. **Unenrollment triggers**: When should a contact automatically exit?
+   - Contact replies to any sequence email
+   - Meeting booked
+   - Deal stage changed to "Closed Won" or "Closed Lost"
+   - Contact unsubscribes
+   - Specific keyword detection in reply (e.g., "unsubscribe", "not interested")
+   - Custom property change
 
-## Step-by-Step: Setting Up Sales Forecasting
+7. **Send limits**:
+   - Max emails per week per contact (default: 5)
+   - Max emails per day per contact
+   - These prevent burning out your database
 
-1. Sales > Forecasting > Configure forecast
-2. Choose forecast period (Monthly, Quarterly, Custom)
-3. Set forecast categories:
-   - **Commit**: deals rep is confident closing
-   - **Best case**: deals likely but not certain
-   - **Pipeline**: all open deals
-4. Add team hierarchy (Enterprise): manager sees team forecasts
-5. Configure filters: exclude certain deal types or pipelines
-6. Forecast settings: default probability override for forecast calculation
-7. Enable forecast notifications (email alerts when deals move)
+8. **Schedule**: Active immediately or set start date
+
+9. **Save and activate**
+
+### Enrolling Contacts
+
+**Manual enrollment**:
+1. Open a contact record
+2. In the "Sequences" section, click "Enroll in sequence"
+3. Select the sequence
+4. Optional: Set first email send time (or send immediately)
+5. Click "Enroll"
+
+**Bulk enrollment**:
+1. From a contact list, select multiple contacts
+2. Actions > Enroll in sequence
+3. Choose sequence
+4. Confirm
+
+**Automated enrollment via workflows**:
+1. Create a workflow
+2. Trigger: When lifecycle becomes MQL
+3. Action: Enroll in sequence — "New MQL outreach"
+
+### Sequence Analytics
+
+Monitor sequence performance:
+
+**Dashboard metrics**:
+- **Active enrollments**: Contacts currently in the sequence
+- **Completed**: Contacts who finished the sequence
+- **Replied**: Contacts who replied at any step
+- **Meeting booked**: Goal completions
+- **Bounced**: Email bounces
+- **Unsubscribed**: Contacts who unsubscribed
+- **Unenrolled**: Contacts removed by other triggers
+
+**Per-step metrics**:
+- Open rate for each step
+- Click rate for each step
+- Reply rate for each step
+- Step-by-step conversion
+
+**Sequence comparison**: Compare multiple sequences side-by-side to see which performs best.
+
+### Sequence Best Practices
+
+1. **Start with value**: First email should offer value, not just "checking in"
+2. **Mix email types**: Not all emails need to be text — try case studies, video messages, social proof
+3. **Respect busy people**: 3-5 steps is usually enough. 10+ emails in a sequence rarely perform better.
+4. **Use conditional branching**: If a contact clicks a specific link on step 2, skip steps 3-4 and go straight to the demo offer
+5. **Personalize aggressively**: Use personalization tokens for company, industry, role
+6. **Include a clear CTA**: Every email should have one specific ask
+7. **Test subject lines**: A/B test your sequence subject lines
+8. **Monitor unsubscribe rate**: If >1%, your sequence may be too aggressive
+
+---
+
+## Meetings — Complete Guide
+
+### Meeting Link Setup
+
+1. **Sales** > **Meetings** > Create meeting link
+2. **Calendar integration**: Connect Google Calendar or Office 365 (required)
+3. **Meeting name**: "Discovery Call" or "Product Demo"
+4. **Duration**: 15, 30, 45, or 60 minutes
+5. **Availability**:
+   - Specific days of the week
+   - Time range (e.g., 9 AM - 5 PM)
+   - Buffer time between meetings (5-30 min)
+   - Lunch break (block off specific time)
+6. **Meeting type**: Phone call, Video call (Zoom/Google Meet/Teams), In-person
+7. **Location or link**: Auto-join URL for video conferences
+8. **Reminders**: Custom email reminders (1 hour before, 24 hours before)
+9. **Customize URL**: `meetings.hubspot.com/yourname/discovery-call`
+
+### Round-Robin Meeting Scheduling
+
+Distribute meetings among team members:
+
+1. **Settings** > **Sales** > **Meetings** > **Round-robin**
+2. Add team members
+3. Choose assignment method:
+   - **Even distribution**: New meeting goes to the person with fewest meetings
+   - **Sequential**: Pre-set order, each person gets one, then cycle repeats
+4. Link: Share a single meeting link for the team
+
+### Meeting Types
+
+| Type | Best For |
+|------|----------|
+| **Discovery Call** | Initial qualification — 30 min |
+| **Product Demo** | Show product in action — 45-60 min |
+| **Proposal Review** | Review quote/contract — 30 min |
+| **Technical Deep Dive** | Technical evaluation — 60 min |
+| **Check-in** | Ongoing account review — 30 min |
+| **QBR (Quarterly Business Review)** | Strategic review — 60 min |
+
+### Group Meetings
+
+Multiple people on one meeting link:
+1. Create meeting link
+2. Add "Round-robin" or "Collective" group
+3. **Collective**: Contact sees combined availability of all team members
+4. **Round-robin**: Contact books with one specific person from the team
+
+### Calendar Sync
+
+Two-way sync with:
+- **Google Calendar**: Full sync (events created in either direction)
+- **Office 365 / Exchange**: Full sync
+- **iCloud**: One-way (HubSpot reads but doesn't write)
+
+When a contact books a meeting, an event is created in your calendar with the contact name, company, and any intake questions answered.
+
+---
+
+## Calling — Complete Guide
+
+### HubSpot Calling Setup
+
+1. **Settings** > **Sales** > **Calling**
+2. Enable HubSpot Calling (Sales Hub Pro+)
+3. Choose phone number: Use your existing business number or get a new one
+4. **Local presence** (US only): Caller ID shows a local number matching the recipient's area code
+5. **Call recording**: Enable recording (check local laws — consent required in some jurisdictions)
+6. **Voicemail**: Drop pre-recorded or typed voicemails
+
+### Making a Call
+
+From a contact record:
+1. Click the phone icon next to the contact's phone number
+2. HubSpot Calling dialer opens in your browser
+3. Click "Call" → browser requests microphone access
+4. Connect via computer (VoIP) with headset or handset
+5. Call connects — duration, notes, outcome options appear
+6. After call: Log outcome (Connected, Left voicemail, No answer, Busy, Wrong number, Other)
+7. Add notes
+8. Recording is saved to the contact timeline (if enabled)
+
+### Call Analytics
+
+Available in Sales Hub Pro+ and Enterprise:
+
+- **Total calls**: Daily, weekly, monthly
+- **Call duration**: Average per rep
+- **Call outcomes**: Connected vs not connected
+- **Call volume by rep**: Who's making the most/fewest calls
+- **Call-to-meeting conversion**: How many calls result in booked meetings
+
+### Power Dialer (Enterprise)
+
+Auto-dial through a list of contacts:
+
+1. Create or select a call list (filtered contacts)
+2. Click "Power dial" in the calling section
+3. HubSpot dials the first contact
+4. If no answer → auto-moves to next contact
+5. If connected → log outcome, auto-dials next contact when you finish
+6. Logs all call attempts
+
+---
+
+## Conversation Intelligence (Enterprise)
+
+Conversation Intelligence records, transcribes, and analyzes sales calls to provide coaching insights.
+
+### Call Recording & Transcription
+
+1. Enable call recording in Settings > Sales > Calling
+2. When a call is recorded, transcription starts automatically
+3. Transcription appears in the call timeline entry within minutes
+4. Full text search across all call transcriptions
+
+### AI Call Summaries (Breeze AI)
+
+After each recorded call, Breeze AI generates:
+- **Summary**: 2-3 sentence overview of the call
+- **Key points**: Main topics discussed (product features, pricing, timeline, competitors)
+- **Action items**: Follow-up tasks extracted from the conversation
+- **Next steps**: Recommended next action for the rep
+- **Sentiment**: Overall tone of the conversation (positive, neutral, negative)
+
+### AI Coaching Suggestions
+
+Breeze AI analyzes call patterns and suggests coaching opportunities:
+
+- **Talk-to-listen ratio**: Who dominated the conversation? (Ideal: 50/50 or customer talks more)
+- **Objection handling**: How did the rep handle pricing objections? Competitor questions?
+- **Discovery questions**: Did the rep ask about budget, authority, need, timeline (BANT)?
+- **Next steps**: Did the rep clearly define next steps?
+- **Competitive mentions**: How were competitors discussed?
+- **Value proposition**: Was the value proposition clearly stated?
+- **Closing**: Did the rep ask for the business?
+
+### Keyword Spotting
+
+Set keywords to auto-flag in calls:
+
+1. **Settings** > **Sales** > **Conversation Intelligence** > **Keywords**
+2. Add keywords: "Competitor", "Budget", "Pricing too high", "Decision maker"
+3. When a keyword is mentioned, it's highlighted in the transcript
+4. Notifications can be set for high-priority keywords
+
+### Coaching Scorecards
+
+Managers can review calls with structured scorecards:
+
+1. **Sales** > **Conversation Intelligence** > **Review call**
+2. Listen to recording or read transcript
+3. Fill in scorecard:
+   - Opening (1-5): Did rep introduce themselves and set agenda?
+   - Discovery (1-5): Did rep ask qualification questions?
+   - Presentation (1-5): Was value prop clear?
+   - Objection handling (1-5): Were objections addressed well?
+   - Closing (1-5): Was next step clearly defined?
+4. Add comments: "Great objection handling on pricing. Work on asking more discovery questions."
+5. Assign coaching action: "Schedule role-play session on discovery"
+
+### Call Playlists
+
+Group calls by topic for training:
+1. Create playlist: "Objection handling examples"
+2. Add calls where objections were handled well
+3. Share with team for training
+4. Team members can listen, rate, and comment
+
+---
+
+## Deal Management — Complete Guide
+
+### Deal Record Anatomy
+
+Each deal has:
+
+- **Pipeline & Stage**: Where the deal is in the sales process
+- **Amount**: Deal value in your base currency
+- **Close date**: Expected close date
+- **Owner**: The sales rep responsible
+- **Contact**: Who the buyer is at the company
+- **Company**: The account
+- **Line items**: Products/services, quantities, prices, discounts
+- **Activities**: Emails, calls, meetings, notes logged against the deal
+- **Associations**: Quotes, invoices, tickets related to the deal
+- **Forecast category**: Commit, Best case, Pipeline, Closed won, Closed lost
+- **Deal type**: New business, Upgrade, Renewal, Cross-sell
+
+### Creating a Deal
+
+**From contact record**:
+1. Open contact → Deals section → Create deal
+2. Enter deal name, pipeline, stage, amount, close date
+3. Set deal owner (defaults to contact owner)
+4. Click Create
+
+**From company record**: Same process, associates deal to company
+
+**From email**: Reply to a prospect's email → Click "Create deal" from the email timeline → Pre-fills contact/company
+
+**From form submission**: Workflow auto-creates deal when "Request a demo" form is submitted
+
+**From import**: CSV import from another CRM
+
+### Deal Pipeline Board (Kanban View)
+
+The most commonly used view:
+
+```
+| New Lead | Qualified | Demo Scheduled | Demo Done | Proposal | Closed Won | Closed Lost |
+|----------|-----------|----------------|-----------|----------|------------|-------------|
+| [Card]   | [Card]    | [Card]         | [Card]    | [Card]   | [Card]     | [Card]      |
+| Acme Corp| Globex    | Initech        | MegaCorp  | Stark    | Wayne      | Oscorp      |
+| $50k     | $100k     | $75k           | $200k     | $150k    | $50k       | $30k        |
+| John S.  | Jane D.   | Bob M.         | Alice K.  | Tom H.   | Sara L.    | Mike P.     |
+```
+
+**Card details**: Deal name, amount, contact name, owner, last activity date. Click card to open deal record.
+
+**Drag and drop**: Move deals between stages. Confirmation may be required for locked stages.
+
+### Line Items
+
+Products and services on a deal:
+
+1. Open a deal → **Line items** section
+2. Click "Add line items"
+3. **From product library**: Search existing products (from **Settings** > **Products**)
+4. **Custom line item**: Enter name, description, quantity, unit price
+5. **Discount**: Per-line or overall discount (flat amount or percentage)
+6. **Recurring**: For subscription products — monthly, yearly, quarterly
+
+**Product library management**:
+1. **Settings** > **Products** > **Products**
+2. Create product: Name, SKU, description, price, unit, category
+3. Organize products into product categories
+4. Set currency (can be different from portal default)
+
+### Deal Splits (Enterprise)
+
+Split deal credit among multiple reps:
+
+1. Open a deal → Click "Split" in the deal header
+2. Add reps and their percentage share
+3. Must total 100%
+4. Each rep's forecast reflects their split amount
+5. Splits are visible in reporting
+
+### Auto-Assignment Rules
+
+Automatically assign new deals to reps:
+
+1. **Settings** > **Sales** > **Deals** > **Assignment rules**
+2. Create rule:
+   - **Round-robin**: Distribute evenly among team
+   - **Rules-based**: If industry = "Technology" → assign to Tech team. If deal amount > $50k → assign to Enterprise team.
+3. Rules can stack: First matching rule applies
+
+---
+
+## Lead Management — Complete Guide
+
+### Lead Scoring (Sales Hub Enterprise)
+
+Score leads based on fit and behavior:
+
+1. **Sales** > **Lead Scoring** > Create scoring model
+2. **Fit scoring**: Demographic match (industry, job title, company size)
+3. **Behavior scoring**: Engagement (email opens, page visits, form submissions)
+4. **Combine scores**: Total score = fit + behavior
+5. **Thresholds**: Score ranges determine lead status
+
+### Predictive Lead Scoring via Breeze Intelligence
+
+ML-based scoring that auto-adjusts:
+- Based on your CRM's historical conversion data
+- Identifies patterns: "Leads from manufacturing companies with VP-level titles who visited our pricing page close at 3× the rate of other leads"
+- Auto-updates as new data comes in
+- Provides a single "Likelihood to close" score (0-100%)
+
+### Lead Rotation (Round-Robin)
+
+Distribute new leads fairly:
+1. **Settings** > **Sales** > **Lead rotation**
+2. Create rotation rule: "New MQLs → rotate among SDR team"
+3. Set: Who gets assigned, how many per person before next person
+4. Overassignments: If a rep is on PTO, exclude from rotation
+
+### Prospecting Workspace
+
+A focused view for outreach:
+- **Sales** > **Leads** > **Prospecting workspace**
+- Shows: Your leads that need attention
+- Filters: By source, by score, by last activity date
+- Quick actions: Enroll in sequence, create task, log call, send email
+- Custom queues: "Call today", "Follow up by email", "Research company"
+
+---
+
+## Quotes — Complete Guide
+
+### Creating a Quote — Step-by-Step
+
+1. Open a deal → **More** → **Create quote**
+2. **Select template**: Choose a quote template or start from a saved template
+3. **Add line items**: From the deal or select from product library
+4. **Set discounts**: Per-line or overall discount
+5. **Terms & conditions**: Add your standard terms (reusable snippets)
+6. **Payment options** (if Commerce Hub enabled):
+   - Pay in full, pay by invoice, payment plan
+   - Attach payment link for immediate payment
+7. **Expiration date**: Default 30 days
+8. **Signature options**:
+   - **HubSpot native e-signature**: Free, unlimited signatures
+   - **DocuSign**: Connect your DocuSign account
+   - **PandaDoc**: Connect your PandaDoc account
+9. **Preview**: See PDF version of the quote
+10. **Send**: Quote is emailed to contact, logged on deal timeline
+
+### Quote Templates
+
+Create reusable templates:
+1. **Settings** > **Sales** > **Quotes** > **Templates**
+2. Create template: Logo placement, color scheme, font, header/footer
+3. Template sections: Header, summary, line items, terms, signature area
+4. Default vs custom: Templates can be for specific teams or products
+
+### Approval Workflows
+
+Require manager approval for quotes over certain thresholds:
+
+1. **Settings** > **Sales** > **Quotes** > **Approval settings**
+2. Enable approval workflow
+3. Set rules:
+   - Quote amount > $10,000 → requires manager approval
+   - Discount > 20% → requires VP approval
+   - Specific products → requires sales engineering approval
+4. Approvers get notification → approve/reject from email or in HubSpot
+
+### E-Signature
+
+HubSpot's native e-signature:
+- Included with Sales Hub Pro+
+- No additional cost per signature
+- Legally binding in most jurisdictions (ESIGN Act, eIDAS)
+- Audit trail: IP address, timestamp, email verification
+- Automatic quote status updates: Sent → Viewed → Signed → Closed Won
+
+---
+
+## Playbooks — Complete Guide
+
+Playbooks are guided sales methodologies embedded in HubSpot. They help reps ask the right questions, follow a process, and close more deals.
+
+### Creating a Playbook — Step-by-Step
+
+1. **Sales** > **Playbooks** > Create playbook
+2. **Name**: "Discovery — MEDDIC" or "Competitor Displacement"
+3. **Description**: Brief overview of when to use this playbook
+4. **Trigger**: Which deal stage or event auto-suggests this playbook?
+   - Deal stage: "When deal moves to Demo stage → suggest 'Demo Best Practices' playbook"
+   - Manual: Rep opens playbook on demand
+5. **Content**:
+   - **Question templates**: Guided questions for reps
+   - **Ask Me Anything (AMA)**: Dynamic responses based on rep input
+   - **Scripts**: Suggested talking points
+   - **Email templates**: Templates to send to prospect
+   - **Documents**: Attach PDFs, case studies, proposals
+   - **Videos**: Embed training videos
+   - **Links**: Quick links to internal resources
+6. **Sales methodologies**:
+   - **MEDDIC**: Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion
+   - **BANT**: Budget, Authority, Need, Timeline
+   - **SPIN**: Situation, Problem, Implication, Need-payoff
+   - **Challenger**: Teach, Tailor, Take control
+   - **Command of the Message**: Value proposition, capabilities, proof points
+7. **Save and publish**: Share with specific teams or all sales
+
+### Using a Playbook
+
+1. Open a deal → Click "Playbooks" in the sidebar
+2. Select the appropriate playbook
+3. Answer guided questions → answers are saved to the deal record
+4. Follow suggested scripts during the call
+5. Complete the playbook → summary logged to deal timeline
+
+---
+
+## Forecasting — Complete Guide
+
+Forecasting predicts your team's revenue for a given period.
+
+### Setting Up Forecasting
+
+1. **Sales** > **Forecasting** > Configure
+2. **Forecast period**: Monthly, Quarterly, Custom
+3. **Forecast categories**:
+   - **Commit**: Deals you're very confident will close (your "promise" number)
+   - **Best case**: Deals you expect to close but aren't 100% sure
+   - **Pipeline**: All open deals regardless of confidence
+   - **Closed won / Closed lost**: Historical data
+4. **Probability override**: Default probability per stage, or manual entry
+5. **Team hierarchy** (Enterprise):
+   - Set up reporting structure: Rep → Team Lead → VP → CRO
+   - Manager sees rollup of their team's forecast
+6. **Forecast filters**:
+   - Include/exclude specific pipelines
+   - Include/exclude specific deal types
+   - Include/exclude specific products
+7. **Notifications**: Email alerts when key deals move stages
+
+### Breeze AI Forecasting Predictions
+
+ML-enhanced forecasting that auto-adjusts:
+
+- **Deal velocity**: How fast deals typically move through each stage
+- **Historical close rates**: Actual close rates per rep, per team, per pipeline
+- **Stuck deals**: Deals inactive for X days flagged for attention
+- **Predicted close date**: ML estimate based on historical patterns
+- **Confidence score**: How reliable each forecast number is
+- **What-if analysis**: "If all deals at 70%+ close, revenue = $X"
+
+### Forecast Reporting
+
+- **View by**: Pipeline, rep, team, product, region
+- **Forecast vs quota**: How each rep/team is tracking
+- **Trend lines**: Compare to previous periods
+- **Weighted pipeline**: Deal value × stage probability
+
+---
+
+## LinkedIn Sales Navigator Integration
+
+### Setting Up
+
+1. **Settings** > **Integrations** > **LinkedIn Sales Navigator**
+2. Click "Connect"
+3. Authenticate with your LinkedIn Sales Navigator account
+4. Grant permissions for: Profile access, InMail access, CRM sync
+
+### Features
+
+- **Profile sync**: LinkedIn profiles linked to HubSpot contacts
+- **Activity sync**: InMail messages, profile views, saves logged to CRM
+- **Save to CRM**: Save LinkedIn profiles directly to HubSpot
+- **List sync**: LinkedIn list → HubSpot list, and vice versa
+- **Icebreakers**: LinkedIn shows mutual connections and talking points
+- **Notes**: Sync notes between platforms
+
+---
+
+## Multi-Currency Reporting
+
+**Supported on**: Sales Hub Pro+
+
+### Setup
+
+1. **Settings** > **Sales** > **Currencies**
+2. Set base currency (your reporting currency)
+3. Add additional currencies you deal in (USD, EUR, GBP, JPY, etc.)
+4. Exchange rates: Manual or auto-updated (daily)
+
+### How It Works
+
+- Deals can be created in any configured currency
+- Amounts are converted to base currency for reporting
+- Exchange rates update daily for automatic mode
+- Reports show amounts in both original and base currency
+- Forecasting converts all deals to base currency
+
+---
 
 ## Limits That Matter
 
-- Email tracking: Free (200/day), Pro/Enterprise (1,000/day)
-- Email templates: 500 (Pro), unlimited (Enterprise)
-- Sequences: 1,000 active enrollments per user (Enterprise: 2,000)
-- Sequence steps: 50 per sequence
-- Meeting links per user: 5 default + custom
-- Playbooks: 50 (Pro), 500 (Enterprise)
-- Teams: Free (1), Starter (3), Pro (15), Enterprise (unlimited)
-- Sales rep seats: contact-based pricing
-- Calling minutes: US/Canada only included (international billed per minute)
-- Forecast periods: 8 (Pro), unlimited (Enterprise)
-- Quotes per deal: 20 (Pro), 100 (Enterprise)
-- Line items per quote: 50
-- Deal splits: up to 15 (Enterprise)
+| Resource | Free | Starter | Pro | Enterprise |
+|----------|------|---------|-----|------------|
+| Email tracked/day | 200 | 200 | 1,000 | 1,000 |
+| Email templates | 5 | Unlimited | Unlimited | Unlimited |
+| Sequences active/user | 0 | 0 | 1,000 | 2,000 |
+| Sequence steps | — | — | 50 | 50 |
+| Meeting links/user | 5 | Unlimited | Unlimited | Unlimited |
+| Playbooks | — | — | 50 | 500 |
+| Deal pipelines | 10 | 10 | 50 | 100 |
+| Deal stages/pipeline | 30 | 30 | 30 | 30 |
+| Quotes/deal | — | — | 20 | 100 |
+| Line items/quote | — | — | 50 | 50 |
+| Deal splits/deal | — | — | — | 15 |
+| Forecast periods | — | — | 8 | Unlimited |
+| Forecasting teams | — | — | — | Unlimited |
 
-## Use Cases
-
-- Automate cold email outreach with sequences
-- Track email opens and clicks to prioritize hot leads
-- Manage multi-stage sales pipeline with Kanban board
-- Create and send professional quotes with e-signature
-- Forecast revenue with team-level rollups
-- Coach reps using call recordings and conversation intelligence
-- Route leads to the right reps automatically
-- Track product-level performance with line items
+---
 
 ## Common Gotchas
 
-- Sequences auto-enroll but you must set unenrollment rules or contacts will receive unnecessary follow-ups if they've already replied
-- Email tracking uses a 1x1 tracking pixel — some email clients block images
-- Deleting a sequence unenrolls all contacts currently enrolled
-- Call recording laws vary by state/country — HubSpot provides consent tones for some jurisdictions
-- Quotes created without templates can't be edited later (clone + recreate)
-- Forecast accuracy depends on proper deal stage → probability mapping
-- LinkedIn Sales Navigator integration requires LinkedIn Sales Navigator seat
-- Sequence reply detection is not 100% accurate (depends on email being in HubSpot-connected inbox)
+### 1. Sequence Unenrollment
+If you don't set unenrollment triggers, contacts will receive the entire sequence even after they reply. Always configure unenrollment conditions.
+
+### 2. Email Tracking Limitations
+Apple Mail Privacy Protection and some Android clients block tracking pixels. Opens from these clients may not be tracked accurately.
+
+### 3. Call Recording Compliance
+In many jurisdictions (US 10+ states require two-party consent), you must inform the other party that the call is being recorded. HubSpot provides an optional consent tone.
+
+### 4. Quote Template Editing
+Quotes created without a template CANNOT be edited after sending. You must clone the quote and create a new one with a template.
+
+### 5. Forecasting Accuracy
+Forecast accuracy depends on accurate deal stage probability. If deals at "Demo" stage close at 30% but probability is set to 50%, your forecast is inflated. Regularly review and adjust.
+
+### 6. LinkedIn Sales Nav Permissions
+Integration requires each user to have their own LinkedIn Sales Navigator seat. Shared licenses don't work.
+
+### 7. Deal Splits Affect Reporting
+Each rep's split of a deal affects their individual forecast independently. Misconfigured splits can inflate forecast totals (100% rep A + 100% rep B = 200% of actual deal value — but splits should total 100%).
+
+### 8. Multi-Currency Rounding
+Exchange rate conversions can produce rounding differences in reporting. Auto-update rates help but manual adjustments may be needed for audit accuracy.

@@ -1,194 +1,1006 @@
-# 2. Marketing Hub
+# 2. Marketing Hub — Complete Tutorial
 
-## What It Does
-HubSpot Marketing Hub provides tools for inbound marketing: attracting visitors, converting leads, nurturing prospects, and analyzing campaign performance. It covers email marketing, landing pages, forms, SEO/content, social media, ads, marketing automation, lead scoring, and analytics.
+## Table of Contents
+1. [Introduction to Marketing Hub](#introduction-to-marketing-hub)
+2. [Breeze AI Content Assistant](#breeze-ai-content-assistant)
+3. [Email Marketing — Complete Guide](#email-marketing--complete-guide)
+4. [Forms — Complete Guide](#forms--complete-guide)
+5. [Landing Pages — Complete Guide](#landing-pages--complete-guide)
+6. [SEO & Blogging — Complete Guide](#seo--blogging--complete-guide)
+7. [Social Media — Complete Guide](#social-media--complete-guide)
+8. [Ads — Complete Guide](#ads--complete-guide)
+9. [Campaigns — Complete Guide](#campaigns--complete-guide)
+10. [Marketing Automation (Workflows) — Complete Guide](#marketing-automation-workflows--complete-guide)
+11. [Lead Scoring — Complete Guide](#lead-scoring--complete-guide)
+12. [Analytics & Reporting — Complete Guide](#analytics--reporting--complete-guide)
+13. [Limits That Matter](#limits-that-matter)
+14. [Common Gotchas](#common-gotchas)
+15. [Use Cases](#use-cases)
 
-## Key Features
+---
 
-### Breeze AI Content Assistant
-- **AI writing**: generate blog posts, emails, landing page copy, and social content with natural language prompts
-- **AI image generation**: create custom images for blogs, landing pages, emails, and social posts using built-in AI image generator
-- **AI translation**: translate content into multiple languages with one click (Pro+)
-- **AI subject line generation**: automatically generate and test subject line variations for email campaigns
-- **Content tone adjustment**: rewrite content for brand voice (formal, casual, professional, playful)
-- **AI content repurposing**: reformat existing content for different channels (blog → social, email → landing page)
-- **Brand voice settings**: define and enforce brand voice guidelines across all AI-generated content
+## Introduction to Marketing Hub
 
-### Email Marketing
-- **Breeze AI email campaign generation**: generate full email campaigns — subject lines, body copy, CTAs, and images — with natural language prompts
-- **Drag-and-drop email editor** with pre-built templates
-- **Personalization tokens**: first name, company, deal info, custom properties
-- **Smart content**: show different content based on list membership, lifecycle stage, device type, language, or contact properties
-- **A/B testing**: test subject lines, content, send times
-- **Email scheduling**: send immediately, schedule for later, or time-zone optimized send
-- **Transactional emails**: order confirmations, password resets (not marketing)
-- **Subscription management**: bulk email (marketing), one-to-one (sales), transactional
-- **Unsubscribe management**: automated, one-click unsubscribe required
-- **Reply-to routing**: replies go to shared inbox or specific email
-- **Email analytics**: opens, clicks, bounces, unsubscribes, spam reports, click maps, device breakdown
-- **Send time optimization**: send when each recipient is most likely to open (Pro+)
-- **Email templates**: save as templates, clone, share across teams
-- **Drag-and-drop builder**: modules, sections, global content
-- **Domain management**: connect custom domains (up to 15 on Pro, unlimited on Enterprise)
-- **SEO settings**: meta description, page title, URL slug, canonical URL
-- **Smart content**: personalize landing pages per contact
-- **A/B testing**: test page variants (Pro+)
-- **Forms on landing pages**: embedded or pop-up, with progressive profiling
-- **CTA buttons**: with click tracking
-- **Password-protected pages**: member-only content
-- **Responsive design**: mobile-optimized by default
-- **Blog integration**: link landing pages from blog posts
-- **Conversion analytics**: views → submissions, traffic sources
+Marketing Hub is HubSpot's inbound marketing suite. It provides everything you need to attract visitors, convert leads, nurture prospects, and measure campaign ROI — all within the same CRM where your sales and service teams work.
 
-### Forms
-- **Form types**: embedded form, pop-up form, slide-in form, inline form, floating footer
-- **Field types**: text, email, phone, date, file upload, GDPR consent, checkboxes, radio, dropdown, multi-select
-- **Progressive profiling**: show new fields to returning visitors (replace existing fields)
-- **Smart fields**: hide fields if already known
-- **Thank-you messages**: redirect to URL or show inline message
-- **Lead flows**: pop-up forms triggered by exit intent, time on page, scroll percentage (Legacy)
-- **Captcha**: Google reCAPTCHA v2 and v3
-- **Post-submit actions**: follow-up email, workflow enrollment, lead assignment
-- **HubSpot tracking code**: automatically tracks form submissions
-- **Form pre-population**: populate with known contact data
-- **File upload**: collect files via forms (limits apply)
+### What Marketing Hub Includes
 
-### SEO / Blogging
-- **Blog editor**: rich text with drag-and-drop modules
-- **Topic clusters**: pillar page + cluster content model
-- **SEO recommendations**: page-level analysis, suggested keywords, readability score
-- **Content strategy tool**: topic suggestions based on search data
-- **Keyword tracking**: rank tracking for target keywords (Pro+)
-- **Internal linking recommendations**: connect related blog posts
-- **Meta data editor**: title tag, meta description, URL slug
-- **Structured data**: schema.org markup for blogs
-- **Blog RSS**: auto-generated RSS feeds
-- **Author pages**: author bios with social links
-- **Multi-language blogging**: URL structure for i18n
-- **Content calendar** (Content Hub)
+| Feature | Free | Starter | Pro | Enterprise |
+|---------|------|---------|-----|------------|
+| Email marketing | 2,000 sends/mo | 10× contacts/mo | 10× contacts/mo | 12× contacts/mo |
+| Forms | 1,000 forms | 5,000 forms | 50,000 forms | Unlimited |
+| Landing pages | 20 pages | 70 pages | Unlimited | Unlimited |
+| Blogging | 250 posts | 2,500 posts | Unlimited | Unlimited |
+| Social media | 5 accounts | 10 accounts | Unlimited | Unlimited |
+| Workflows | 5 active | 20 active | 500 active | 1,000+ active |
+| Lead scoring | ✗ | ✗ | ✓ | ✓ |
+| A/B testing | ✗ | ✗ | ✓ | ✓ |
+| Smart content | ✗ | ✗ | ✓ | ✓ |
+| Multi-touch attribution | ✗ | ✗ | ✓ | ✓ |
 
-### Social Media
-- **Social publishing**: compose, schedule, and publish posts
-- **Supported networks**: Facebook, LinkedIn, Twitter/X, Instagram, YouTube (limited)
-- **Social listening**: monitor brand mentions (Enterprise)
-- **Social analytics**: engagement, clicks, impressions, followers over time
-- **Post re-engagement**: see past posts, reshare
-- **Bulk scheduling**: upload CSV of posts
-- **Approval workflows**: draft → review → publish (Pro+)
-- **Content sharing**: share blog posts and landing pages to social
+### Navigation
 
-### Ads
-- **Ad tracking**: track ad interactions for Google Ads, Facebook Ads, LinkedIn Ads, Instagram
-- **Ad conversion attribution**: see which ads generate leads/customers
-- **Ad audiences**: create retargeting audiences from HubSpot contact lists
-- **Budget management**: view spend, impressions, clicks (read-only, manage in ad platform)
-- **Lead ad sync**: sync Facebook/Instagram/LinkedIn lead ads to HubSpot
-- **UTM parameter tracking**: auto-tagging and tracking
+The Marketing Hub navigation is in the top menu bar under **Marketing**. Sub-sections:
 
-### Campaigns
-- **Campaign creation**: name, goal, budget, start/end dates
-- **Asset grouping**: associate emails, landing pages, ads, social posts, CTAs, workflows, lists
-- **Campaign analytics**: ROI, influence, contacts created, revenue attributed
-- **Multi-touch attribution**: first interaction, last interaction, linear, U-shaped, W-shaped, time decay
-- **Campaign reporting**: dashboard of all assets' performance
+- **Marketing** > **Email** — Email campaigns, templates, analytics
+- **Marketing** > **Forms** — Form builder, embedded forms, pop-up forms
+- **Marketing** > **Landing Pages** — Page builder, templates, performance
+- **Marketing** > **Blog** — Blog posts, content calendar, SEO
+- **Marketing** > **Social** — Social publishing, monitoring, analytics
+- **Marketing** > **Ads** — Ad tracking, audiences, analytics
+- **Marketing** > **Campaigns** — Campaign management, asset grouping, attribution
+- **Marketing** > **Lead Scoring** — Score criteria, scoring models
+- **Automation** > **Workflows** — Marketing automation workflows
+- **Reports** > **Marketing** — Traffic, conversion, email, social, SEO dashboards
 
-### Marketing Automation (Workflows)
-- **Trigger types**: contact-based (form submission, list membership, property change, date-based), company-based, deal-based, ticket-based
-- **Actions**: send email, add to list, remove from list, create task, set property value, enroll in sequence, create deal, trigger webhook, branch (if/then), delay, goal, rotate lead
-- **Enrollment criteria**: AND/OR logic with property conditions, list membership, form submissions, page views
-- **Goal-based workflows**: enroll until goal met (e.g., "contact becomes customer")
-- **Re-enrollment**: configure re-enrollment triggers
-- **Workflow history**: visual audit trail of contacts through workflow
-- **Error handling**: logs for enrollment failures, action failures
-- **Versioning**: save workflow versions, rollback
+---
 
-### Lead Scoring
-- **Positive attributes**: +X points for property values, page views, form submissions, email clicks, behaviors
-- **Negative attributes**: -X points for unsubscribes, bounces, inactivity
-- **Scoring tiers**: set score ranges that map to lifecycle stages
-- **Fit scoring**: demographic fit (industry, job title, company size, location)
-- **Behavior scoring**: engagement level
-- **Predictive lead scoring** (Content Hub Enterprise, Sales/Service Enterprise): ML-based scoring
-- **Workflow integration**: trigger workflows when score changes
+## Breeze AI Content Assistant
 
-### Analytics
-- **Traffic analytics**: sources (organic, paid, direct, social, email, referrals), pages, devices, locations
-- **Contact analytics**: contacts created, engaged, converted by source
-- **Conversion analytics**: from visitor → contact → customer
-- **ROI reporting**: revenue generated vs. cost spent
-- **Custom report builder**: drag-and-drop report creation
-- **Dashboard creation**: shareable, filterable, scheduled emails
-- **Attribution reporting**: multi-touch attribution models
+Breeze AI is built into Marketing Hub to accelerate content creation and optimization.
 
-## Step-by-Step: Creating an Email Campaign
-1. Marketing > Email > Create email
-2. Choose template (blank, pre-built, or saved template)
-3. Name your email in the settings panel
-4. Set sender details: From name, From address, Reply-to address
-5. Personalize subject line: use {{ contact.firstname }} tokens
-6. Build content: drag modules (text, image, CTA, video, social follow, etc.)
-7. Add smart content rules (Pro+): Device type, Contact list membership, Lifecycle stage, Language
-8. Set send settings: send to list, send at specific time, time-zone optimized, A/B test variant
-9. Preview and test: send test to your own email, test rendering in different clients
-10. Review compliance: verify unsubscribe link, physical address, permission basis
-11. Review > Send or Schedule
+### AI Content Generation
 
-## Step-by-Step: Creating a Marketing Automation Workflow
-1. Automation > Workflows > Create workflow
-2. Choose type: Contact-based, Company-based, Deal-based, Ticket-based, Custom object-based
-3. Set enrollment triggers (can be blank for manual enrollment)
-4. Add branches: Set up if/then logic (e.g., if contact has role "Manager")
-5. Add actions in sequence:
-   - Send email (choose from existing marketing emails)
-   - Add to/remove from static list
-   - Set property value (e.g., set Lifecycle Stage to "Customer")
-   - Create task (e.g., "Call this lead")
-   - Enroll in sequence (Sales Hub)
-   - Delay (specific time, X days, or until day of week/time)
-   - Goal (wait until condition met, e.g., "deal created")
-6. Configure re-enrollment: When should contacts re-enter?
-7. Turn on workflow
+The AI Content Assistant can generate:
 
-## Step-by-Step: Progressive Profiling on Forms
-1. Settings > Marketing > Forms
-2. Create new form or edit existing
-3. Add all fields you want to collect over time
-4. Click on a field → "Progressive Profiling" tab
-5. Check "Use progressive profiling" (form must have at least 4 extra fields beyond contact identity)
-6. Set how many fields to show per submission (default: 1 new field)
-7. Order fields by priority (drag to reorder)
-8. Configure identity fields (email is default identifier)
-9. Save
+**Blog posts**: Give it a topic, target audience, key points, and tone. It generates a complete blog post with headings, body, and a call-to-action.
+
+**Email campaigns**: Provide a goal (welcome, promotion, newsletter, re-engagement). The AI generates subject lines, body copy, CTAs, and even images.
+
+**Landing page copy**: Describe your offer (ebook, webinar, trial). The AI writes headline, subheadline, bullet points, and CTA text.
+
+**Social media posts**: Extend blog content to social posts for multiple platforms (LinkedIn, Twitter/X, Facebook, Instagram).
+
+### How to Use AI Content Assistant
+
+1. Open any content editor (blog, email, landing page)
+2. Click the Breeze AI icon (sparkle) in the editor toolbar
+3. Choose what you want to create: "Generate blog post", "Rewrite paragraph", "Shorten text", "Translate", "Change tone"
+4. For generation: Enter a prompt describing what you need
+5. Click "Generate"
+6. Review the output — you can regenerate, edit, or accept
+7. Modify as needed (AI is a starting point, not a final draft)
+
+### Brand Voice Settings
+
+Define your brand's voice so AI-generated content stays consistent:
+
+1. **Settings** > **Marketing** > **Brand Voice**
+2. Click "Create brand voice profile"
+3. Fill in:
+   - Brand description: "A modern B2B SaaS company helping small businesses manage finances"
+   - Tone: Casual, Professional, Playful, Formal, Authoritative, Friendly
+   - Words to use: Industry-specific terminology
+   - Words to avoid: Competitor names, outdated terms
+   - Style preferences: Contractions (yes/no), humor level, sentence length
+4. Save — AI will use this voice profile when generating content
+
+### AI Image Generation
+
+Generate custom images for blog posts, landing pages, emails, and social:
+
+1. In any content editor, click the image module
+2. Select "Generate with AI"
+3. Describe the image you want: "A modern office with plants and natural lighting, diverse team collaborating"
+4. Choose style: Photorealistic, Illustration, Flat design, 3D render, Watercolor
+5. Set dimensions (16:9 for blog, 1:1 for social, 4:3 for email)
+6. Click "Generate"
+7. Choose from 4 generated options
+8. Add, edit, or regenerate
+
+### AI Translation
+
+Translate any content into supported languages with one click:
+
+1. Open blog post, landing page, or email
+2. Click the language dropdown in the settings panel
+3. Select "Add language"
+4. Choose target language from 20+ options
+5. AI generates the translation maintaining formatting and links
+6. Review and publish
+
+Supported languages include: Spanish, French, German, Italian, Portuguese, Dutch, Japanese, Chinese (Simplified), Chinese (Traditional), Korean, Arabic, Russian, Swedish, Norwegian, Danish, Finnish, Polish, Turkish, Thai, Vietnamese, Indonesian
+
+---
+
+## Email Marketing — Complete Guide
+
+### Email Editor Walkthrough
+
+The drag-and-drop email editor is the heart of Marketing Hub's email capabilities.
+
+**Creating an email**:
+1. **Marketing** > **Email** > Create email
+2. Choose from:
+   - **Regular email**: Standard marketing email
+   - **Automated email**: Trigger-based (e.g., abandoned cart)
+   - **Blog/RSS email**: Auto-send new blog posts to subscribers
+   - **Transactional email**: Operational emails (order confirmations, password resets)
+3. Select a template:
+   - **Blank template**: Start from scratch
+   - **Pre-built templates**: HubSpot's library of responsive templates
+   - **Saved templates**: Your team's previously saved templates
+   - **Drag-and-drop templates**: Fully customizable
+
+### The Email Editor Interface
+
+The editor has three main areas:
+
+**Left sidebar — Modules**:
+- Text, Image, Button, Divider, Spacer, Social Follow, Video, CTA, Header, Footer, Logo
+- Drag modules into the email body
+- Each module has customizable settings (padding, background color, borders, visibility on mobile)
+
+**Center — Preview canvas**:
+- WYSIWYG view of your email
+- Toggle between Desktop and Mobile views (critical for responsive testing)
+- Click any module to edit its content and settings
+
+**Right panel — Settings** (click a module to see):
+- **Content tab**: Text, links, images for the selected module
+- **Style tab**: Font, color, size, padding, alignment
+- **Advanced tab**: CSS classes, conditional visibility
+
+### Personalization Tokens
+
+Insert dynamic content from the contact's CRM record:
+
+| Token | What It Shows | Example Output |
+|-------|--------------|----------------|
+| `{{ contact.firstname }}` | Contact's first name | "Hi Jane!" |
+| `{{ contact.lastname }}` | Contact's last name | "Doe" |
+| `{{ contact.email }}` | Email address | "jane@example.com" |
+| `{{ contact.company }}` | Company name | "Acme Corp" |
+| `{{ contact.jobtitle }}` | Job title | "Marketing Manager" |
+| `{{ contact.phone }}` | Phone number | "+1 (555) 123-4567" |
+| `{{ contact.city }}` | City | "San Francisco" |
+| `{{ contact.country }}` | Country | "United States" |
+| `{{ owner.firstname }}` | Contact owner's first name | "Sarah" |
+| `{{ custom.property_name }}` | Custom property | Any custom value |
+| `{{ subscription.bulk }}` | Subscription confirmation | "You're receiving this because..." |
+
+Insert tokens by clicking the `{{ }}` icon in the editor toolbar.
+
+### Smart Content
+
+Show different content to different contacts based on rules:
+
+**Available conditions**:
+- **Contact list membership**: Show content A to list "VIP Customers", content B to everyone else
+- **Lifecycle stage**: Show different CTAs to Leads vs Customers
+- **Device type**: Mobile-optimized vs desktop content
+- **Language**: Show translated content blocks based on contact's language property
+- **Contact properties**: Any property value (e.g., industry, job role)
+- **Personalization tokens within smart content**: Combine both approaches
+
+**Setting up smart content**:
+1. Add a module to your email
+2. Click the module → **Smart Content** tab
+3. Enable "Make this module smart"
+4. Choose condition type (e.g., "Contact list membership")
+5. Create default content (seen by non-matching contacts)
+6. Add variation: Choose a specific list, set the content for that audience
+7. Add more variations as needed
+8. Preview each variation to verify
+
+**Example**: A fitness company sends the same newsletter to all subscribers, but uses smart content to show:
+- Runners: "New running shoes!" image and CTA
+- Yoga practitioners: "Yoga mats on sale!" image and CTA
+- Everyone else: "Browse our collection" generic CTA
+
+### A/B Testing
+
+Test up to 5 variations to find the winner:
+
+**What you can test**:
+- **Subject line**: Test different subject lines (most common)
+- **Content**: Test different body copy, images, CTAs
+- **Send time**: Test different send days/times
+- **From name**: Test sender name variations
+
+**Setting up an A/B test**:
+1. In email editor, click "Enable A/B test" in settings
+2. Choose what to test: Subject line, Content, Send time, From name
+3. Create variants:
+   - **A**: Control (your original)
+   - **B, C, D, E**: Variations
+4. Set sample size: What percentage of the list gets the test? (Recommended: 20-50%)
+5. Winner determination:
+   - **Manual**: You pick the winner after reviewing results
+   - **Automatic**: HubSpot picks the winner based on open rate, click rate, or reply rate
+6. Winning criteria: Open rate (subject line tests) vs Click rate (content tests)
+7. Minimum sample: HubSpot needs enough data to determine a statistically significant winner
+8. Winner sends to remaining list automatically
+
+### Send Time Optimization
+
+Send emails when each recipient is most likely to open:
+
+1. In email send settings, enable "Send time optimization"
+2. HubSpot analyzes each contact's past open behavior
+3. The send window opens at your set time
+4. Over the next 24 hours, each contact receives the email at their optimal time
+5. Works best with lists of 1,000+ contacts for sufficient data
+
+**Pro tip**: Send time optimization works better for broadcast marketing emails than time-sensitive content (event reminders, flash sales).
+
+### Transactional Emails
+
+Transactional emails are not marketing emails — they're operational:
+
+**Use cases**:
+- Order confirmations
+- Password resets
+- Account verification
+- Payment receipts
+- Shipping notifications
+
+**Differences from marketing emails**:
+- Not subject to marketing send limits
+- Bypass unsubscribe (though you should still provide preference center links)
+- Do not count against marketing contact metrics
+- Use separate templates with different design considerations
+
+**Setting up transactional emails**:
+1. **Settings** > **Marketing** > **Email** > **Transactional email**
+2. Create a transactional email template
+3. Use personalization tokens for order details
+4. Trigger via workflow, API, or connected app (Shopify, Stripe, etc.)
+
+### Subscription Management
+
+Manage how contacts receive your emails:
+
+**Subscription types**:
+- **Bulk/Newsletter**: Marketing emails (default)
+- **One-to-one**: Sales sequences
+- **Transactional**: Operational emails (auto-approved)
+
+**Preference center**:
+- HubSpot-hosted page where contacts manage their subscriptions
+- URL format: `https://[portal].hubspotpreferences-ns.com/page/[id]`
+- Include in email footer via the subscription management module
+- Shows contact's current subscriptions, allows opt-in/opt-out
+
+**Double opt-in** (optional):
+1. Settings > Marketing > Email > Double opt-in
+2. When enabled, contacts must click a confirmation link in an initial email
+3. Only confirmed contacts are added as marketing contacts
+4. Reduces spam signups, improves deliverability
+
+### Email Analytics
+
+After sending, analyze performance:
+
+**Key metrics**:
+- **Delivered**: Successfully reached inbox
+- **Opens**: Unique and total open count, open rate
+- **Clicks**: Unique and total click count, click rate (CTR)
+- **Click-to-open rate**: Clicks/Opens (CTOR)
+- **Bounces**: Soft (temporary) vs Hard (permanent) bounces
+- **Unsubscribes**: By type, by campaign
+- **Spam complaints**: Complaints as % of delivered
+- **Forwarded**: Recipients who forwarded the email
+- **Device breakdown**: Opens and clicks by device type
+- **Click map**: Visual heatmap of where contacts clicked in the email
+- **Location breakdown**: Opens by country, city
+- **Browser/email client**: Which email clients were used to open
+
+**Per-contact analytics**: Open the contact record → See their email engagement on the timeline. Shows which emails they opened, clicked, and when.
+
+---
+
+## Forms — Complete Guide
+
+### Form Types
+
+HubSpot offers 5 form types. Each serves a different purpose:
+
+**1. Embedded Form**:
+- Placed directly on your website pages via iframe or HubSpot tracking code
+- Stays within the page flow
+- Best for: Long forms, multi-field forms, inline sign-ups
+- Pro: Fully customizable, all field types available
+- Con: Requires the visitor to be on the page
+
+**2. Pop-Up Form**:
+- Overlays the page in a modal window
+- Best for: Lead capture from exit intent, timed triggers
+- Triggers: Time on page, scroll percentage, exit intent, page specific, CTA click
+
+**3. Slide-In Form**:
+- Slides in from the bottom or side of the screen
+- Less intrusive than pop-ups, more visible than embedded
+- Best for: Gentle lead capture, blog sidebar offers
+- Triggers: Same as pop-ups
+
+**4. Inline Form**:
+- Appears inline within a blog post or page content
+- Best for: Contextual CTAs within content (e.g., "Subscribe to this blog" mid-article)
+- Uses HubSpot's tracking code for placement
+
+**5. Floating Footer Form**:
+- Stays fixed at the bottom of the screen
+- Best for: Persistent lead capture on long pages, newsletters
+- Minimally intrusive, always visible
+
+### Creating a Form — Step-by-Step
+
+1. **Marketing** > **Forms** > Create form
+2. Choose form type: Embedded, Pop-up, Slide-in, Inline, Floating footer
+3. **Form name**: Internal name for your reference
+4. **Form options**:
+   - **Style**: Customize colors, fonts, layout (single column, multi-column)
+   - **Theme**: Use brand colors, custom CSS
+   - **Position**: For pop-ups and slide-ins — top, center, bottom; left, right
+5. **Add fields**:
+   - Drag fields from the left panel into the form
+   - Available field types: Single-line text, Multi-line text, Number, Date, Dropdown, Multiple checkboxes, Radio select, File upload, Phone, Email, Domain, GDPR consent
+   - Mark required fields
+   - Set placeholder text
+6. **Progressive profiling** (Pro+):
+   - Enable in the field settings
+   - Returning visitors see different fields than new visitors
+   - Configure how many new fields to show per submission
+   - Identity fields (usually email) identify returning visitors
+7. **Smart fields**: If a field's value is already known (e.g., first name from a previous form), auto-hide it
+8. **Behavior settings**:
+   - **Thank-you message**: Inline or redirect to a landing page
+   - **Follow-up email**: Send an automated email after submission
+   - **Workflow enrollment**: Enroll in a workflow automatically
+9. **Lead assignment**: Assign the new lead to a specific user, owner, or team
+10. **Captcha**: Google reCAPTCHA v2 (checkbox) or v3 (invisible)
+11. **GDPR consent**: Add consent checkboxes with custom text
+12. Click "Publish" → Get embed code or set trigger rules
+
+### Progressive Profiling Deep Dive
+
+Progressive profiling shows new fields over time so you never overwhelm visitors:
+
+**How it works**:
+1. First visit: First name, Last name, Email (3 fields)
+2. Second visit: Phone number (1 new field)
+3. Third visit: Company name, Job title (2 new fields)
+4. By the 5th visit, you've collected 10 fields from 5 form submissions
+
+**Setup**:
+1. Add ALL the fields you want to eventually collect to the form
+2. For each field after the identity fields, check "Use progressive profiling"
+3. Set "Fields to show per submission": Default is 1 (show one new field each time)
+4. Prioritize fields by dragging them — more important fields appear sooner
+5. Identity field (email) is always shown and is not progressive
+
+**Best practices**:
+- Collect 3-4 fields on first submission
+- Show 1-2 new fields on subsequent submissions
+- Prioritize fields: start with essential info, get deeper data later
+- Don't make all fields visible at once (defeats the purpose)
+
+### Form Field Types Explained
+
+| Field Type | When to Use |
+|------------|------------|
+| Single-line text | Short answers, any data up to 255 chars |
+| Multi-line text | Longer answers, comments, messages |
+| Number | Quantities, scores, ages |
+| Date | Birthdays, preferred dates |
+| Dropdown | Single choice from long list (industry, country) |
+| Radio select | Single choice from short list (yes/no/maybe) |
+| Checkboxes | Multiple selections (interests, preferences) |
+| File upload | Submit documents, images, resumes |
+| Phone | Contact number (with formatting) |
+| Email | Primary identifier (with validation) |
+| Domain | Website URL |
+| GDPR consent | Legal consent checkboxes |
+
+---
+
+## Landing Pages — Complete Guide
+
+Landing pages are standalone web pages designed for a specific marketing goal (form fill, ebook download, webinar registration, trial signup).
+
+### Creating a Landing Page — Step-by-Step
+
+1. **Marketing** > **Landing Pages** > Create landing page
+2. Choose template:
+   - **Blank**: Start from scratch
+   - **HubSpot templates**: Dozens of pre-built, responsive templates
+   - **Your templates**: Previously saved custom templates
+   - **From URL**: Clone from an existing page
+3. **Template categories**:
+   - Ebook download
+   - Webinar registration
+   - Free consultation
+   - Demo request
+   - Newsletter signup
+   - Multi-step (wizard-style)
+4. **Editor**:
+   - **Left panel**: Drag-and-drop modules (text, image, form, CTA button, video, testimonial, logo cloud, pricing table, divider, spacer, rich text)
+   - **Center**: WYSIWYG preview (Desktop/Mobile toggle)
+   - **Right panel**: Selected module settings
+
+5. **Settings panel** (gear icon):
+   - **Page title**: Browser tab title
+   - **Page URL**: e.g., `/free-ebook-download`
+   - **Meta description**: For search results
+   - **Featured image**: Social sharing preview
+   - **Custom domain**: `resources.yourcompany.com/ebook`
+   - **Language**: For multi-language pages
+   - **Password**: Protect the page (membership/gating)
+   - **A/B test**: Enable to test variants
+   - **Smart content**: Personalize per visitor
+
+6. **SEO settings**:
+   - Page title tag
+   - Meta description
+   - URL slug
+   - Canonical URL (if syndicated elsewhere)
+   - NOINDEX option (for landing pages you don't want in search)
+
+7. **Publish**: Click "Publish" to make live
+
+### Smart Content on Landing Pages
+
+Same concept as email smart content, but for web pages:
+
+**Available conditions**:
+- **Contact list membership**: Show different CTAs to different segments
+- **Lifecycle stage**: Adapt messaging for leads vs customers
+- **Device type**: Mobile vs desktop layout variations
+- **Language**: Show content in visitor's language
+- **Referral source**: Customize for organic vs paid vs social traffic
+- **Contact properties**: Any CRM field
+
+**Example**: A SaaS company's homepage shows:
+- First-time visitors: "Start your free trial"
+- Existing leads: "Schedule a demo" (with personalized text)
+- Current customers: "Upgrade your plan" or "Access knowledge base"
+
+### Domain Setup for Landing Pages
+
+1. **Settings** > **Marketing** > **Domains & URLs** > **Connected domains**
+2. Click "Connect a domain"
+3. Enter your subdomain (e.g., `resources.yourcompany.com` or `go.yourcompany.com`)
+4. HubSpot provides CNAME and TXT records
+5. Add these to your DNS provider (GoDaddy, Cloudflare, AWS Route53, etc.)
+6. SSL certificate is auto-provisioned
+7. Verification takes 5-30 minutes (DNS propagation)
+8. Once verified, you can select this domain for landing pages
+
+**Domain recommendations**:
+- Use `go.yourcompany.com` for campaign landing pages
+- Use `resources.yourcompany.com` for content offers
+- DON'T use your primary domain for landing pages if you're sending high-volume marketing traffic
+
+---
+
+## SEO & Blogging — Complete Guide
+
+### Blog Editor
+
+1. **Marketing** > **Blog** > Create blog post
+2. **Rich text editor** with drag-and-drop modules:
+   - Text blocks
+   - Images (upload, from URL, or AI-generated)
+   - CTAs and buttons
+   - Video embeds (YouTube, Wistia, HubSpot Video)
+   - Tables
+   - Code blocks
+   - Social sharing buttons
+   - Blog subscription form
+   - Topic/tag links
+3. **Sidebar settings**:
+   - **Post body**: Main content
+   - **Excerpt**: Blog listing summary (for RSS and tags)
+   - **Featured image**: Shown on blog listing
+   - **Author**: From your blog team
+   - **Topics/Tags**: For filtering and SEO clustering
+   - **Publish date**: Schedule for future
+   - **Password**: Member-only content
+
+### Topic Clusters
+
+HubSpot's content strategy is built around **topic clusters** — a modern SEO approach:
+
+**Structure**:
+```
+Pillar Page (Broad Topic)
+├── Cluster Content 1 (Specific subtopic)
+├── Cluster Content 2 (Specific subtopic)
+├── Cluster Content 3 (Specific subtopic)
+└── Each cluster page links BACK to the pillar page
+```
+
+**Why it works**:
+- Google sees the pillar page as authoritative on the broad topic
+- Internal linking structure boosts SEO for all pages in the cluster
+- Content is organized, not scattered
+
+**Setting up topic clusters**:
+1. **Marketing** > **Content Strategy** > **Strategy tool**
+2. **Add a topic**: Enter a broad topic (e.g., "Email Marketing")
+3. HubSpot suggests related subtopics:
+   - "Email deliverability best practices"
+   - "How to write email subject lines"
+   - "Email automation workflows"
+   - "A/B testing for emails"
+4. For each subtopic, HubSpot provides:
+   - Monthly search volume
+   - Keyword difficulty
+   - Current ranking (if any)
+5. Create content for each subtopic
+6. Link from each cluster page back to the pillar page
+7. HubSpot's tool tracks internal links and cluster completeness
+
+### SEO Recommendations
+
+When editing a blog post or page, HubSpot provides real-time SEO analysis:
+
+**Page-level analysis**:
+- **Title tag**: Is it the right length (50-60 characters)? Does it include the target keyword?
+- **Meta description**: Is it compelling and the right length (150-160 characters)?
+- **URL slug**: Is it clean and keyword-rich?
+- **Headings**: Is H1 used? Are H2/H3s structured?
+- **Image alt text**: Are images described for accessibility and SEO?
+- **Keyword usage**: Is the target keyword used appropriately (not stuffed)
+- **Readability score**: Flesch reading ease, grade level
+- **Internal linking**: Are there enough internal links? Links to the pillar page?
+- **External links**: Are citations authoritative?
+- **Content length**: Is the post long enough to be comprehensive?
+
+### Content Strategy Tool
+
+1. **Marketing** > **Content Strategy**
+2. **Topics tab**: Add your core topics
+3. **Competitors tab**: Add competitors' domains — see which topics they rank for
+4. **Content gaps**: HubSpot shows topics your competitors rank for but you don't
+5. **Opportunity score**: Prioritizes topics by search volume + ranking difficulty
+6. **Track keywords**: Monitor your rankings over time (Pro+)
+
+### Blog Settings
+
+1. **Settings** > **Marketing** > **Blog**:
+   - **Blog homepage**: URL structure (`/blog`, `/resources`, `/insights`)
+   - **Post URL structure**: `/blog/post-title` or `/blog/category/post-title`
+   - **RSS feed**: Enable, customize
+   - **Comments**: Enable/disable, moderate
+   - **Author pages**: Display author bios
+   - **Social sharing**: Auto-format posts for social platforms
+   - **Subscription**: Blog subscription module, frequency
+   - **Content calendar**: Visual calendar view of published and scheduled posts
+
+---
+
+## Social Media — Complete Guide
+
+### Publishing
+
+1. **Marketing** > **Social** > **Create post**
+2. **Single post**:
+   - Choose network: Facebook, LinkedIn, Twitter/X, Instagram
+   - Write content — different lengths for each network
+   - Add image, link, or video
+   - Set publish time: Now or schedule
+3. **Bulk scheduling**:
+   - Upload CSV of posts with content, dates, networks
+   - Useful for monthly content planning
+
+**Approval workflows** (Pro+):
+1. Settings > Marketing > Social > Approval workflows
+2. Require approval before posts go live
+3. Draft → Submit for review → Approve/Reject → Schedule/Publish
+
+### Social Analytics
+
+**Per-network analytics**:
+- Impressions
+- Clicks
+- Engagement rate
+- Follower growth over time
+- Best posting times
+- Top-performing content
+
+**Social listening** (Enterprise):
+- Monitor brand mentions across social platforms
+- Track competitor mentions
+- Identify trending topics in your industry
+- Sentiment analysis on mentions
+
+### Connected Networks Setup
+
+1. **Settings** > **Marketing** > **Social** > **Connect new account**
+2. Authenticate with each network:
+   - Facebook: Page access required
+   - LinkedIn: Company page or personal profile
+   - Twitter/X: Profile access
+   - Instagram: Professional account connected to Facebook
+3. Limits: Free (5 accounts), Starter (10), Pro (unlimited)
+
+---
+
+## Ads — Complete Guide
+
+HubSpot Ads lets you track ad performance and sync lead data from ad platforms.
+
+### Connected Ad Networks
+
+| Network | What Syncs |
+|---------|-----------|
+| Google Ads | Clicks, impressions, cost, conversions, keywords |
+| Facebook Ads | Clicks, impressions, cost, conversions, lead ads |
+| LinkedIn Ads | Clicks, impressions, cost, conversions, lead gen forms |
+| Instagram | Via Facebook Ads connection |
+
+### Setting Up Ad Tracking
+
+1. **Marketing** > **Ads** > Connect accounts
+2. Authenticate your ad platform (Google, Facebook, LinkedIn)
+3. **Auto-tagging**: Enable to track UTM parameters
+4. **Conversion tracking**: HubSpot tracking code on your thank-you pages
+5. **Revenue attribution**: Connect ad clicks to closed deals
+
+### Retargeting Audiences
+
+Create retargeting audiences from HubSpot contact lists:
+
+1. **Marketing** > **Ads** > **Create audience**
+2. Choose ad platform: Google, Facebook, LinkedIn
+3. Select a HubSpot list as the audience source
+4. Set parameters:
+   - **Include**: Contacts from the list (e.g., "Visited pricing page but didn't convert")
+   - **Exclude**: Contacts from another list (e.g., "Already customers")
+5. HubSpot syncs the audience to the ad platform
+6. Create your ad campaign targeting that audience in the platform
+
+### Lead Ad Sync
+
+Facebook/Instagram/LinkedIn lead ads automatically create HubSpot contacts:
+
+1. Connect your Facebook/LinkedIn Ads account
+2. Enable lead ad sync
+3. When someone submits a lead ad, HubSpot creates a contact with the form data
+4. The contact's source is "Facebook Lead Ad" or "LinkedIn Lead Ad"
+5. Automatically enroll in workflows for immediate follow-up
+
+---
+
+## Campaigns — Complete Guide
+
+Campaigns group related marketing assets to track combined performance.
+
+### Creating a Campaign
+
+1. **Marketing** > **Campaigns** > Create campaign
+2. Fill in:
+   - **Name**: "Q3 Ebook Launch"
+   - **Goal**: Leads, Revenue, Brand awareness, Engagement
+   - **Budget**: Marketing spend for this campaign
+   - **Start/End dates**: Campaign duration
+   - **Associated assets**: Emails, landing pages, forms, ads, social posts, CTAs, workflows, lists
+
+### Adding Assets to Campaign
+
+**From campaign**:
+1. Open campaign
+2. Click "Add asset"
+3. Search for existing email, landing page, form, ad, social post, CTA, workflow, or list
+4. Add it to the campaign
+
+**From asset creation**: When creating a new email, landing page, or form, set the "Campaign" field to associate it automatically.
+
+### Multi-Touch Attribution
+
+HubSpot supports 6 attribution models:
+
+| Model | How It Works | Best For |
+|-------|-------------|----------|
+| **First interaction** | First touchpoint gets 100% credit | Brand awareness campaigns |
+| **Last interaction** | Last touchpoint gets 100% credit | Bottom-of-funnel campaigns |
+| **Linear** | Equal credit to all touchpoints | Multi-channel campaigns |
+| **U-shaped** | 40% first, 40% last, 20% middle | Balanced view |
+| **W-shaped** | 30% first, 30% deal creation, 30% close, 10% middle | Complex B2B sales |
+| **Time decay** | More credit to recent interactions | Long sales cycles |
+
+**Setting attribution**:
+1. **Settings** > **Tracking & Analytics** > **Attribution**
+2. Select default attribution model
+3. Customize attribution windows:
+   - Lookback window: How far back to consider touchpoints (default: 90 days)
+   - Close window: How long after close to include touchpoints (default: 0 days)
+
+---
+
+## Marketing Automation (Workflows) — Complete Guide
+
+### Workflow Types
+
+**Contact-based**: Most common. Triggered by contact properties, form submissions, page views, list membership, email engagement, dates. Actions affect the contact.
+
+**Company-based**: Triggered by company property changes. Actions affect the company record. Less common.
+
+**Deal-based**: Triggered by deal stage changes, property values. Actions affect deals. Used for sales handoffs.
+
+**Ticket-based**: Triggered by ticket creation, status changes. Used for service automation.
+
+**Custom object-based**: Triggered by custom object events.
+
+### Enrollment Triggers in Detail
+
+**Property-based**:
+- When property value is: `Lifecycle stage` → `becomes` → `MQL`
+- When property value changes: Any property → `has changed`
+- Schedule-based: `Property value` → `(date property)` → `is in the past`
+
+**Activity-based**:
+- Form submission: `Has submitted a form` → specific form or any form
+- Email engagement: `Has opened a marketing email` → specific email or any
+- Page visit: `Has visited a page` → URL contains `/pricing`
+- Meeting booked: `Meeting booked` by contact
+- Call logged: `Call logged` with outcome
+
+**List-based**:
+- List membership: `Added to list` → specific list
+
+**Combined triggers**:
+Use AND/OR logic for multiple conditions. Example: "When contact's lifecycle becomes MQL AND has submitted the demo form" is narrower than "When lifecycle becomes MQL OR has submitted the demo form."
+
+### Workflow Actions — Complete List
+
+| Action Category | Specific Actions |
+|----------------|-----------------|
+| **Email** | Send marketing email, send transactional email, send automated email |
+| **CRM** | Create record (contact, deal, ticket, custom object), delete record, associate records, disassociate records |
+| **Property** | Set property value, clear property value, copy property value |
+| **List** | Add to static list, remove from static list |
+| **Communication** | Create task, enroll in sequence (Sales Hub), log a call, log an email |
+| **Goal** | Set goal (wait until condition met), expire goal after |
+| **Delay** | Wait for duration, wait until date, wait for specific day/time |
+| **Branch** | If/then branch based on property value, list membership, has associated deal, etc. |
+| **Internal** | Trigger webhook, rotate lead to user/team, create deal, create ticket |
+| **Actions from connected apps** | Salesforce, Slack, Jira, etc. (via integrations) |
+
+### Goal-Based Workflows
+
+A workflow that enrolls contacts and keeps them in until a goal is met:
+
+**Example**: "Nurture until demo booked"
+1. Enrollment: New MQL created
+2. Actions: Send nurture email series
+3. Goal: Meeting booked with sales team
+4. Expiration: 30 days without meeting → notify manager
+5. If goal met → exit workflow, enroll in "thank you" workflow
+6. If expired → move to "re-engagement" workflow
+
+### Workflow Example: Complete Lead Nurture
+
+**Trigger**: Form submission (download "Ultimate Guide")
+
+**Branch 1**: If lifecycle stage is "Lead" → continue. Otherwise, skip.
+
+**Action Sequence**:
+1. Set property: Lead Source = "Ebook Download: Ultimate Guide"
+2. Add to list: "Ebook Downloaders"
+3. Send email: "Download link + recommended next resource" (immediate)
+4. Delay: 2 days
+5. Send email: "Related content based on download" (nurture)
+6. Delay: 3 days
+7. Branch: If lead score > 50 AND lifecycle = "MQL"
+   - Yes: Create task "Hot lead — call within 24 hours" assigned to owner
+   - No: Continue nurture
+8. Set property: Marketing status = "Being nurtured"
+9. Goal: Contact becomes "Opportunity"
+10. If goal met → Exit, add to "Closed-loop" workflow
+11. If 30 days expire → Send re-engagement email, create task "Re-engage cold lead"
+
+---
+
+## Lead Scoring — Complete Guide
+
+### How Lead Scoring Works
+
+Lead scoring assigns points to contacts based on their profile and behavior.
+
+**Score types**:
+1. **Positive attributes**: Add points for desirable characteristics
+2. **Negative attributes**: Subtract points for undesirable characteristics
+3. **Fit scoring**: Demographic match to your ideal customer profile
+4. **Behavior scoring**: Engagement level with your brand
+
+### Setting Up Lead Scoring
+
+1. **Marketing** > **Lead Scoring** > Create scoring model
+2. **Name**: "B2B SaaS Standard" or similar
+
+**Positive attributes** (% of max points):
+
+**Demographic fit** (up to 50 points total):
+| Criteria | Points | Reasoning |
+|----------|--------|-----------|
+| Job title contains "VP", "Director", "Manager" | +10 | Decision-making role |
+| Industry is "Technology" | +10 | Our ICP |
+| Company size > 200 employees | +10 | Enterprise target |
+| Revenue > $50M | +10 | Budget availability |
+| Country is US, UK, Canada, Australia | +10 | Our serviceable markets |
+
+**Behavioral fit** (up to 50 points total):
+| Criteria | Points | Reasoning |
+|----------|--------|-----------|
+| Visited pricing page | +15 | High purchase intent |
+| Downloaded 3+ resources | +10 | Engaged with content |
+| Opened 3+ marketing emails | +10 | Active engagement |
+| Attended webinar | +15 | In-depth interest |
+| Clicked CTA in email | +10 | Action-oriented |
+
+**Negative attributes** (up to -50 points total):
+| Criteria | Points | Reasoning |
+|----------|--------|-----------|
+| Job title contains "Student" | -20 | Not in our ICP |
+| Unsubscribed from marketing | -50 | No marketing permission |
+| Company is non-profit | -10 | Typically no budget |
+| No activity in 90 days | -20 | Cold lead |
+
+**Score ranges and lifecycle mapping**:
+| Score Range | Lifecycle Stage | Action |
+|-------------|----------------|--------|
+| 0-19 | Lead | Continue nurture |
+| 20-49 | MQL | Assign to SDR |
+| 50-79 | SQL | Assign to AE for demo |
+| 80-100 | Opportunity | Prioritize for close |
+
+3. Click "Save and turn on"
+
+### Predictive Lead Scoring (Pro+/Enterprise)
+
+ML-based scoring that learns from your historical data:
+
+1. **Marketing** > **Lead Scoring** > **Predictive scoring** tab
+2. HubSpot analyzes your past won/lost deals
+3. Model identifies patterns: which properties and behaviors correlate with conversion
+4. Model outputs a "conversion probability" score (0-100%)
+5. Updates as new data comes in
+6. More accurate over time as the model trains on more data
+
+---
+
+## Analytics & Reporting — Complete Guide
+
+### Traffic Analytics
+
+1. **Reports** > **Analytics** > **Traffic**
+2. **Sources breakdown**:
+   - **Organic**: Search engine traffic
+   - **Paid**: Ad traffic (Google Ads, Facebook, LinkedIn)
+   - **Social**: Social media traffic
+   - **Email**: Email campaign traffic
+   - **Referral**: Other websites linking to you
+   - **Direct**: Typed URL or bookmarked
+   - **Other campaigns**: UTM-tagged custom sources
+3. **Pages**: Top pages by visits, time on page, bounce rate
+4. **Devices**: Desktop vs mobile vs tablet
+5. **Locations**: Top countries, cities
+6. **New vs returning**: First-time vs repeat visitors
+
+### Contact Analytics
+
+1. **Reports** > **Analytics** > **Contacts**
+2. **Contacts created**: Over time, by source
+3. **Lifecycle progression**: Subscriber → Lead → MQL → SQL → Opportunity → Customer
+4. **Conversion rates**: Visitor → Contact → Lead → Customer
+5. **Source performance**: Which channels create the most contacts? Most customers?
+
+### ROI Reporting
+
+1. **Reports** > **Dashboards** → **Marketing ROI**
+2. Shows:
+   - Revenue attributed to marketing
+   - Cost per lead (CPL)
+   - Customer acquisition cost (CAC)
+   - Marketing-attributed revenue
+   - ROI per campaign
+   - ROI per channel
+3. **Setup**: Go to settings and enter campaign costs (ad spend, content production, tools) for accurate ROI
+
+### Custom Dashboards
+
+1. **Reports** > **Dashboards** > Create dashboard
+2. Name: "Weekly Marketing Review"
+3. Add reports:
+   - New contacts this week (single number)
+   - Traffic by source (pie chart)
+   - Email performance (table)
+   - Pipeline from marketing sources (bar chart)
+   - Campaign ROI (single number)
+   - Blog top posts (table)
+   - Social followers (line chart)
+4. Schedule email: Send snapshot every Monday
+5. Share with team: Set viewing permissions
+
+---
 
 ## Limits That Matter
-- Marketing contacts: Free (0), Starter (1,000), Pro (2,000 base + $250/1,000), Enterprise (10,000 base + $225/1,000)
-- Emails per month: Free (2,000 send limit), Pro (10x marketing contacts count), Enterprise (12x)
-- Email send frequency: no hard limit but deliverability declines >1 per day per contact
-- Landing pages: Free (20), Starter (70), Pro (100), Enterprise (unlimited)
-- Forms: Free (1,000), Starter (5,000), Pro (50,000), Enterprise (unlimited)
-- Workflows: Free (5), Starter (20), Pro (500), Enterprise (1,000+)
-- Blog posts: Free (250), Starter (2,500), Pro (unlimited)
-- Social accounts: Free (5), Starter (10), Pro/Enterprise (unlimited on some plans)
-- A/B test variants: up to 5 per test
-- Form fields per form: 100
-- File upload size via forms: 5MB per file
-- Recipients per email send: up to 100 per email on Free tier (Starter+) unlimited per send
 
-## Use Cases
-- Nurture leads through automated email drip sequences
-- Generate conversions with targeted landing pages and forms
-- Improve organic search ranking through topic clusters
-- Score leads based on behavior and demographic fit
-- Attribute revenue to specific marketing campaigns
-- Manage multi-channel campaigns (email, social, ads)
+| Resource | Free | Starter | Pro | Enterprise |
+|----------|------|---------|-----|------------|
+| Marketing contacts | 0 | 1,000 | 2,000 base | 10,000 base |
+| Monthly email sends | 2,000 | 10× contacts | 10× contacts | 12× contacts |
+| Email send per day | 5× contacts | 5× contacts | 5× contacts | Unlimited |
+| Forms | 1,000 | 5,000 | 50,000 | Unlimited |
+| Form fields per form | 100 | 100 | 100 | 100 |
+| Landing pages | 20 | 70 | Unlimited | Unlimited |
+| Blog posts | 250 | 2,500 | Unlimited | Unlimited |
+| Social accounts | 5 | 10 | Unlimited | Unlimited |
+| Workflows (active) | 5 | 20 | 500 | 1,000+ |
+| A/B test variants | — | — | 5 | 5 |
+| Lead scoring | — | — | 3 models | Unlimited |
+| Campaigns | 5 | 20 | Unlimited | Unlimited |
+| Custom attribution models | — | — | 1 | 3 |
+
+### Marketing Contacts vs Non-Marketing Contacts
+
+This is the most important distinction in Marketing Hub pricing:
+
+- **Marketing contacts**: Contacts you send marketing emails to. You're billed per marketing contact.
+- **Non-marketing contacts**: Everyone else. Unlimited at no extra cost.
+
+**Setting a contact as non-marketing**:
+1. Open contact record
+2. Under "Marketing contact status": Toggle OFF
+3. They still appear in CRM, support teams can work with them
+4. They don't receive marketing emails but still get transactional emails
+5. Workflows targeting them can still run (just no marketing emails)
+
+**Strategy**: Set contacts who don't need nurturing (existing customers, support-only contacts) to non-marketing.
+
+---
 
 ## Common Gotchas
-- Marketing contacts vs non-marketing contacts: you pay for marketing contacts who are sent marketing emails; contacts can be set as "non-marketing" to save cost
-- Sending too many marketing emails hurts deliverability — HubSpot enforces bounce/reputation management
-- Progressive profiling won't work on all form styles (best with multi-step or embedded forms)
-- Workflow enrollment is evaluated on trigger — if contact doesn't meet criteria at trigger time, they won't enroll retroactively
-- Removing someone from a workflow does NOT undo actions already taken (emails already sent)
-- A/B testing in email requires minimum sample size (usually 20-50% of list before winner determined)
-- Landing page domains must have SSL configured (auto-provided but custom domains need DNS config)
-- Blog post URLs cannot be changed once published (redirect recommended)
-- Topic cluster pillar page auto-detection requires internal links from cluster pages back to pillar
+
+### 1. Marketing Contacts Count
+If you go over your marketing contact limit, you'll get an overage warning. You're not charged immediately, but you must reduce contacts or upgrade before the next billing period.
+
+### 2. Email Deliverability
+HubSpot manages sending reputation, but you must warm up new domains. Start with small lists and increase gradually. Bounce rate > 5% can damage your sending reputation.
+
+### 3. Progressive Profiling Limitations
+Progressive profiling requires your contact to have a cookie from HubSpot tracking code. If they clear cookies or use a different device, they may see all fields again.
+
+### 4. Workflow Retroactive Enrollment
+Workflows only enroll contacts who meet criteria AFTER the workflow is turned on. They don't retroactively enroll existing contacts. To enroll existing contacts, use manual enrollment or re-enrollment settings.
+
+### 5. Workflow Actions Are Not Undone
+If a workflow sends an email, you can't "unsend" it. If a workflow moves a contact to "Customer" lifecycle stage, reversing it requires a separate workflow.
+
+### 6. A/B Testing Sample Size
+If your list is too small (<500 contacts), A/B tests won't have enough data for significant results. HubSpot warns you but still sends.
+
+### 7. Blog URL Changes
+Once published, changing a blog post URL requires a redirect. HubSpot auto-redirects old URLs, but it's best practice to decide URLs before publishing.
+
+### 8. Form Embedding Without Tracking Code
+Embedded forms (iframe method) work without HubSpot tracking code on the page, but you lose page view tracking. Forms placed via HubSpot tracking code module work fully.
+
+### 9. Social Post Scheduling
+Social posts scheduled in HubSpot might have slight UI differences vs native posting. LinkedIn carousels and Instagram Stories have limited support.
+
+### 10. Ad Tracking Accuracy
+UTM parameters are the most reliable tracking method. Auto-tagging from ad platforms works but can miss some interactions. Combine UTM + HubSpot tracking for best results.

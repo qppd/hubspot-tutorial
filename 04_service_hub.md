@@ -1,216 +1,710 @@
-# 4. Service Hub
+# 4. Service Hub — Complete Tutorial
 
-## What It Does
-HubSpot Service Hub equips customer support and success teams with tools to manage tickets, build knowledge bases, automate responses (bots), collect feedback, and track CSAT/NPS. It turns support from reactive to proactive.
+## Table of Contents
+1. [Introduction to Service Hub](#introduction-to-service-hub)
+2. [Ticketing — Complete Guide](#ticketing--complete-guide)
+3. [Knowledge Base — Complete Guide](#knowledge-base--complete-guide)
+4. [Chatbots & Conversational Bots — Complete Guide](#chatbots--conversational-bots--complete-guide)
+5. [Feedback Surveys — Complete Guide](#feedback-surveys--complete-guide)
+6. [Customer Success — Complete Guide](#customer-success--complete-guide)
+7. [Help Desk Features — Complete Guide](#help-desk-features--complete-guide)
+8. [Service Automation (Workflows) — Complete Guide](#service-automation-workflows--complete-guide)
+9. [SLA Management — Complete Guide](#sla-management--complete-guide)
+10. [Service Analytics & Reporting — Complete Guide](#service-analytics--reporting--complete-guide)
+11. [Breeze AI in Service Hub](#breeze-ai-in-service-hub)
+12. [Limits That Matter](#limits-that-matter)
+13. [Common Gotchas](#common-gotchas)
+14. [Use Cases](#use-cases)
 
-## Key Features
+---
 
-### Help Desk / Ticketing
-- **Ticket management**: track, prioritize, and resolve customer requests
-- **Ticket statuses**: New, Waiting on Contact, Waiting on Us, Closed
-- **Ticket priorities**: Low, Medium, High, Urgent
-- **Ticket types**: Question, Problem, Feature Request, Refund, Cancellation, Other
-- **Ticket pipelines**: customize stages for your workflow
-- **Pipeline stages**: Up to 10 ticket pipelines (Service Hub Pro+)
-- **SLA management**: set, track, and report on response and resolution SLAs
-- **SLA breaching notifications**: email and in-app alerts
-- **Auto-assignment**: round-robin or rules-based ticket assignment
-- **Ticket routing**: route to teams by topic, customer tier, product type
-- **Private notes**: internal notes on tickets (not visible to customer)
-- **Customer portal**: customers can view and respond to their tickets
-- **Conversations**: unified inbox for live chat, email, and bot messages
+## Introduction to Service Hub
 
-### Knowledge Base
-- **Article creation**: rich text editor with modules (Pro+)
-- **AI article generation from tickets**: auto-generate draft knowledge base articles from resolved tickets — Breeze AI extracts the question, solution, and context from ticket threads and produces a complete article draft ready for review and publishing
-- **Article categorization**: by topic, product, or custom categories
-- **SEO settings**: meta description, URL slug, canonical URL
-- **Smart content**: show different articles based on contact properties
-- **Domain management**: custom domain for KB site
-- **KB analytics**: article views, search terms, helpfulness rating, feedback
-- **AI content suggestions**: generate draft articles from existing tickets
-- **Content organization**: nested categories, table of contents
-- **Password protection**: restrict KB to logged-in customers
-- **Multi-language**: publish in multiple languages
-- **Search**: built-in full-text search
-- **Inline feedback**: thumbs up/down on each article
-- **Deep link from bots**: chatbot can automatically suggest KB articles
+Service Hub transforms customer support from a cost center into a growth driver. Instead of just answering tickets, Service Hub helps you track satisfaction, build a knowledge base, automate responses, and identify at-risk customers before they churn.
 
-### Chatbots (Conversational Bots)
-- **Bot types**: ticket creation bot, lead qualification bot, meeting booking bot, website chat bot, knowledge base bot
-- **Simple bot builder**: rule-based question/answer flows (Free)
-- **Advanced bots**: conditional branching, API calls (Pro+)
-- **Breeze AI chatbot responses**: LLM-powered replies that understand natural language and intent beyond rigid rule trees — bots can answer complex questions, paraphrase, handle typos, and hold contextual multi-turn conversations without every branch being hand-written
-- **Bot handoff**: escalate to human agent when bot can't resolve
-- **Bot analytics**: resolved vs handed-off, conversation logs
-- **Multi-language bots**: create flows in different languages
-- **Bot routing**: route based on contact properties, page URL, time of day
-- **Auto-reply**: instant response outside business hours
-- **FAQ bot**: answer common questions from KB articles (Pro+)
-- **Bot actions**: create ticket, subscribe to list, set property, trigger webhook
-- **Bot triggers**: time on page, scroll %, exit intent, specific page visit
+### What You Get by Tier
 
-### Customer Feedback
-- **CSAT surveys**: send after ticket resolution — "How satisfied were you with our support?"
-  - Emoji scale (1-5) or numeric scale
-  - Follow-up comment optional
-- **NPS surveys**: "How likely are you to recommend us?" (0-10 scale)
-  - Detractor (0-6), Passive (7-8), Promoter (9-10)
-  - Triggered after closed won deals or specific lifecycle transitions
-- **CES surveys**: Customer Effort Score
-- **Survey templates**: pre-built templates for common use cases
-- **Survey triggers**: property change, workflow enrollment, ticket close
-- **Survey analytics**: response rate, score trends, segment by team/product
-- **Feedback reporting**: sentiment tracking over time, by rep, by issue type
-- **Predictive NPS/CSAT scoring**: Breeze AI analyzes ticket language, sentiment, resolution time, and historical patterns to predict a customer's likely CSAT or NPS score before the survey is even sent — flag at-risk accounts proactively
+| Feature | Free | Starter | Pro | Enterprise |
+|---------|------|---------|-----|------------|
+| Ticketing | ✓ | ✓ | ✓ | ✓ |
+| Ticket pipelines | 1 | 1 | 10 | 10 |
+| Knowledge base | ✗ | ✓ | ✓ | ✓ |
+| Chatbots | ✓ (basic) | ✓ | ✓ | ✓ |
+| AI Chatbot (Breeze) | ✗ | ✗ | ✓ | ✓ |
+| Feedback surveys | ✗ | ✓ | ✓ | ✓ |
+| CSAT/NPS/CES | ✗ | ✓ | ✓ | ✓ |
+| SLA management | ✗ | ✗ | ✗ | ✓ |
+| Customer health scoring | ✗ | ✗ | ✗ | ✓ |
+| Team email (shared inbox) | ✗ | ✓ | ✓ | ✓ |
+| Automation (workflows) | ✓ (basic) | ✓ | ✓ | ✓ |
+| Conversation routing | ✗ | ✗ | ✓ | ✓ |
+| Goals & targets | ✗ | ✗ | ✓ | ✓ |
 
-### Customer Success Workspace (Pro+)
-- **Health scoring**: custom health score formulas based on usage, engagement, support history
-- **Renewal tracking**: upcoming subscription renewals
-- **Account overview**: single view of one customer's health, tickets, deals, activity
-- **Customer journey**: timeline of all interactions across marketing, sales, and service
-- **Playbooks for success**: guided workflows for onboarding, QBRs, renewals
-- **Goal tracking**: track adoption milestones, usage goals
-- **Upsell/cross-sell alerts**: auto-flag when customer behavior indicates expansion opportunity
-- **Segmentation**: group customers by health tier (Healthy, At Risk, Churn Risk)
-- **Automated check-ins**: set recurring checklists for customer success managers
+### Navigation
 
-### Multi-Channel Inbox
-- **Email**: connect shared inbox (support@, help@, etc.)
-- **Live chat**: website chat widget
-- **Messaging channels (Pro+)**: Facebook Messenger, **WhatsApp** (full integration — connect WhatsApp Business Account, send/receive messages, share media/files, use templates for proactive outreach, reply from inbox, trigger workflows from WhatsApp messages), Instagram DM (limited)
-- **Bot conversations**: seamlessly continue from bot → human
-- **Omnichannel view**: all channels in one inbox with unified history
-- **AI summarization**: Breeze AI auto-summarizes long conversation threads into a concise bullet-point synopsis so agents can catch up instantly without scrolling through pages of chat history
-- **Macros**: pre-written replies for common scenarios
-- **AI-suggested reply macros**: Breeze AI proposes relevant reply macros based on the conversation context, ticket type, and customer history — agents can insert with one click instead of hunting through a list
-- **Canned responses**: shared snippets across team
-- **Collision detection**: see when another agent is viewing/replying to a ticket
-- **Team mentions**: @mention to pull in another agent
-- **Status management**: online, away, offline with auto-response
-- **Assignment rules**: round-robin, skill-based, least-recently-assigned
+- **Service** > **Tickets** — Ticket management, pipelines, boards
+- **Service** > **Knowledge Base** — Article creation, categories, management
+- **Service** > **Chatflows** — Chatbot builder and management
+- **Service** > **Feedback** — Survey templates, NPS/CSAT/CES, reporting
+- **Service** > **Customer Success** — Health scores, renewals, risk (Enterprise)
+- **Conversations** > **Inbox** — Shared team inbox (email, chat, social)
+- **Automation** > **Workflows** — Service automation
+- **Reports** > **Service** — Ticket, CSAT, NPS, SLA dashboards
 
-### Automations
-- **Ticket automation**: auto-create tickets from email, chat, web form
-- **Email-to-ticket**: forward emails to a pipeline address → auto-creates ticket
-- **Workflow triggers**: ticket creation, property change, pipeline stage change, SLA breach
-- **Workflow actions**: send email, assign ticket, set priority, notify team, webhook
-- **SLA escalations**: auto-escalate tickets approaching SLA breach
-- **Automatic ticket closure**: close tickets after X days of no customer response
-- **Feedback survey automation**: auto-send after ticket resolution
-- **Routing rules**: auto-assign based on expertise, load balancing, custom rules
+---
 
-### Reporting
-- **Ticket analytics**: volume by channel, type, priority, rep, time to close
-- **Team productivity**: tickets closed per rep, average response time, resolution time
-- **SLA metrics**: SLA compliance %, breached tickets, average breach time
-- **Customer satisfaction**: CSAT, NPS, CES trends
-- **Knowledge base analytics**: most viewed articles, top search queries, article helpfulness
-- **Bot performance**: resolution rate, hand-off rate, conversations handled
-- **Custom dashboards**: build and share with stakeholders
-- **Sentiment analysis**: track positive vs negative language in tickets (AI)
+## Ticketing — Complete Guide
 
-## Step-by-Step: Creating a Ticket Pipeline
+### Ticket Record Structure
 
-1. Service > Tickets > Pipelines
-2. Create new pipeline
-3. Name and add stages (example):
-   - New
-   - Investigating (Waiting on Us)
-   - Waiting on Contact
-   - Solution Proposed
-   - Resolved
-   - Closed
-4. Set SLA targets per stage or pipeline-wide:
-   - Response time: e.g., 1 hour for Urgent, 4 hours for High
-   - Resolution time: e.g., 8 hours for Urgent
-5. Configure auto-assignment: round-robin, by ticket type, by priority
-6. Save
+Tickets represent customer issues or requests. Key fields:
 
-## Step-by-Step: Setting Up a Knowledge Base
+**Standard Fields**:
+- **Ticket name**: Summary of the issue (required)
+- **Status**: New, Waiting on Contact, Waiting on Us, Closed
+- **Priority**: Low, Medium, High, Urgent
+- **Type**: Question, Problem, Feature Request, Refund, Order Issue, Cancellation, Other
+- **Pipeline**: Which support pipeline it belongs to
+- **Ticket owner**: The support agent assigned
+- **Source**: Email, Chat, Phone, Form, Internal, Social
+- **Time to first response**: Automated SLA metric
+- **Time to close**: Automated SLA metric
+- **Related contact/company**: Who submitted and what account
+- **Associated deal**: If related to a specific deal
 
-1. Service > Knowledge Base > Create new
-2. Name your KB (e.g., "Customer Help Center")
-3. Choose template or start blank
-4. Create categories: Getting Started, Billing, Troubleshooting, Account Management
-5. Write articles in rich text editor
-6. Add SEO metadata (title, description, URL)
-7. Associate articles with categories
-8. Configure domain: subdomain.yourdomain.com or custom domain
-9. Add search filters: by category, by product, by topic
-10. Publish → add link in your website footer, email signatures, chatbots
+**Custom Fields**: Create custom properties specific to your support process.
 
-## Step-by-Step: Creating a Feedback Survey
+### Creating Tickets
 
-1. Service > Feedback > Create survey
-2. Choose type: CSAT, NPS, CES
-3. Name the survey
-4. Configure custom questions (optional):
-   - NPS follow-up: "What's the main reason for your score?"
-   - CSAT follow-up: "How could we improve?"
-5. Set design: color scheme, logo, layout
-6. Trigger rules:
-   - Send immediately after ticket closure
-   - Send after deal closed won
-   - Send after lifecycle stage change to Customer
-7. Set delay (e.g., send 1 hour after trigger)
-8. Configure follow-up actions:
-   - If Detractor → create high-priority ticket, notify CS manager
-   - If Promoter → add to list, trigger workflow
-9. Activate
+**Method 1: Email-to-Ticket**
+1. **Settings** > **Service** > **Email to ticket**
+2. Create a support email address: `support@yourcompany.com`
+3. Emails to this address automatically become tickets
+4. Subject line → ticket name
+5. Email body → ticket description
+6. Sender → linked to existing contact or new contact created
+7. Attachments → attached to the ticket
 
-## Step-by-Step: Creating a Chatbot
+**Method 2: Form Submission**
+1. Create a "Contact Support" form
+2. Fields: Subject, Description, Priority, Attachment
+3. Form submission creates a ticket automatically
+4. Workflow can trigger on creation for routing
 
-1. Conversations > Chatflows > Create a bot
-2. Choose bot type: Lead qualification, Ticket creation, Knowledge base, Meeting booking, Custom
-3. Build the conversation flow:
-   - Greeting message
-   - Decision points (e.g., "Are you a new customer?")
-   - Branching logic (each answer leads to different path)
-   - End actions: create ticket, book meeting, show KB article, handoff to agent
-4. Configure targeting:
-   - Show on specific pages
-   - Show after X seconds on page
-   - Show to specific visitor segments
-   - Language selection
-   - Time/day of week rules
-5. Set business hours: auto-reply outside hours, handoff during hours
-6. Test the bot (preview mode)
-7. Publish → add tracking code to website
+**Method 3: Chatbot**
+1. Chatbot conversation ends with "Create a ticket"
+2. Conversation transcript becomes ticket description
+3. Contact auto-linked to the ticket
+
+**Method 4: Manual Creation**
+1. **Service** > **Tickets** > Create ticket
+2. Enter ticket details
+3. Associate to contact and company
+4. Click Create
+
+**Method 5: Automation/Workflow**
+- Workflow action: "Create a ticket"
+- Useful for: Failed payment → auto-create billing ticket
+- Deal closed won → auto-create onboarding ticket
+
+### Ticket Statuses Explained
+
+| Status | Meaning | Next Step |
+|--------|---------|-----------|
+| **New** | Ticket created, not yet assigned or reviewed | Assign owner, acknowledge |
+| **Waiting on Contact** | Agent needs information from customer | Follow up with customer |
+| **Waiting on Us** | Agent is actively working on the solution | Resolve, update customer |
+| **Closed** | Issue resolved or no longer actionable | Confirm closure, send survey |
+
+### Ticket Priority Levels
+
+| Priority | Meaning | Response SLA |
+|----------|---------|-------------|
+| **Low** | General inquiry, nice-to-have | 24-48 hours |
+| **Medium** | Common issue, functional impact | 8-24 hours |
+| **High** | Major functionality affected | 2-4 hours |
+| **Urgent** | System down, data loss, security issue | < 1 hour |
+
+### Ticket Pipelines
+
+Separate pipelines for different support flows:
+
+**Example pipelines**:
+| Pipeline | Used For | Stages |
+|----------|----------|--------|
+| Standard Support | General customer issues | New → Open → In Progress → Resolved → Closed |
+| Billing | Payment and invoicing | New → Review → Contact Customer → Resolved → Closed |
+| Escalations | Critical issues | New → Triage → Assigned → Escalated → Resolved → Closed |
+| Internal | QA items, bugs | New → Assessed → In Dev → QA → Deployed |
+
+**Creating ticket pipelines**:
+1. **Settings** > **Data Management** > **Pipelines** > **Tickets**
+2. Create pipeline, add stages, set stage rules
+
+### Ticket Automation
+
+**Automation rules** (without workflows):
+- Auto-close tickets after N days of inactivity
+- Auto-reply with "We received your request" on new tickets
+- Auto-assign based on ticket type (Billing goes to billing team)
+
+### Ticket Collaboration
+
+Multiple agents can work on a ticket:
+- **Internal notes**: Notes visible only to agents, not customer
+- **Mentions**: @mention another agent to bring them in
+- **CC/BCC**: Include other agents on email replies
+- **Ticket visibility**: Teams can have ticket-level permissions
+
+---
+
+## Knowledge Base — Complete Guide
+
+### What is a Knowledge Base?
+
+A KB is a self-service library of help articles. Customers can search and read articles to solve their own issues, reducing ticket volume.
+
+### Creating Articles — Step-by-Step
+
+1. **Service** > **Knowledge Base** > Create article
+2. **Title**: Clear, search-optimized (e.g., "How to reset your password")
+3. **Content**: Rich text editor with:
+   - Formatting: Bold, italic, lists, quotes, code blocks
+   - Images: Upload, URL, or AI-generated
+   - Videos: Embed YouTube, Wistia, or MP4
+   - Tables: For comparison or pricing data
+   - Link to other articles: Internal linking
+   - Note/Info/Warning callout boxes
+   - Step-by-step numbered instructions
+4. **Categories**: Group related articles (Getting Started, Account, Billing, Troubleshooting)
+5. **Tags**: Additional keywords for search
+6. **SEO settings**:
+   - Page title
+   - Meta description
+   - URL slug
+   - NOINDEX option (for internal-only articles)
+7. **Author**: Display name shown on article
+8. **State**: Draft → Published (or schedule for later)
+9. **Domain**: Choose which connected domain the KB lives on
+
+### KB Structure
+
+**Best practices for KB organization**:
+
+```
+Knowledge Base
+├── Getting Started
+│   ├── Creating your account
+│   ├── Setting up your profile
+│   └── First project guide
+├── Account Management
+│   ├── Billing & Plans
+│   ├── Changing your password
+│   └── Deleting your account
+├── Troubleshooting
+│   ├── Login issues
+│   ├── Payment failures
+│   └── Error codes
+└── FAQs
+    ├── What's included in Pro plan?
+    └── How do I cancel?
+```
+
+### KB Search
+
+- Full-text search across all articles
+- Search results ranked by relevance and popularity
+- Auto-suggest as customer types
+- "Did this help?" feedback on each article
+- Search analytics: What are customers looking for?
+
+### Multi-Language KB
+
+1. Publish article in primary language
+2. Click "Add translation"
+3. Choose target language
+4. Add translated content
+5. URL structure: `/en/article`, `/es/article`, `/fr/article`
+6. Language switcher on KB homepage
+
+### KB Reporting
+
+- **Article performance**: Views, helpful votes, search appearances
+- **Top articles**: Most viewed, highest search appearances
+- **Zero-result searches**: What customers search for but can't find
+- **Ticket deflection**: How many customers found the answer before filing a ticket
+
+---
+
+## Chatbots & Conversational Bots — Complete Guide
+
+### Types of Chatbots
+
+**1. Flow-based chatbot**:
+- Pre-built conversation flows with decision trees
+- Triggers: Time on page, URL, scroll %, page exit
+- Actions: Route to sales, create ticket, answer FAQ, collect info
+- Best for: Simple, predictable conversations (FAQ, lead capture)
+
+**2. AI Agent (Breeze AI chatbot)**:
+- LLM-powered conversational AI with natural language understanding
+- Access to your KB articles and CRM data
+- Can handle complex, multi-turn conversations
+- Escalates to human when needed
+- Best for: Tier-1 support, complex troubleshooting
+
+### Creating a Flow-Based Chatbot
+
+1. **Service** > **Chatflows** > Create chatflow
+2. Choose type:
+   - **Website chat**: Live chat widget on your site
+   - **Messaging chat**: For WhatsApp, Facebook Messenger (beta)
+   - **Phone/IVR**: Automated phone tree (limited)
+3. **Chatflow type**: Simple flow, custom flow, or round-robin
+4. **Build the flow**:
+
+   **Example: FAQ Bot**
+   ```
+   [Welcome]
+   "Hi {{ contact.firstname }}! What can I help with?"
+   
+   [Button options]
+   ○ Billing question
+   ○ Technical issue
+   ○ Talk to a human
+   
+   [Billing path]
+   "Common billing questions:"
+   ○ "How do I update my payment method?"
+   ○ "Can I get a refund?"
+   ○ "Talk to billing team"
+   
+   [Technical issue path]
+   "Describe your issue briefly:"
+   [Free text input]
+   → Search KB for matches
+   → Suggest relevant articles
+   → Offer to create ticket
+   
+   [Talk to human]
+   → Send to live chat queue
+   ```
+
+5. **Trigger rules**:
+   - **Page URL**: Show on specific pages (e.g., /pricing)
+   - **Time on page**: Show after 30 seconds
+   - **Scroll**: Show when 50% scrolled
+   - **Exit intent**: Show when mouse moves to close tab
+   - **Device type**: Desktop only, mobile only, or both
+   - **Visitor type**: New vs returning, known vs unknown
+   - **Custom property**: Show only to Pro/Enterprise customers
+
+6. **Targeting**: Which pages to show (specific pages, all pages, or all except specific pages)
+
+7. **Routing**: Who gets the conversation?
+   - **Round-robin**: Distribute evenly among team
+   - **Skills-based**: Route technical issues to tech team
+   - **Custom rules**: Route based on contact properties
+
+8. **Off-hours behavior**: What happens when no agents are available?
+   - Show "We're offline" message with hours
+   - Offer to leave a message (creates a ticket)
+   - Suggest KB articles
+
+9. **Publish**: Add code snippet to website or use HubSpot tracking code
+
+### AI Agent (Breeze Chatbot)
+
+1. **Service** > **Chatflows** > Create chatflow > **AI Agent**
+2. **Knowledge sources**: Connect your KB articles
+3. **Personality**: Friendly, Professional, Casual — defines how the bot communicates
+4. **Capabilities**:
+   - Answer questions from KB
+   - Check order status (CRM data)
+   - Update subscription (if permitted)
+   - Create tickets
+   - Book meetings
+   - Check billing info
+5. **Guardrails**:
+   - Topics it CAN discuss: Products, support, billing, account
+   - Topics it CANNOT discuss: Legal advice, medical advice, pricing for competitors
+   - Confidentiality: Never share customer's personal data with other customers
+   - Escalation: When to transfer to human (sentiment analysis, repeated questions, specific trigger words)
+6. **Human handoff**: Smooth transition to live agent with full conversation history
+7. **Publish**: Same as flow-based chatbot
+
+---
+
+## Feedback Surveys — Complete Guide
+
+### Survey Types
+
+**1. CSAT (Customer Satisfaction Score)**:
+- Question: "How satisfied were you with the support you received?"
+- Scale: 1-5 (Very Dissatisfied → Very Satisfied)
+- Sent after ticket closure
+- Goal: Measure satisfaction with specific interactions
+
+**2. NPS (Net Promoter Score)**:
+- Question: "How likely are you to recommend us to a friend or colleague?"
+- Scale: 0-10
+- Categories: Promoters (9-10), Passives (7-8), Detractors (0-6)
+- NPS = % Promoters − % Detractors
+- Sent periodically (quarterly, post-onboarding, or post-milestone)
+
+**3. CES (Customer Effort Score)**:
+- Question: "How easy was it to resolve your issue?"
+- Scale: 1-5 (Very Difficult → Very Easy)
+- Sent after specific interactions (ticket closed, feature used)
+- Goal: Measure friction in the customer experience
+
+### Creating a Survey
+
+1. **Service** > **Feedback** > **Surveys** > Create survey
+2. Choose type: CSAT, NPS, or CES
+3. **Design**:
+   - Question text: Customizable
+   - Scale labels: Customize the endpoint labels
+   - Follow-up question: "What's the main reason for your score?" (open text)
+   - Branding: Logo, colors, font (matches your brand kit)
+   - Layout: Single question, multi-step, inline
+4. **Distribution**:
+   - **Email**: Sent automatically after ticket closure (CSAT) or on schedule (NPS)
+   - **Website**: Embed survey on pages
+   - **Chat**: Ask after chatbot interaction
+   - **Link**: Shareable survey URL
+5. **Timing**:
+   - CSAT: 1 hour after ticket closed
+   - NPS: 7 days after onboarding completed
+   - CES: Immediately after resolution
+6. **Automation rules**:
+   - Send only if ticket was resolved (not rejected)
+   - Send only one survey per ticket
+   - Don't send if contact already received survey in last 30 days
+
+### Survey Analytics
+
+- **Response rate**: % of surveys sent vs completed
+- **Score trends**: Over time, by team, by agent
+- **Score breakdown**: Distribution of responses
+- **Comments**: Open-text analysis of follower responses
+- **Benchmark**: Compare to industry averages (when available)
+- **Segmentation**: Scores by plan type, customer age, region
+
+---
+
+## Customer Success — Complete Guide
+
+### Customer Health Scoring (Enterprise)
+
+Predict which customers are at risk of churning and which are primed for expansion.
+
+**Health Score Components**:
+| Factor | Weight | Example |
+|--------|--------|---------|
+| Product usage | 30% | Logged in 15+ days this month |
+| Support interactions | 20% | Open tickets < 2, priority < High |
+| Engagement | 20% | Email opens, meeting attendance, webinar |
+| Payment status | 15% | No overdue invoices |
+| NPS/CSAT | 15% | Recent survey score > 4 |
+
+**Health statuses**:
+| Status | Score | Action |
+|--------|-------|--------|
+| Healthy | 80-100 | Upsell, cross-sell, ask for referral |
+| Neutral | 50-79 | Monitor, send educational content, check-in |
+| At Risk | 20-49 | Reach out, schedule health check, offer training |
+| Critical | 0-19 | Immediate executive intervention, retention offer |
+
+**Setting up health scoring**:
+1. **Service** > **Customer Success** > **Health Scoring**
+2. Define criteria and weights
+3. Test against known at-risk customers
+4. Adjust weights based on historical churn data
+5. Turn on automated scoring
+
+### Renewal Management
+
+Track and manage subscription renewals:
+- **Service** > **Customer Success** > **Renewals**
+- See all customers with upcoming renewals
+- Filter by: Time to renewal, health score, deal value
+- Create tasks: "Renewal call — 30 days before expiration"
+- Workflow: Auto-notify CSM when renewal is approaching
+
+### Customer Lifecycle
+
+Track customers through stages:
+| Stage | Description | Activities |
+|-------|-------------|------------|
+| Onboarding | First 30 days | Welcome call, setup, training |
+| Adoption | Months 1-3 | Feature adoption, usage monitoring |
+| Growth | Months 3-12 | Upsell, cross-sell, advocacy |
+| Maturity | 12+ months | Expansion, referrals, case studies |
+| Risk | Churn signals detected | Retention intervention |
+| Churned | Customer lost | Win-back campaign later |
+
+---
+
+## Help Desk Features — Complete Guide
+
+### Team Email (Shared Inbox)
+
+A shared email address for your support team:
+
+1. **Conversations** > **Inbox** > Connect email
+2. Connect `support@yourcompany.com` or `help@yourcompany.com`
+3. Emails to this address appear in the shared inbox
+4. Any team member can respond
+5. Responses are tracked as interactions on the contact timeline
+
+**Inbox features**:
+- **Assignment**: Assign conversations to specific agents
+- **Status**: Open, Pending, Closed
+- **Priority**: Standard, High, Urgent
+- **Snooze**: Re-open at specific time or when contact replies
+- **Canned responses**: Pre-written replies for common questions
+- **Internal notes**: Notes visible only to agents
+- **Mentions**: @mention to alert another agent
+- **Typing indicator**: See when another agent is typing
+- **Response templates**: Quick replies using saved templates
+
+### Automation in Help Desk
+
+**Preset responses**: Create snippets for common replies:
+- "We've received your request and will respond within 24 hours."
+- "Can you please share a screenshot of the issue?"
+- "This has been escalated to our billing team."
+
+**Assignment rules**:
+- Auto-assign conversations to available agents (round-robin)
+- Assign based on conversation source (email vs chat)
+- Assign based on contact properties (plan type, industry)
+
+**Auto-reply**: Send automatic acknowledgment when new conversation arrives
+
+---
+
+## Service Automation (Workflows) — Complete Guide
+
+### Service Workflow Triggers
+
+| Trigger Type | Example |
+|-------------|---------|
+| Ticket property changed | Priority becomes "Urgent" |
+| Ticket created | New ticket from form submission |
+| SLA breached | Time to first response exceeded |
+| Survey submitted | CSAT score is 1 or 2 (dissatisfied) |
+| Contact property | Customer lifecycle becomes "At Risk" |
+| Deal property | Renewal deal stage changes |
+
+### Service Workflow Actions
+
+| Action | Example |
+|--------|---------|
+| Send email | "Thank you for your patience" auto-reply |
+| Set property value | Set ticket priority to "High" |
+| Create task | "Follow up with customer about resolution" |
+| Enroll in sequence | "Post-resolution check-in" sequence |
+| Trigger webhook | Notify external system (Jira, PagerDuty) |
+| Create ticket | Auto-create for internal QA |
+| Assign owner | Assign to specific team based on ticket type |
+| Branch | If ticket type = "Billing" → send to billing team |
+
+### Example: Urgent Ticket Workflow
+
+1. **Trigger**: Ticket priority is set to "Urgent"
+2. **Branch**: If ticket source is "Email"
+   - Yes: Send auto-reply "We've escalated your issue"
+   - No: Continue silently
+3. **Action**: Set ticket owner to "Escalations" team
+4. **Action**: Send Slack notification to #urgent-alerts
+5. **Action**: Set property "Escalation time" to current timestamp
+6. **Goal**: Ticket status = "Resolved"
+7. **Expiration**: If not resolved in 4 hours → notify manager
+
+### Example: Post-Resolution Check-in
+
+1. **Trigger**: Ticket status becomes "Closed"
+2. **Delay**: Wait 24 hours
+3. **Send survey**: CSAT survey
+4. **Branch**: If CSAT score < 3 (dissatisfied)
+   - Action: Create task for agent — "Follow up with unhappy customer"
+   - Action: Set property "Needs retention call" = true
+5. **Branch**: If CSAT score ≥ 4 (satisfied)
+   - Action: Add to "Happy Customers" list for referrals
+
+---
+
+## SLA Management — Complete Guide
+
+### What are SLAs?
+
+Service Level Agreements define response and resolution time commitments for tickets.
+
+**Common SLA metrics**:
+- **First response time**: Time from ticket creation to first agent response
+- **Time to close**: Time from ticket creation to closure
+- **Resolution time**: Time from first response to resolution
+- **Breach**: When SLA target is not met
+
+### Setting Up SLAs (Enterprise)
+
+1. **Settings** > **Service** > **SLA Management**
+2. Create SLA:
+   - **Name**: "Standard Support SLA"
+   - **Applies to**: All tickets, specific pipelines, specific ticket types
+   - **Targets**:
+     - First response: Within 4 hours
+     - Time to close: Within 24 hours
+   - **Business hours**: Mon-Fri, 9 AM-6 PM (or 24/7 for premium)
+   - **Priority adjustments**: Urgent = 1 hour, High = 4 hours, Medium = 8 hours, Low = 24 hours
+3. **Breach actions**:
+   - Send email to ticket owner: "SLA breach imminent"
+   - Notify manager
+   - Escalate ticket to senior agent
+   - Change priority automatically
+4. **Save and activate**
+
+### SLA Reporting
+
+- **SLA compliance %**: Tickets resolved within SLA targets
+- **SLA breaches**: Tickets that missed targets
+- **SLA by pipeline**: Which pipelines have best/worst compliance
+- **SLA by agent**: Individual performance
+- **SLA trends**: Over time, by team
+- **Time to first response**: Average, median, percentile breakdown
+
+---
+
+## Service Analytics & Reporting — Complete Guide
+
+### Pre-Built Service Dashboards
+
+**Ticket volume report**:
+- Tickets created per day/week/month
+- Tickets by status, priority, type, pipeline
+- Ticket trends over time
+
+**Agent performance**:
+- Tickets closed per agent
+- Average response time per agent
+- Average resolution time per agent
+- CSAT score per agent
+- Ticket reopen rate
+
+**CSAT & NPS dashboards**:
+- Overall score trends
+- Score by agent, team, plan type
+- Score distribution (how many rated 1-5)
+- Comment word cloud
+
+**SLA compliance**:
+- % within SLA
+- Breaches by type, priority, agent
+- Time to first response
+- Time to resolution
+
+### Custom Service Reports
+
+Create reports combining ticket data with contacts, companies, and deals:
+- "Show me tickets from companies with revenue over $1M"
+- "Tickets created by customers who opened a support case in the last 30 days"
+- "CSAT scores for customers on Professional plan"
+- "Resolution time by product category"
+
+### Key Metrics to Track
+
+| Metric | What It Measures | Target |
+|--------|-----------------|--------|
+| Ticket volume | How many issues are coming in | Trend monitoring |
+| First response time | How fast agents acknowledge | < 1 hour |
+| Time to resolution | How fast issues are solved | < 24 hours |
+| CSAT | Customer satisfaction with support | > 4.0 |
+| NPS | Overall customer loyalty | > 50 |
+| Ticket reopen rate | Were issues really resolved? | < 10% |
+| KB article views | Are customers self-serving? | Increasing trend |
+| Ticket deflection | % of visitors using KB instead of tickets | > 20% |
+| Agent utilization | % of agent time on tickets | 70-80% |
+
+---
+
+## Breeze AI in Service Hub
+
+### AI Ticket Summaries
+
+When a ticket is being worked on, Breeze AI provides:
+- **Summary**: What the issue is about
+- **Key points**: Most important details from the conversation
+- **Suggested actions**: What the agent should do next
+- **Related KB articles**: Articles that might help resolve the issue
+
+### AI Agent (Chatbot)
+
+See [Chatbots section](#ai-agent-breeze-chatbot) above. The AI Agent can:
+- Resolve common issues autonomously (password resets, account updates)
+- Deflect tickets by answering from KB
+- Create tickets when unable to resolve
+- Seamlessly hand off to human agents with full context
+
+### AI Email Replies
+
+When responding to ticket emails, Breeze AI suggests:
+- Complete response drafts based on the customer's question
+- Tone adjustments: Make it warmer, more professional, or shorter
+- Quick actions: "Mark as resolved", "Create follow-up task"
+
+### Predictive Churn Detection
+
+Breeze AI analyzes patterns to flag at-risk customers:
+- Decreased product usage
+- Increased support ticket volume
+- Negative sentiment in support conversations
+- Missed payments
+- No engagement with success team
+
+---
 
 ## Limits That Matter
 
-- Tickets: Free (1,000 lifetime), Starter (5,000 lifetime), Pro (unlimited), Enterprise (unlimited)
-- Pipelines: Free (1), Starter (3), Pro (10), Enterprise (unlimited)
-- Knowledge base articles: Free (100), Starter (2,500), Pro (unlimited), Enterprise (unlimited)
-- Chatbots: Free (1), Starter (1), Pro (5), Enterprise (unlimited)
-- Chatbot users: Free (100), Starter (1,000), Pro (unlimited)
-- Feedback surveys: Free (3), Starter (10), Pro (100), Enterprise (unlimited)
-- Survey responses: Free (500 lifetime), Starter (10,000 lifetime), Pro (unlimited)
-- SLA: Pro (time tracking only), Enterprise (full SLA management with auto-escalation)
-- Customer portal: Free/Starter (read-only tickets), Pro/Enterprise (respond to tickets)
-- CS users: contact-based pricing (paid seats for CS reps)
-- Macro/snippets: Free (5), Starter (20), Pro (unlimited), Enterprise (unlimited)
+| Resource | Free | Starter | Pro | Enterprise |
+|----------|------|---------|-----|------------|
+| Ticket pipelines | 1 | 1 | 10 | 10 |
+| Knowledge base articles | — | 50 | Unlimited | Unlimited |
+| Knowledge base domains | — | 1 | 5 | 10 |
+| Chatbot flows | 1 | 3 | 10 | Unlimited |
+| Feedback surveys | — | 5 | Unlimited | Unlimited |
+| Team emails | — | 1 | 3 | 10 |
+| SLA targets | — | — | — | Unlimited |
+| Customer health scores | — | — | — | Unlimited |
+| Service dashboards | 3 | 5 | 15 | Unlimited |
+| Ticket automation rules | 5 | 20 | 200 | Unlimited |
+| Agent seats | Unlimited | Unlimited | Unlimited | Unlimited |
 
-## Use Cases
-
-- Centralize customer support across email, chat, and social
-- Build a self-service knowledge base to reduce ticket volume
-- Automate common Q&A with chatbots
-- Track customer satisfaction with CSAT and NPS surveys
-- Set and monitor SLA compliance for enterprise customers
-- Manage renewals and health scores for customer success
-- Escalate critical issues automatically
-- Train agents with call coaching and quality assurance
+---
 
 ## Common Gotchas
 
-- SLA times only count during business hours unless configured for 24/7
-- Feedback surveys sent too soon after ticket closure may get lower scores (customer still frustrated)
-- Email-to-ticket requires specific forwarding address and SPF/DKIM configured
-- Merging two tickets is irreversible — pick the primary record carefully
-- Deleting a bot's conversation history is permanent
-- Knowledge base articles don't support advanced CSS customization on Free/Starter
-- Customer portal shows only tickets with portal visibility enabled (default: all customer tickets)
-- Macros are per-user unless shared via properties/teams
-- CES questions require more than just "Very Easy" — must match CES scale wording exactly to be valid
+### 1. Email-to-Ticket Formatting
+Emails to the ticket address convert the entire email body into the ticket description. Forwarded emails with long chains of previous responses included can create messy tickets.
+
+### 2. KB Search Accuracy
+KB search relies on article titles and content. Articles with poor titles (e.g., "Issue #42") won't be found by customers using natural language.
+
+### 3. Chatbot Off-Hours
+If you don't configure off-hours behavior, the chatbot simply shows "No agents available" which frustrates customers. Always set up a fallback (leave message, suggest KB, offer callback).
+
+### 4. Survey Fatigue
+Don't send surveys after every single interaction. Limit to 1 CSAT per ticket and 1 NPS per quarter per contact. Multiple surveys annoy customers and lower response rates.
+
+### 5. SLA Business Hours
+SLA calculations depend on business hours. If your agents work 9-5 but your system runs 24/7, a ticket created at 10 PM might appear to be breaching SLA when no agent was online.
+
+### 6. Ticket Reopen
+When a customer replies to a closed ticket, it can automatically reopen. Configure reopen rules: reopen if reply within 7 days, or create a new ticket for older threads.
+
+### 7. AI Agent Limitations
+The AI Agent is powerful but can't do everything. It doesn't have access to external systems (payment gateways, shipping carriers, product APIs) unless you build custom integrations.
+
+### 8. Health Score Accuracy
+Health scores are only as good as your data quality. If product usage data isn't syncing or surveys aren't being sent, health scores will be incomplete or misleading.

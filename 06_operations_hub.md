@@ -1,218 +1,640 @@
-# 6. Operations Hub
+# 6. Operations Hub — Complete Tutorial
 
-## What It Does
-HubSpot Operations Hub connects HubSpot to your other business tools, syncs data bidirectionally, cleans and standardizes your CRM data, automates data management workflows, and provides programmable automation with custom-coded actions. It's the engine that keeps your revenue data accurate, consistent, and actionable across your entire tech stack.
+## Table of Contents
+1. [Introduction to Operations Hub](#introduction-to-operations-hub)
+2. [Data Sync — Complete Guide](#data-sync--complete-guide)
+3. [Data Quality — Complete Guide](#data-quality--complete-guide)
+4. [Programmable Automation — Complete Guide](#programmable-automation--complete-guide)
+5. [Datasets (SQL Querying) — Complete Guide](#datasets-sql-querying--complete-guide)
+6. [Calculated Properties — Complete Guide](#calculated-properties--complete-guide)
+7. [Data Pipeline — Complete Guide](#data-pipeline--complete-guide)
+8. [Operations Automation — Complete Guide](#operations-automation--complete-guide)
+9. [Limits That Matter](#limits-that-matter)
+10. [Common Gotchas](#common-gotchas)
+11. [Use Cases](#use-cases)
 
-## Key Features
+---
 
-### Data Sync
-- **Bidirectional sync**: synchronize data between HubSpot and connected apps in real time or on schedule
-- **Supported connectors**: Salesforce, Microsoft Dynamics 365, Mailchimp, Shopify, WooCommerce, QuickBooks Online, Xero, Zendesk, ServiceNow, Stripe, Google Sheets, Airtable, and 100+ others via custom + iPaaS connectors
-- **Sync directions**: one-way or two-way, per-field configuration
-- **Field mapping**: drag-and-drop mapping UI with transformation rules (picklist mapping, string formatting, number rounding)
-- **Record matching**: match by email, domain, custom ID, or combination of fields
-- **Conflict resolution rules**: HubSpot wins, connected app wins, most recently updated wins, or manual review
-- **Sync history**: audit log of synced records, errors, and field conflicts
-- **Sync monitoring**: dashboard showing sync status, error rate, records synced per connector
-- **Re-sync**: full re-sync without duplicating records
-- **Custom object sync**: sync custom objects between systems (Enterprise)
-- **Sync trigger**: real-time (webhook-based) or scheduled intervals (every 5, 15, 30 min, hourly, daily)
-- **HubSpot → Salesforce, Shopify, QuickBooks**: field-level mapping with conflict resolution
+## Introduction to Operations Hub
 
-### Data Quality Automation
-- **Data quality automation**: rules that auto-format, clean, and standardize data
-- **Rule types**:
-  - **Format**: phone numbers, URLs, email addresses, date formats, currency
-  - **Standardize**: title case, capitalize, lowercase, remove extra spaces, strip HTML
-  - **Enrich**: append firmographic data from Breeze Intelligence (industry, revenue range, employee count, technographics)
-  - **Validate**: check email deliverability, phone number format, domain validity
-  - **Custom**: write your own data transformation rules via the rule builder
-- **Rule triggers**: on record create, on import, on property update, on schedule (daily/weekly)
-- **Data quality dashboard**: score your CRM health — completeness, formatting errors, duplicate rate
-- **Duplicate detection**: merge suggestions for contacts, companies, deals, tickets
-- **Duplicate prevention**: block duplicates at import and creation time
-- **Data quality score**: percentage of records meeting your quality criteria (dashboard trends over time)
-- **Field completeness tracking**: % of required fields populated per object with drill-down
-- **Error reporting**: log of failed data quality actions with retry option
+Operations Hub is HubSpot's data infrastructure layer. It connects your tech stack, cleans your data, and enables custom automation that spans across hubs. If Marketing Hub is the engine and Sales Hub is the driver, Operations Hub is the wiring that connects everything.
 
-### Breeze Intelligence Data Enrichment
-- **Company enrichment**: auto-populate industry, revenue range, employee count, location, phone, and domain from 260M+ company profiles
-- **Contact enrichment**: append job title, seniority, department, and work email from Breeze's B2B contact database
-- **Technographic data**: see which technologies a company uses (CRM, ERP, marketing tools, analytics)
-- **Intent signals**: identify accounts actively researching your product category
-- **Behavioral scoring**: merge intent signals with CRM data for prioritization
-- **Enrichment triggers**: on create, on import, or on schedule as a data quality rule
-- **Usage**: available as a paid add-on; directly accessible through data quality automation rules
+### What You Get by Tier
 
-### Programmable Automation (Custom-Coded Workflows)
-- **Custom-coded actions**: write your own workflow actions in Node.js or Python
-- **Code action triggers**: contact-based, company-based, deal-based, ticket-based, custom object-based
-- **Code execution**: serverless environment (10s timeout, 10MB response limit)
-- **Input/output schemas**: define typed schemas for what your code receives and returns
-- **Secrets management**: store API keys, tokens securely (encrypted at rest, not readable after save)
-- **External API calls**: make HTTP/HTTPS requests to any third-party API
-- **Error handling**: retry logic, error logging to workflow history, fallback actions
-- **Testing**: inline code tester with sample input data
-- **Versioning**: save and rollback code action versions
-- **Custom-coded cards**: display custom UI cards on contact/company/deal records (Enterprise) — React or plain JS
+| Feature | Free | Starter | Pro | Enterprise |
+|---------|------|---------|-----|------------|
+| Data sync | 1 connection | 5 connections | 10 connections | Unlimited |
+| Data quality (dedup) | ✓ (basic) | ✓ | ✓ | ✓ |
+| Data quality automation | ✗ | ✓ | ✓ | ✓ |
+| Programmable automation | ✗ | ✗ | ✓ | ✓ |
+| Datasets (SQL) | ✗ | ✗ | ✓ | ✓ |
+| Calculated properties | ✗ | ✗ | ✓ | ✓ |
+| Rollup properties | ✗ | ✗ | ✓ | ✓ |
+| Data pipeline | ✗ | ✗ | ✗ | ✓ |
+| Custom-coded actions | ✗ | ✗ | 10 | Unlimited |
+| Webhook actions | ✓ | ✓ | ✓ | ✓ |
 
-### Datasets, Reporting & SQL
-- **Custom datasets**: combine HubSpot CRM data with external data sources (CSV uploads, API data)
-- **SQL query**: write `SELECT`, `JOIN`, `WHERE`, `GROUP BY` against datasets for custom reports
-- **Dataset types**: HubSpot objects, custom objects, imported CSV/Excel, programmatic (API)
-- **Dataset scheduling**: auto-refresh on schedule (hourly, daily, weekly)
-- **Dataset joining**: join HubSpot objects to external data tables (e.g., join contacts to imported sales territory mapping)
-- **Reporting from datasets**: build custom reports on top of datasets using the Custom Report Builder
-- **Calculated properties**: create formula-based properties (e.g., "Days Since Last Contact", "Deal Velocity Score")
-- **Rollup properties**: aggregate data from related objects (e.g., sum of all deal amounts for a company, count of open tickets per contact)
-- **Text analytics**: sentiment analysis, keyword extraction, language detection on text properties
+### Navigation
 
-### Pre-built Connectors (Data Sync Hub)
+- **Settings** > **Data Management** — Properties, custom objects, data model
+- **Automation** > **Workflows** — Including custom-coded actions
+- **Reports** > **Datasets** — SQL query builder
+- **Operations** > **Data Sync** — Sync connections and status
+- **Operations** > **Data Quality** — Dedup rules, cleaning, formatting
 
-| Connector Type | Examples |
-|---|---|
-| CRM | Salesforce, Microsoft Dynamics 365 |
-| E-commerce | Shopify, WooCommerce, BigCommerce |
-| Finance | QuickBooks Online, Xero, Stripe |
-| Support | Zendesk, ServiceNow, Freshdesk |
-| Marketing | Mailchimp, Constant Contact, Eventbrite |
-| Productivity | Google Sheets, Airtable, Asana |
-| Custom | Webhook triggers, REST API, Zapier, Make |
+---
 
-### Data Management
-- **Import**: CSV/Excel import with field mapping, deduplication, and automation triggers
-- **Export**: export any object, list, or report to CSV
-- **Bulk operations**: update, delete, or reassign records in bulk
-- **Object management**: create/edit custom objects, properties, associations
-- **Property management**: create, edit, archive, and organize properties
-- **Record merging**: merge duplicate contacts, companies, deals, tickets
-- **Trash/recycle bin**: recover deleted records (30 days for paid tiers)
-- **Audit log**: track property changes, user actions, API calls (available in Settings)
+## Data Sync — Complete Guide
 
-## Step-by-Step: Setting Up Data Sync with Salesforce
+Data Sync bi-directionally synchronizes data between HubSpot and other applications.
 
-1. Settings > Integrations > Data Sync
-2. Click "Connect app" → select Salesforce
-3. Authenticate with Salesforce OAuth
-4. Choose sync direction per object:
-   - Contacts: Bidirectional
-   - Companies: Salesforce → HubSpot only
-   - Deals: HubSpot → Salesforce only
-5. Configure field mappings for each object:
-   - Drag to match HubSpot fields to Salesforce fields
-   - Set transformation rules (e.g., Salesforce picklist → HubSpot dropdown)
-6. Set conflict resolution:
-   - "Most recently updated wins" for contacts
-   - "HubSpot wins" for companies
-7. Set sync frequency: Real-time or every 15 minutes
-8. Initial sync: triggers full sync for existing records
-9. Monitor: Dashboard shows sync status, errors, records synced
+### What Data Sync Can Do
 
-## Step-by-Step: Creating a Data Quality Rule
+- **Bi-directional sync**: Changes in HubSpot → connected app and vice versa
+- **Field mapping**: Map HubSpot properties to fields in the connected app
+- **Conflict resolution**: Rules for when data differs between systems
+- **Scheduled sync**: Continuous, or specific intervals
+- **Selective sync**: Choose which objects and records to sync
+- **History and audit trail**: See what was synced and when
 
-1. Settings > Data Management > Data Quality
-2. Click "Create rule"
-3. Choose object: Contact, Company, Deal, Ticket, Custom Object
-4. Choose rule type:
-   - **Format phone**: +63-xxx-xxx-xxxx format
-   - **Format URL**: ensure https:// prefix
-   - **Standardize name**: Capitalize first letter of each word
-   - **Enrich with Breeze**: Append industry, revenue range from Breeze Intelligence
-   - **Validate email**: mark invalid emails
-5. Set trigger:
-   - When record is created
-   - When property changes
-   - On import
-   - On schedule (daily/weekly)
-6. Configure: e.g., "Format phone number on create"
-7. Save and activate
-8. View impact in Data Quality Dashboard (score improvement over time)
+### Supported Connections
 
-## Step-by-Step: Creating a Custom-Coded Workflow Action
+| App | Objects Synced | Direction |
+|-----|---------------|-----------|
+| **Salesforce** | Contacts, Companies, Deals, Tasks, Custom Objects | Bi-directional |
+| **Marketo** | Contacts, Companies | Bi-directional |
+| **Mailchimp** | Contacts, Lists | Bi-directional |
+| **Shopify** | Contacts, Companies, Orders | HubSpot ← Shopify |
+| **QuickBooks Online** | Companies, Invoices, Customers | Bi-directional |
+| **NetSuite** | Contacts, Companies, Invoices | Bi-directional |
+| **Zendesk** | Contacts, Tickets | Bi-directional |
+| **Jira** | Issues, Contacts | HubSpot ← Jira |
 
-1. Automation > Workflows > Actions library > Create custom-coded action
-2. Name the action (e.g., "Create Invoice in Stripe")
-3. Choose runtime: Node.js (default) or Python
-4. Define input schema:
-   ```json
-   {
-     "type": "object",
-     "properties": {
-       "deal_amount": { "type": "number" },
-       "contact_email": { "type": "string" }
-     },
-     "required": ["deal_amount", "contact_email"]
-   }
+### Setting Up Data Sync — Step-by-Step
+
+1. **Operations** > **Data Sync** > Create connection
+2. Select the app (e.g., Salesforce)
+3. **Authenticate**: Log in to the connected app, grant permissions
+4. **Choose direction**:
+   - **One-way**: HubSpot → App (write only)
+   - **One-way**: App → HubSpot (read only)
+   - **Bi-directional**: Both directions (requires conflict resolution)
+5. **Select objects**: Which CRM objects to sync (Contacts, Companies, Deals, etc.)
+6. **Field mapping**: Drag to connect fields:
    ```
-5. Define output schema:
-   ```json
-   {
-     "type": "object",
-     "properties": {
-       "invoice_id": { "type": "string" },
-       "status": { "type": "string" }
-     }
-   }
+   HubSpot Contact.FirstName  →  Salesforce Contact.FirstName
+   HubSpot Contact.Email      →  Salesforce Contact.Email
+   HubSpot Contact.Phone      →  Salesforce Contact.MobilePhone
    ```
-6. Write code (Node.js example):
-   ```javascript
-   exports.main = async (event, callback) => {
-     const { deal_amount, contact_email } = event.inputFields;
-     const response = await fetch('https://api.stripe.com/v1/invoices', {
-       method: 'POST',
-       headers: {
-         'Authorization': `Bearer ${event.secrets.STRIPE_SECRET_KEY}`,
-         'Content-Type': 'application/x-www-form-urlencoded',
-       },
-       body: `customer_email=${contact_email}&amount=${deal_amount * 100}`
-     });
-     const data = await response.json();
-     callback({ outputFields: { invoice_id: data.id, status: data.status } });
-   };
-   ```
-7. Configure secrets: Add `STRIPE_SECRET_KEY` encrypted storage
-8. Test with sample data
-9. Save → Use in workflow as an action step
+7. **Sync filters**: Which records to include (e.g., only sync contacts with email)
+8. **Conflict resolution**: When both systems have changes:
+   - **HubSpot wins**: HubSpot value overwrites connected app
+   - **Connected app wins**: Connected app value overwrites HubSpot
+   - **Most recent wins**: Most recent timestamp value is kept
+   - **Manual review**: Flag conflicts for human review
+9. **Schedule**: Continuous sync (real-time) or scheduled (daily, hourly)
+10. **Activate**
+
+### Sync Monitoring
+
+- **Sync status dashboard**: Last sync time, records synced, errors
+- **Sync history**: Detailed log of individual record syncs
+- **Error notifications**: Email alerts when sync fails
+- **Retry**: Auto-retry failed syncs with backoff
+- **Pause/Resume**: Temporarily stop sync without losing configuration
+
+### Data Sync Best Practices
+
+1. **Start small**: Sync one object, verify it works, then add more
+2. **Map carefully**: Wrong field mapping can corrupt data in both systems
+3. **Avoid circular syncs**: Don't sync the same field in both directions without a clear winner
+4. **Monitor for first week**: Check sync logs daily to catch issues early
+5. **Clean data first**: Deduplicate before syncing (duplicate records multiply when synced)
+
+---
+
+## Data Quality — Complete Guide
+
+### Deduplication Rules
+
+Find and merge duplicate records:
+
+1. **Operations** > **Data Quality** > **Deduplication**
+2. **Create dedup rule**:
+   - **Object**: Contacts, Companies, Deals, or Custom Objects
+   - **Match criteria**: Email (contacts), Domain (companies), Name (exact or fuzzy)
+   - **Fuzzy matching**: Catches "Acme Corp" vs "Acme Corporation" vs "Acme Corp."
+   - **Confidence threshold**: High (exact match) vs Low (loose match)
+3. **Review duplicates**: Preview potential duplicates before merging
+4. **Merge action**: Auto-merge or create review task
+5. **Exclusion list**: Exclude specific records from dedup rules
+
+**Deduplication example**:
+| Record 1 | Record 2 | Match? |
+|----------|----------|--------|
+| jane@acme.com | jane@acme.com | ✓ Email exact match (100%) |
+| Acme Corp | Acme Corporation | ✓ Fuzzy match (85%) |
+| 123 Main St | 123 Main Street | ✓ Fuzzy address match (90%) |
+
+### Data Property Standardization
+
+Auto-format property values:
+
+1. **Operations** > **Data Quality** > **Data Standardization**
+2. Create rule:
+   - **Phone numbers**: Format "(555) 123-4567" consistently
+   - **Names**: Capitalize "JOHN DOE" → "John Doe"
+   - **Countries**: "USA", "US", "United States" → "United States"
+   - **URLs**: Remove trailing slash, add https://
+   - **Emails**: Lowercase all email addresses
+3. **Trigger**: Run once (fix existing data) or continuous (fix on entry)
+
+### Data Quality Dashboard
+
+- **Total duplicates found**: Current count and trend
+- **Deduplication rate**: % of identified duplicates that were resolved
+- **Data completeness**: % of required fields filled in
+- **Field consistency**: % of values in standard format
+- **Data quality score**: Overall health (0-100)
+
+---
+
+## Programmable Automation — Complete Guide
+
+Programmable automation lets you write custom code that runs as workflow actions. This is Operations Hub's superpower — anything you can code, you can automate.
+
+### Custom-Coded Actions
+
+Custom-coded actions are Node.js or Python functions that run in HubSpot's automation engine.
+
+**Creating a custom-coded action**:
+
+1. **Automation** > **Workflows** > Create workflow
+2. Add action: "Custom-coded action"
+3. Choose language: JavaScript (Node.js 18) or Python 3.10
+4. Write your code:
+
+```javascript
+// JavaScript custom-coded action
+exports.main = async (event, callback) => {
+  // event contains: objectId, portalId, properties, previousProperties
+  const { objectId, properties } = event;
+  
+  // Access the HubSpot API client
+  const hubspot = require('@hubspot/api-client');
+  const client = new hubspot.Client({
+    accessToken: process.env.PRIVATE_APP_TOKEN
+  });
+  
+  // Get contact data
+  const contactResponse = await client.crm.contacts.basicApi.getById(
+    objectId,
+    ['email', 'firstname', 'lastname']
+  );
+  
+  const email = contactResponse.properties.email;
+  const domain = email.split('@')[1];
+  
+  // Call external API for enrichment
+  const apiResponse = await fetch(`https://api.clearbit.com/v2/company/find?domain=${domain}`, {
+    headers: { 'Authorization': `Bearer ${process.env.CLEARBIT_KEY}` }
+  });
+  const companyData = await apiResponse.json();
+  
+  // Update contact properties
+  await client.crm.contacts.basicApi.update(objectId, {
+    properties: {
+      company_name: companyData.name,
+      company_industry: companyData.category?.industry,
+      company_size: companyData.metrics?.employees?.toString()
+    }
+  });
+  
+  callback({ succeeded: true });
+};
+```
+
+```python
+# Python custom-coded action
+def main(event):
+    # event contains: objectId, portalId, properties
+    object_id = event['objectId']
+    properties = event['properties']
+    
+    # HubSpot API client
+    import hubspot
+    client = hubspot.Client.create(access_token=os.environ['PRIVATE_APP_TOKEN'])
+    
+    # Process the contact
+    email = properties.get('email')
+    if email and '@' in email:
+        domain = email.split('@')[1]
+        
+        # Update a custom property
+        api_response = client.crm.contacts.basic_api.update(
+            object_id,
+            {
+                'properties': {
+                    'email_domain': domain
+                }
+            }
+        )
+    
+    return {'succeeded': True}
+```
+
+### Available in Custom-Coded Actions
+
+- **Access to HubSpot API**: Full CRUD on contacts, companies, deals, tickets, custom objects
+- **HTTP requests**: Call external APIs (within 20-second timeout)
+- **Environment variables**: Store API keys, secrets securely
+- **Logging**: `console.log()` output appears in workflow logs
+- **Error handling**: `try/catch` blocks; failed actions can retry
+
+### Limitations
+
+- **Timeout**: 20 seconds maximum execution
+- **Memory**: 256 MB
+- **No file system**: Can't read/write local files
+- **No npm/pip install**: Only standard library + `@hubspot/api-client` (JS) or `hubspot-api-client` (Python)
+- **No external network to private subnets**: Can only access public internet endpoints
+- **No state persistence**: Each invocation is stateless
+
+### Webhook Actions
+
+Call external systems without writing code:
+
+1. In workflow builder, add action: "Trigger webhook"
+2. Set URL: `https://your-system.com/webhook`
+3. Choose method: POST, PUT, GET, PATCH
+4. Set headers: API keys, content type
+5. Define payload: Map HubSpot properties to JSON fields
+6. Handle response: Parse response to update properties
+
+**Example webhook payload**:
+```json
+{
+  "contact": {
+    "email": "{{ contact.email }}",
+    "firstname": "{{ contact.firstname }}",
+    "lastname": "{{ contact.lastname }}"
+  },
+  "deal": {
+    "name": "{{ deal.dealname }}",
+    "amount": {{ deal.amount }}
+  }
+}
+```
+
+---
+
+## Datasets (SQL Querying) — Complete Guide
+
+Datasets let you query HubSpot data using SQL. No more exporting to Excel just to join data across objects.
+
+### What Datasets Can Do
+
+- Write SQL SELECT queries against CRM data
+- Join across objects (contacts + deals + companies)
+- Aggregate (SUM, COUNT, AVG, MIN, MAX)
+- Filter, group, sort
+- Create custom reports from query results
+- Schedule exports
+
+### SQL Syntax Supported
+
+```sql
+-- Basic SELECT
+SELECT 
+  c.email,
+  c.firstname,
+  c.createdate,
+  d.dealname,
+  d.amount,
+  d.dealstage
+FROM contacts c
+LEFT JOIN deals d ON c.id = d.associated_contact_id
+WHERE d.createdate >= '2025-01-01'
+  AND d.amount > 1000
+ORDER BY d.amount DESC;
+
+-- Aggregation
+SELECT 
+  company,
+  COUNT(*) as contact_count,
+  SUM(d.amount) as total_pipeline,
+  AVG(d.amount) as avg_deal_size
+FROM contacts c
+LEFT JOIN deals d ON c.id = d.associated_contact_id
+GROUP BY company
+HAVING COUNT(*) > 5
+ORDER BY total_pipeline DESC;
+
+-- Date functions
+SELECT 
+  DATE_TRUNC('month', d.createdate) as month,
+  COUNT(*) as deals_created,
+  SUM(CASE WHEN d.dealstage = 'closedwon' THEN 1 ELSE 0 END) as deals_won
+FROM deals d
+GROUP BY DATE_TRUNC('month', d.createdate)
+ORDER BY month;
+```
+
+### Creating a Dataset
+
+1. **Reports** > **Datasets** > Create dataset
+2. Write SQL query
+3. Click "Run" to test
+4. **Save** as a dataset
+5. Use dataset in:
+   - Custom report builder (as data source)
+   - Dashboard (as chart/table)
+   - Scheduled export (email CSV)
+
+### Joins Available
+
+| Object | Can Join With |
+|--------|-------------|
+| Contacts | Companies, Deals, Tickets, Products, Custom Objects |
+| Companies | Contacts, Deals, Tickets, Products, Custom Objects |
+| Deals | Contacts, Companies, Products, Line Items, Quote |
+| Tickets | Contacts, Companies |
+| Custom Objects | Any associated object |
+
+### Scheduled Exports
+
+1. Create a dataset
+2. Click "Schedule export"
+3. Set frequency: Daily, Weekly, Monthly
+4. Set delivery: Email CSV to specific users
+5. Optionally: Send to external storage (Google Sheets, Box, Dropbox via webhook)
+
+### Dataset Use Cases
+
+- **Pipeline velocity**: Average days in each deal stage per rep
+- **Account health**: Deals + tickets + contact count per company
+- **Churn analysis**: Customers who haven't purchased in 12 months
+- **Lead source ROI**: Revenue by first-touch source
+- **Sales activity**: Emails, calls, meetings per rep per week
+
+---
+
+## Calculated Properties — Complete Guide
+
+Calculated properties compute values from other properties using formulas. Rollup properties aggregate data from associated records.
+
+### Formula Syntax
+
+**Arithmetic**:
+```
+commission = deal_amount * 0.10
+total_price = unit_price * quantity
+discounted_price = IF(coupon_applied, price * 0.8, price)
+```
+
+**Conditional**:
+```
+priority_score = IF(
+  AND(deal_amount > 10000, lifecycle_stage = "opportunity"),
+  100,
+  IF(lifecycle_stage = "opportunity", 50, 0)
+)
+```
+
+**Date calculations**:
+```
+days_since_last_activity = DATE_DIFF(last_activity_date, TODAY(), "day")
+contract_end_soon = DATE_DIFF(TODAY(), contract_end_date, "day") < 30
+```
+
+**Text operations**:
+```
+full_name = firstname + " " + lastname
+email_domain = SPLIT(email, "@")[1]
+```
+
+### Available Functions
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| IF(cond, t, f) | Conditional | IF(score > 50, "Hot", "Cold") |
+| AND(a, b) | Logical AND | AND(is_customer, has_deal) |
+| OR(a, b) | Logical OR | OR(is_prospect, is_lead) |
+| NOT(a) | Logical NOT | NOT(is_deleted) |
+| DATE_DIFF(d1, d2, unit) | Date difference in days | DATE_DIFF(createdate, TODAY(), "day") |
+| TODAY() | Current date | TODAY() |
+| NOW() | Current datetime | NOW() |
+| CONTAINS(text, substr) | Text contains check | CONTAINS(industry, "Tech") |
+| LENGTH(text) | String length | LENGTH(firstname) |
+| ROUND(num, places) | Round to decimal | ROUND(amount, 2) |
+| CONCAT(a, b) | Concatenate | CONCAT(city, ", ", state) |
+| SPLIT(text, delim) | Split string | SPLIT(email, "@")[1] |
+| UPPER(text) | Uppercase | UPPER(firstname) |
+| LOWER(text) | Lowercase | LOWER(email) |
+
+### Rollup Properties
+
+Rollups aggregate values from associated records:
+
+**Contact → Deals**:
+```
+SUM(associated_deals, amount)       — Total deal value
+COUNT(associated_deals)              — Number of deals
+AVG(associated_deals, amount)        — Average deal size
+MAX(associated_deals, amount)        — Largest deal
+MIN(associated_deals, amount)        — Smallest deal
+LATEST(associated_deals, closedate)  — Most recent close
+EARLIEST(associated_deals, createdate) — First deal date
+```
+
+**Company → Contacts**:
+```
+COUNT(associated_contacts)           — Number of employees/contacts
+COUNT(associated_tickets)            — Open support tickets
+COUNT(associated_deals)              — Active deals
+SUM(associated_deals, amount)        — Total pipeline value
+```
+
+**Deal → Line Items**:
+```
+SUM(associated_line_items, quantity)   — Total units
+SUM(associated_line_items, price)      — Total product value
+```
+
+**Use case example**: On a company record, show "Total Revenue" as a rollup of all closed-won deal amounts. This gives account managers instant visibility into account value.
+
+---
+
+## Data Pipeline — Complete Guide
+
+Data Pipeline (Enterprise) syncs data from HubSpot to external data warehouses.
+
+### Supported Destinations
+
+- Snowflake
+- Google BigQuery
+- Amazon Redshift
+- Microsoft Azure Synapse
+
+### How It Works
+
+1. Configure destination (Snowflake, BigQuery, Redshift, Synapse)
+2. Select objects to sync (Contacts, Companies, Deals, Tickets, Custom Objects)
+3. Choose sync frequency (every 1, 6, 12, or 24 hours)
+4. Data is exported in raw or transformed format
+5. Historical snapshots are maintained
+6. Use your BI tool (Tableau, Looker, Power BI) to analyze HubSpot data alongside other data sources
+
+### Data Pipeline vs Operations Hub Sync
+
+| Feature | Operations Hub Sync | Data Pipeline |
+|---------|-------------------|---------------|
+| Direction | Bi-directional | HubSpot → Warehouse |
+| Destination | Connected apps (Salesforce, Shopify) | Data warehouses (Snowflake, BigQuery) |
+| Purpose | Keep CRMs in sync | Analytics and BI |
+| Use case | Day-to-day operations | Reporting and analysis |
+
+---
+
+## Operations Automation — Complete Guide
+
+Operations Hub enables automation patterns that span multiple systems and hubs.
+
+### Cross-Object Workflow Patterns
+
+**Pattern 1: Data Quality on Entry**
+```
+Trigger: New contact created
+  → Standardize phone number format
+  → Look up company by email domain
+  → Auto-enrich with Breeze Intelligence
+  → Check for duplicates → Flag if found
+```
+
+**Pattern 2: Account-Based Alerting**
+```
+Trigger: Company's number of open tickets > 5
+  → Slack notification to account manager
+  → Create high-priority task for CS team
+  → Update company health score to "At Risk"
+```
+
+**Pattern 3: Lead-to-Account Matching**
+```
+Trigger: Contact created with company name
+  → Search for existing company by name
+  → If found: associate contact to company
+  → If not found: create company, enrich with Breeze
+```
+
+**Pattern 4: Revenue Recognition**
+```
+Trigger: Deal stage becomes "Closed Won"
+  → Create invoice in QuickBooks
+  → Calculate commission using calculated property
+  → Create commission record in custom object
+  → Notify finance team via webhook
+```
+
+### Custom-Coded Action Examples
+
+**Real-time Slack alerting**:
+```javascript
+exports.main = async (event, callback) => {
+  const { properties } = event;
+  
+  await fetch(process.env.SLACK_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      text: `🚨 Urgent ticket created: ${properties.ticket_name}\n` +
+            `Priority: ${properties.ticket_priority}\n` +
+            `Contact: ${properties.email}`,
+      channel: '#support-urgent'
+    })
+  });
+  
+  callback({ succeeded: true });
+};
+```
+
+**External data enrichment**:
+```javascript
+exports.main = async (event, callback) => {
+  const { objectId } = event;
+  
+  const hubspot = require('@hubspot/api-client');
+  const client = new hubspot.Client({ 
+    accessToken: process.env.PRIVATE_APP_TOKEN 
+  });
+  
+  const contact = await client.crm.contacts.basicApi.getById(objectId, ['email']);
+  const domain = contact.properties.email.split('@')[1];
+  
+  // Enrich from Clearbit
+  const response = await fetch(`https://company.clearbit.com/v2/companies/find?domain=${domain}`, {
+    headers: { 'Authorization': `Bearer ${process.env.CLEARBIT_KEY}` }
+  });
+  const data = await response.json();
+  
+  if (data.name) {
+    await client.crm.contacts.basicApi.update(objectId, {
+      properties: {
+        company_name: data.name,
+        company_industry: data.category?.industry || '',
+        company_revenue: data.metrics?.annualRevenue?.toString() || '',
+        company_employees: data.metrics?.employees?.toString() || ''
+      }
+    });
+  }
+  
+  callback({ succeeded: true });
+};
+```
+
+---
 
 ## Limits That Matter
 
-| Resource | Pro | Enterprise |
-|----------|-----|------------|
-| Data sync objects | 100k/month | 500k/month |
-| Data sync connectors | 5 | Unlimited |
-| Data quality rules | 50 | 200 |
-| Custom-coded actions | 10 | 200 |
-| Custom-coded action executions | 100k/month | 1M/month |
-| Action timeout | 10 seconds | 10 seconds |
-| Action response size | 10MB | 10MB |
-| Datasets | 5 (10k rows each) | Unlimited (100k rows each) |
-| SQL queries per minute | 20 | 50 |
-| Calculated properties | 500 | 5,000 |
-| Rollup properties | 20 | 200 |
-| API rate limits | 100 req/10s per app | 200 req/10s per app |
-| Sync frequency | Scheduled | Real-time + Scheduled |
+| Resource | Free | Starter | Pro | Enterprise |
+|----------|------|---------|-----|------------|
+| Data sync connections | 1 | 5 | 10 | Unlimited |
+| Sync frequency | Daily | Every 4h | Every 1h | Real-time |
+| Field mappings per sync | 10 | 25 | 50 | 200 |
+| Custom-coded actions | 0 | 0 | 10 | Unlimited |
+| Custom-coded action timeout | — | — | 20s | 20s |
+| Datasets (SQL) | 0 | 0 | 50 | 200 |
+| Dataset query timeout | — | — | 60s | 120s |
+| Calculated properties | 0 | 0 | 200 | 1,000 |
+| Rollup properties | 0 | 0 | 200 | 1,000 |
+| Data warehouse destinations | 0 | 0 | 0 | 5 |
+| Webhook actions in workflows | ✓ | ✓ | ✓ | ✓ |
+| Data quality rules | 3 | 10 | 50 | Unlimited |
 
-## Use Cases
-
-- Keep HubSpot and Salesforce in sync without manual data entry
-- Clean and standardize phone numbers, emails, and names automatically
-- Build custom integrations with any REST API using code actions
-- Enrich company/contact records with Breeze Intelligence firmographics and intent signals
-- Calculate rollups (e.g., total revenue per account across all deals)
-- Create datasets combining HubSpot data with external spreadsheets
-- Automate data quality checks on every new record import
-- Build custom cards on CRM records displaying real-time data from external systems
+---
 
 ## Common Gotchas
 
-- Data sync conflict resolution settings are per-object, not per-field — apply carefully
-- Custom-coded actions have no external package manager (npm) — code must be self-contained
-- Secrets in code actions cannot be read back after saving (store them externally)
-- Deleting a rollup property doesn't recalculate until next sync cycle
-- Data quality rules run on trigger — existing records aren't retroactively cleaned (run a manual bulk fix)
-- Datasets imported via CSV are static snapshots until next scheduled refresh
-- Real-time sync (Enterprise) creates more API calls → watch rate limits
-- Rollup properties over large datasets can slow down page load
-- Custom objects synced via Data Sync need identical field definitions on both ends
-- Data Sync with Salesforce may require field-level security permissions in SF
-- Breeze Intelligence enrichment is a separate paid add-on — not included in base Operations Hub pricing
+### 1. Data Sync Conflicts
+When running bi-directional sync, conflicts are inevitable. Always set clear conflict resolution rules. "Most recent wins" is generally safest but can lose data if clocks are off between systems.
+
+### 2. Custom-Coded Action Debugging
+There's no step-through debugger. The only debugging tool is `console.log()` output, visible in the workflow action history. Test thoroughly in a sandbox first.
+
+### 3. SQL Dataset Performance
+Complex joins across large datasets (>1M records) can timeout. Use WHERE clauses to limit data, and avoid joining more than 3-4 objects in a single query.
+
+### 4. Calculated Property Dependency
+If a calculated property references another calculated property (chained calculations), changes to the source property may not cascade immediately. Keep calculation chains shallow (1-2 levels max).
+
+### 5. Rollup Property Performance
+Rollups over many associated records (>1,000) can slow down. When viewing a company with 5,000 contacts and 2,000 deals, rollup calculations may take seconds to compute.
+
+### 6. Webhook Payload Limits
+Webhook payloads are limited to 1MB. If you're sending large payloads (many properties, long text fields), they may be truncated.
+
+### 7. Sync Pause Resets
+If you pause data sync for more than 30 days, some connections may need to be re-authenticated when resumed.
+
+### 8. Environment Variables
+Custom-coded action environment variables are stored at the portal level. Be careful not to commit sensitive values (API keys, tokens) to version control.
