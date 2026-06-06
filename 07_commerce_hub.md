@@ -483,3 +483,300 @@ Dunning emails from HubSpot improve recovery by 15-30%. Customize both the messa
 
 ### 6. CPQ Complexity
 CPQ is powerful but complex. Start with simple bundles and pricing rules before attempting advanced configurations. Test thoroughly in a sandbox.
+
+---
+
+## Payment Methods — Detailed Reference
+
+### Credit/Debit Cards
+
+| Card Type | Supported | Regions |
+|-----------|-----------|---------|
+| Visa | ✓ | Worldwide |
+| Mastercard | ✓ | Worldwide |
+| American Express | ✓ | Worldwide (higher processing fee) |
+| Discover | ✓ | US, Canada |
+| Diners Club | ✓ | US, select international |
+| JCB | ✓ | Japan, select international |
+| UnionPay | ✓ | China, select international |
+
+**Processing details**: Cards are processed through Stripe's gateway. HubSpot handles PCI DSS Level 1 compliance — you never handle raw card numbers. Card entry happens on Stripe's secure iframe or via Stripe Elements.
+
+### Digital Wallets
+
+| Wallet | Setup Required | User Experience |
+|--------|---------------|-----------------|
+| **Apple Pay** | Domain verification with Apple | One-touch payment with Face ID/Touch ID on Safari |
+| **Google Pay** | Link with Google Merchant account | One-touch on Chrome/Android |
+| **Shopify Pay** | Shopify integration | For Shopify-connected stores |
+
+**How digital wallets work in HubSpot**: When enabled, the checkout page shows Apple Pay/Google Pay buttons alongside the card form. If the customer's browser supports it, they can pay with biometric authentication. The payment is processed through Stripe's existing integration.
+
+### Buy Now, Pay Later (BNPL)
+
+| Provider | Installment Options | Merchant Fee |
+|----------|-------------------|--------------|
+| **Affirm** | 3, 6, 12 months | 4-6% of transaction |
+| **Afterpay** | 4 bi-weekly payments | 4-6% of transaction |
+
+**How BNPL works**: Customer selects BNPL at checkout. They're redirected to the BNPL provider's approval flow. If approved, HubSpot receives the full payment upfront (minus BNPL fee). Customer pays the BNPL provider in installments. If customer defaults, BNPL provider bears the risk.
+
+### ACH Bank Transfers (US Only)
+
+| Feature | Details |
+|---------|---------|
+| Fee | 0.8% + $5.00 cap per transaction |
+| Settlement time | 3-5 business days |
+| Max transaction | $25,000 per transfer |
+| Refund window | 60 days to initiate refund |
+| Failed payment fee | $5.00 per failed ACH |
+
+**Use case**: B2B companies with large invoice amounts ($5,000+) prefer ACH over credit cards to avoid 2.9% fees.
+
+---
+
+## Payouts & Settlement — Complete Guide
+
+### Payout Schedule
+
+| Region | Payout Speed | Notes |
+|--------|-------------|-------|
+| United States | 2 business days | Daily automatic payouts |
+| Canada | 3 business days | Daily automatic payouts |
+| United Kingdom | 3 business days | Daily automatic payouts |
+| EU (SEPA) | 3 business days | Settled in EUR |
+| Australia | 3 business days | Settled in AUD |
+| Other regions | 5-7 business days | Varies by local banking |
+
+**Minimum payout**: No minimum threshold — any positive balance is automatically paid out (US). Some regions have minimums ($1-10 equivalent).
+
+### Payout Components
+
+Each payout statement includes:
+- **Gross volume**: Total amount of all transactions
+- **Fees**: Processing fees deducted per transaction
+- **Refunds**: Amount refunded during this period
+- **Chargebacks**: Disputed amounts deducted
+- **Adjustments**: Any corrections from Stripe
+- **Net payout**: Gross - fees - refunds - chargebacks
+
+### Payout Reporting
+
+1. **Commerce** > **Reporting** > **Payouts**
+2. View payout history by date range
+3. Download payout reports as CSV
+4. Reconcile with bank deposits
+5. Export to accounting software via integration
+
+### Reserve & Rolling Reserve
+
+For businesses with higher chargeback risk, HubSpot/Stripe may place a reserve:
+- **Rolling reserve**: Percentage of each transaction held for a period (e.g., 5% held for 90 days)
+- **Fixed reserve**: Set amount held
+- **Reserve release**: Released after reserve period if no chargebacks occur
+
+---
+
+## End-to-End Tutorial: Setting Up a Subscription Business in Commerce Hub
+
+This walkthrough covers the complete setup of a subscription-based SaaS business in Commerce Hub.
+
+### Step 1: Initial Configuration
+
+1. **Settings** > **Commerce** > **Payments** > **Connect payment processor**
+2. Select "Use HubSpot's Stripe account" or "Connect existing Stripe account"
+3. Enter business details:
+   - Legal business name: "Acme SaaS Inc."
+   - Support email: "support@acmessaas.com"
+   - Statement descriptor: "ACME SAAS"
+   - Customer support phone: +1-555-123-4567
+4. Enable payment methods: Visa, Mastercard, Amex, Apple Pay, Google Pay
+5. Click "Complete setup"
+
+### Step 2: Create Subscription Products
+
+1. **Settings** > **Products** > **Products** > **Create product**
+2. **Product A — Basic Plan**
+   - Name: "Basic Plan"
+   - Type: Service/Subscription
+   - Billing: Monthly at $29.00
+   - Description: "Up to 100 contacts, basic features"
+   - SKU: SUB-BASIC-MONTHLY
+3. **Product B — Pro Plan**
+   - Name: "Pro Plan"
+   - Type: Service/Subscription
+   - Billing: Monthly at $99.00
+   - Description: "Up to 1,000 contacts, all features"
+   - SKU: SUB-PRO-MONTHLY
+4. **Product C — Pro Annual**
+   - Name: "Pro Plan Annual"
+   - Type: Service/Subscription
+   - Billing: Annually at $999.00 (save 16%)
+   - SKU: SUB-PRO-ANNUAL
+5. **Product D — Setup Fee**
+   - Name: "Onboarding Fee"
+   - Type: One-time
+   - Price: $500.00
+   - SKU: ONBOARDING-FEE
+
+### Step 3: Create Product Bundles (CPQ Enterprise)
+
+1. **Commerce** > **CPQ** > **Product Bundles** > **Create**
+2. **Bundle: "Startup Package"**
+   - Basic Plan (required): 1
+   - Onboarding Fee (optional, default yes): 1
+   - Bundle price: $29 first month (includes onboarding), $29/mo thereafter
+3. **Bundle: "Growth Package"**
+   - Pro Plan (required): 1
+   - Onboarding Fee (optional, default yes): 1
+   - Priority Support (optional): $50/mo
+   - Bundle price: Sum of components minus 5%
+
+### Step 4: Set Up Subscription Checkout
+
+1. **Commerce** > **Payments** > **Payment Links** > **Create**
+2. Name: "Subscribe — Pro Plan"
+3. Amount: Customer enters amount (or link to subscription product)
+4. Select the subscription product (Pro Plan)
+5. Check "Recurring payment"
+6. Customize checkout page:
+   - Logo: Upload company logo
+   - Brand color: Primary brand color
+   - Thank-you page: "Welcome! Check your email for access instructions."
+7. Add to website as "Subscribe" button, or send link in sales emails
+
+### Step 5: Configure Dunning
+
+1. **Settings** > **Commerce** > **Subscriptions** > **Dunning**
+2. Enable dunning management
+3. Retry schedule:
+   - Attempt 1: 3 days after failure (email notification)
+   - Attempt 2: 5 days after failure (email + SMS notification)
+   - Attempt 3: 8 days after failure (final notice)
+4. Grace period before cancellation: 15 days
+5. Cancellation action: Move subscription to "Cancelled" status, notify account manager
+
+### Step 6: Automate Subscription Workflows
+
+**Workflow 1: New Subscriber Onboarding**
+1. Trigger: Subscription created
+2. Actions:
+   - Send welcome email with login credentials
+   - Create contact property "Subscription Tier" = current plan
+   - Enroll in "New Customer Onboarding" sequence
+   - Create ticket for CS team: "New subscriber onboarding"
+   - If annual plan: Set lifecycle = "VIP Customer"
+   - If monthly plan: Set lifecycle = "Customer"
+
+**Workflow 2: Failed Payment Alert**
+1. Trigger: Subscription payment failed
+2. Actions:
+   - Send "Payment failed" email with update payment link
+   - After 3 retries: Notify account manager via Slack
+   - After 7 days: Create high-priority task "Retention call needed"
+   - After 15 days: Send "We miss you" email with retention offer
+
+**Workflow 3: Subscription Upgrade**
+1. Trigger: Subscription plan changed (upgrade)
+2. Actions:
+   - Send thank-you email with new features overview
+   - Update contact property "Subscription Tier"
+   - Create task for CS: "Onboard customer to new features"
+   - Add to "Power Users" segment for upsell opportunities
+
+**Workflow 4: Subscription Cancellation**
+1. Trigger: Subscription cancelled
+2. Actions:
+   - Send cancellation confirmation
+   - Send feedback survey (CES: "What could we have done better?")
+   - Create retention task for account manager
+   - After 30 days: Move to win-back sequence
+   - After 90 days: Archive from active lists
+
+### Step 7: Reporting Dashboard
+
+Create a subscription analytics dashboard:
+1. **Reports** > **Dashboards** > **Create dashboard**
+2. Name: "Subscription Business Overview"
+3. Add reports:
+   - MRR (Monthly Recurring Revenue) — single number
+   - ARR (Annual Recurring Revenue) — single number
+   - Subscribers by plan — donut chart
+   - Churn rate (monthly) — line chart trending down
+   - New subscriptions vs cancellations — bar chart
+   - Failed payments rate — gauge chart
+   - Revenue forecast — line chart with projections
+   - Customer lifetime value by plan — table
+
+---
+
+## End-to-End Tutorial: Setting Up CPQ for a Hardware Manufacturer
+
+For companies selling configurable physical products, CPQ is essential.
+
+### Product Configuration
+
+**Product: Industrial Printer**
+
+| Component | Type | Options | Base Price |
+|-----------|------|---------|-----------|
+| Base model | Required | Standard, Pro, Enterprise | $5,000 / $8,000 / $12,000 |
+| Print speed | Required | Standard, High-speed | Included / +$2,000 |
+| Paper size | Required | Letter, Legal, Tabloid, Custom | Included / +$500 / +$1,000 / +$2,000 |
+| Connectivity | Optional | WiFi, Ethernet, Bluetooth, All three | $200 / $100 / $150 / $350 |
+| Extended warranty | Optional | 1yr, 2yr, 3yr | $500 / $800 / $1,000 |
+| Training | Optional | On-site, Virtual, Both | $2,000 / $500 / $2,200 |
+| Installation | Optional | Standard, Premium | $500 / $1,500 |
+
+### Pricing Rules
+
+**Rule 1 — Volume Discount**: If quantity ≥ 10, apply 10% discount on base model
+**Rule 2 — Bundle Discount**: If customer adds installation + training, give 15% off installation
+**Rule 3 — Competitive Win-back**: If deal source is "Competitor Switch", give additional 5% off total
+**Rule 4 — Annual Contract**: If contract term = 3 years, include warranty at no charge
+
+### Approval Flow
+
+| Total Value | Approver | Conditions |
+|-------------|----------|-----------|
+| $0 - $15,000 | Sales rep | Auto-approve |
+| $15,001 - $50,000 | Sales manager | Review margin, discount % |
+| $50,001 - $150,000 | VP Sales | Review total, competitive pressure |
+| $150,001+ | CRO | Quarterly business review context |
+
+---
+
+## HubSpot Commerce vs Dedicated E-commerce Platforms
+
+### When to Use HubSpot Commerce
+
+- You already use HubSpot CRM and want integrated payments
+- You sell B2B with invoicing (Net 30, Net 60 terms)
+- You run a subscription business with recurring billing
+- Your sales process involves quotes, approvals, and e-signatures
+- You want automated payment-to-CRM tracking (no manual reconciliation)
+
+### When to Use Dedicated Platforms Instead
+
+**Shopify / WooCommerce / BigCommerce for e-commerce**:
+- You need a full online store with product pages, cart, checkout
+- You sell 100+ products with inventory management
+- You need advanced shipping calculations and tracking
+- You need marketplace integration (Amazon, eBay, Etsy)
+- You need advanced SEO for product pages
+
+**Stripe / Square / Adyen for payments**:
+- You process $100k+/month and want negotiated rates (2.7% vs 2.9%)
+- You need advanced fraud detection (Radar, Risk Scoring)
+- You need recurring billing with complex usage-based pricing
+- You want direct payment processor relationship
+
+**QuickBooks / Xero / FreshBooks for billing**:
+- You need full accounting (AP, AR, GL, payroll)
+- You need inventory valuation and COGS tracking
+- You need tax filing preparation
+- You have complex multi-entity accounting requirements
+
+### Hybrid Approach
+
+Many businesses use both: HubSpot Commerce for quotes + invoicing, and a dedicated e-commerce platform for the online store. Connect them via Operations Hub Data Sync or Zapier.
